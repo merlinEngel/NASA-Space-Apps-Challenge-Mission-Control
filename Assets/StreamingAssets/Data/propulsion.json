@@ -1,0 +1,7 @@
+[
+  { "id": "cold_gas",      "name": "Cold gas (nitrogen)",         "isp_s": 70,   "thrust_N": 1,     "source": "antriebe.md" },
+  { "id": "hydrazine",     "name": "Hydrazine (monopropellant)",  "isp_s": 225,  "thrust_N": 22,    "source": "antriebe.md" },
+  { "id": "bipropellant",  "name": "Bipropellant (MMH/NTO)",      "isp_s": 315,  "thrust_N": 400,   "source": "antriebe.md" },
+  { "id": "hall_thruster", "name": "Hall thruster",               "isp_s": 1800, "thrust_N": 0.2,   "power_W": 5000, "source": "antriebe.md" },
+  { "id": "ion_thruster",  "name": "Ion thruster (gridded)",      "isp_s": 3100, "thrust_N": 0.092, "power_W": 2300, "source": "antriebe.md (Dawn NSTAR)" }
+]

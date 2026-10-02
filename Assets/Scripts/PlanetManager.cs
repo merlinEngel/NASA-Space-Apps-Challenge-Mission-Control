@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace MissionGame
 {
-    public class PlanetManager : MonoBehaviour
+    public class PlanetManager : Singleton<PlanetManager>
     {
+
         [Header("Time")]
         public int startTimeSinceJ2000 = 0;
         public double timeScale = 86400;      // sim seconds per real-time second (86400 = 1 day/s)
@@ -44,6 +45,7 @@ namespace MissionGame
 
         void Awake()
         {
+            base.Awake();
             Clock = new SimClock(stepSeconds, startTimeSinceJ2000);
         }
 

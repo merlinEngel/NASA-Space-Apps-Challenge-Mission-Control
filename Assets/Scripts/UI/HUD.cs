@@ -27,8 +27,6 @@ namespace MissionGame
 
         public SpaceCraft spaceCraft;
 
-        public PlanetManager planetManager;
-
         double deltaTime;
 
         void OnEnable() { spaceCraft.BurnScheduled += RebuildBurnList; spaceCraft.BurnExecuted += RebuildBurnList; }
@@ -60,10 +58,10 @@ namespace MissionGame
                 UpdateSpacecraftStats(spaceCraft);
                 foreach ((TMP_Text text, ScheduledBurn burn) in scheduledBurnTexts)
                 {
-                    text.text = burn.ToString(planetManager.Clock.RenderTime);
+                    text.text = burn.ToString(PlanetManager.Instance.Clock.RenderTime);
                 }
             }
-            simDateTimeText.text = Constants.J2000DateTime.AddSeconds(planetManager.Clock.SimTime).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+            simDateTimeText.text = Constants.J2000DateTime.AddSeconds(PlanetManager.Instance.Clock.SimTime).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
         }
 
         void Start()
@@ -88,7 +86,7 @@ namespace MissionGame
             foreach (ScheduledBurn burn in spaceCraft.scheduledBurns)
             {
                 TMP_Text burnText = Instantiate(scheduledBurnPrefab, scheduledBurnsContainer.transform);
-                burnText.text = burn.ToString(planetManager.Clock.RenderTime);
+                burnText.text = burn.ToString(PlanetManager.Instance.Clock.RenderTime);
 
                 scheduledBurnTexts.Add((burnText, burn));
             }

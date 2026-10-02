@@ -1,0 +1,31 @@
+[
+  {
+    "id": "techdemo",
+    "title_key": "mission.techdemo.title",
+    "description_key": "mission.techdemo.description",
+    "budget_USD": 5000000,
+    "duration_days": 90,
+    "altitude_m": { "min": 400000, "max": 600000 },
+    "min_instruments": 1,
+    "required_goals": [
+      { "type": "survive_days",     "value": 90 },
+      { "type": "data_downlinked_bytes", "value": 1e9 }
+    ],
+    "bonus_goals": [
+      { "type": "max_cost_USD",     "value": 4000000 },
+      { "type": "data_downlinked_bytes", "value": 2e9 }
+    ],
+    "solar_activity": "medium",
+    "epoch_utc": "2027-06-01T00:00:00Z",
+    "raan_deg": 0,
+    "fixed_events": [
+      { "type": "solar_storm", "day": { "min": 20, "max": 40 } }
+    ],
+    "variation": {
+      "budget_USD": { "min": 4500000, "max": 5500000 },
+      "data_downlinked_bytes": { "min": 8e8, "max": 1.5e9 },
+      "duration_days": { "min": 60, "max": 120 }
+    },
+    "source": "roadmap A5 (mission card), A8 (level 1), B5 #14"
+  }
+]

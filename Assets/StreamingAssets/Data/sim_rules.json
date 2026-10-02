@@ -1,0 +1,11 @@
+{
+  "tick_s": 60,
+  "integrator_substeps": 6,
+  "load_shedding": {
+    "instruments_off_below_soc": 0.20,
+    "safe_mode_below_soc": 0.05,
+    "instruments_on_above_soc": 0.40
+  },
+  "solar_activity_density_factor": { "low": 0.5, "medium": 1.0, "high": 3.0 },
+  "source": "roadmap B3 (tick, load shedding); density factors estimate"
+}

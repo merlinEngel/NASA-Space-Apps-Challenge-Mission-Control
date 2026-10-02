@@ -1,0 +1,7 @@
+[
+  { "id": "camera_high_res", "name": "High-resolution camera",    "mass_kg": 40,   "power_W": 35, "data_rate_class": "very_high", "source": "instrumente.md" },
+  { "id": "camera_wide",     "name": "Wide-angle / context camera", "mass_kg": 3,  "power_W": 6,  "data_rate_class": "medium",    "source": "instrumente.md" },
+  { "id": "radiometer",      "name": "Thermal radiometer",        "mass_kg": 12.5, "power_W": 20, "data_rate_class": "medium",    "source": "instrumente.md" },
+  { "id": "magnetometer",    "name": "Magnetometer",              "mass_kg": 3,    "power_W": 3,  "data_rate_class": "very_low",  "source": "instrumente.md" },
+  { "id": "particle_detector", "name": "Particle / plasma detector", "mass_kg": 6, "power_W": 6,  "data_rate_class": "low",       "source": "instrumente.md" }
+]

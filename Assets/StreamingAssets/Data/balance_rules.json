@@ -1,0 +1,10 @@
+{
+  "dry_mass_fractions_earth_orbit_with_propulsion": {
+    "payload": 0.25, "structure": 0.25, "thermal": 0.03, "power": 0.20,
+    "communications": 0.04, "attitude_control": 0.07, "computer": 0.04,
+    "propulsion": 0.10, "other": 0.02
+  },
+  "mass_margin_early_phase": 0.25,
+  "power_margin_early_phase": 0.25,
+  "source": "subsysteme-massenanteile.md (SMAD)"
+}

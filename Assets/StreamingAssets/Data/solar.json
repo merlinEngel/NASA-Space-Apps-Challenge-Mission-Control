@@ -1,0 +1,4 @@
+[
+  { "id": "silicon",        "name": "Silicon cells",              "efficiency": 0.17, "packing_factor": 0.85, "mass_per_area_kg_m2": 2.5, "degradation_per_year": 0.025, "price_per_area_USD_m2": 100000, "source": "energie.md (efficiency, degradation); price estimate" },
+  { "id": "triple_junction", "name": "Triple-junction cells (GaAs)", "efficiency": 0.30, "packing_factor": 0.85, "mass_per_area_kg_m2": 3.5, "degradation_per_year": 0.01,  "price_per_area_USD_m2": 400000, "source": "energie.md (efficiency, degradation); price estimate" }
+]

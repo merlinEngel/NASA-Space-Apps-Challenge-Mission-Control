@@ -1,0 +1,9 @@
+{
+  "weights": { "data": 0.50, "budget": 0.25, "safety": 0.25 },
+  "data_cap_ratio": 2.0,
+  "safety_penalty_per_yellow_risk": 20,
+  "safety_penalty_disposal_rule": 40,
+  "disposal_max_years": 5,
+  "stars": { "required_goals": 1, "per_bonus_goal": 1, "max": 3 },
+  "source": "roadmap A6"
+}
