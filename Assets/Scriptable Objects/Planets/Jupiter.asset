@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Jupiter
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 35730
+  _axis:
+    x: -0.015
+    y: -0.036
+    z: 0.999
+  parent: {fileID: 0}
+  muKm3: 126686534
+  radius: 69911
+  semiMajorAxisKm: 778340821
+  eccentricity: 0.04838624
+  inclinationDeg: 1.30439695
+  longAscNodeDeg: 100.47390909
+  argPeriapsisDeg: 274.25457074
+  meanAnomalyAtEpochDeg: 19.66796068
+  material: {fileID: 2100000, guid: bc9f9f7d14acc4d7d872014934f279fe, type: 2}

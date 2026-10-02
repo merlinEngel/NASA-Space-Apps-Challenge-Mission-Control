@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Saturn
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 38018
+  _axis:
+    x: 0.085
+    y: 0.462
+    z: 0.883
+  parent: {fileID: 0}
+  muKm3: 37931187
+  radius: 58232
+  semiMajorAxisKm: 1426666422
+  eccentricity: 0.05386179
+  inclinationDeg: 2.48599187
+  longAscNodeDeg: 113.66242448
+  argPeriapsisDeg: 338.93645383
+  meanAnomalyAtEpochDeg: 317.35536592
+  material: {fileID: 2100000, guid: 5814a71979261460884a89b36d46fdf5, type: 2}
