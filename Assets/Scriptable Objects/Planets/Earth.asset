@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Earth
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 86164.1
+  _axis:
+    x: 0
+    y: 0.398
+    z: 0.917
+  parent: {fileID: 0}
+  muKm3: 398600.4418
+  radius: 6371
+  semiMajorAxisKm: 149598023
+  eccentricity: 0.01671123
+  inclinationDeg: 0
+  longAscNodeDeg: 0
+  argPeriapsisDeg: 102.94719
+  meanAnomalyAtEpochDeg: 357.52911
+  material: {fileID: 2100000, guid: b04bc897d36a5449682b1b4486868ef6, type: 2}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Mars
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 88642.7
+  _axis:
+    x: 0.427
+    y: -0.039
+    z: 0.903
+  parent: {fileID: 0}
+  muKm3: 42828.37
+  radius: 3389.5
+  semiMajorAxisKm: 227943824
+  eccentricity: 0.0933941
+  inclinationDeg: 1.84969142
+  longAscNodeDeg: 49.55953891
+  argPeriapsisDeg: 286.4968315
+  meanAnomalyAtEpochDeg: 19.39019754
+  material: {fileID: 2100000, guid: ee4c4f5947a0348058d6cbe6b925abd3, type: 2}

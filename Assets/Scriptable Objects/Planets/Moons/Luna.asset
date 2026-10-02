@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Luna
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 2360591
+  _axis:
+    x: 0
+    y: 0
+    z: 0
+  parent: {fileID: 11400000, guid: c8c407ce8b057444aa3952f1ab4fdbc5, type: 2}
+  muKm3: 0
+  radius: 1737.4
+  semiMajorAxisKm: 384400
+  eccentricity: 0.0549
+  inclinationDeg: 5.145
+  longAscNodeDeg: 125.08
+  argPeriapsisDeg: 318.15
+  meanAnomalyAtEpochDeg: 134.96
+  material: {fileID: 2100000, guid: 22b49b7e34b424bcbb24721d4c2a8886, type: 2}

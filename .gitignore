@@ -105,3 +105,10 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# .NET test project build output
+core.tests/[Bb]in/
+core.tests/[Oo]bj/
+
+# macOS
+.DS_Store

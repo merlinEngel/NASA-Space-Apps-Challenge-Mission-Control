@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b89953df0e3b467296f7b2c432b7e81, type: 3}
+  m_Name: Merkur
+  m_EditorClassIdentifier: 
+  rotationPeriodSeconds: 5067014
+  _axis:
+    x: 0.091
+    y: -0.082
+    z: 0.992
+  parent: {fileID: 0}
+  muKm3: 22031.86
+  radius: 2439.7
+  semiMajorAxisKm: 57909227
+  eccentricity: 0.20563593
+  inclinationDeg: 7.00497902
+  longAscNodeDeg: 48.33076593
+  argPeriapsisDeg: 29.12703035
+  meanAnomalyAtEpochDeg: 174.79252722
+  material: {fileID: 2100000, guid: 507639ed5aee1441c8ba5906ae4a36fe, type: 2}
