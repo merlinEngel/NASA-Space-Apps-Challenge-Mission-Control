@@ -1,0 +1,5 @@
+[
+  { "id": "li_ion_small",  "name": "Li-ion pack, small",  "energy_Wh": 20,  "mass_kg": 0.2,  "max_depth_of_discharge": 0.3, "price_USD": 5000,  "source": "energie.md (Wh/kg, depth of discharge); price estimate" },
+  { "id": "li_ion_medium", "name": "Li-ion pack, medium", "energy_Wh": 80,  "mass_kg": 0.65, "max_depth_of_discharge": 0.3, "price_USD": 15000, "source": "energie.md (Wh/kg, depth of discharge); price estimate" },
+  { "id": "li_ion_large",  "name": "Li-ion pack, large",  "energy_Wh": 300, "mass_kg": 2.4,  "max_depth_of_discharge": 0.3, "price_USD": 50000, "source": "energie.md (Wh/kg, depth of discharge); price estimate" }
+]

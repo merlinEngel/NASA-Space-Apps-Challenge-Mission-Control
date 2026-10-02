@@ -1,0 +1,5 @@
+[
+  { "id": "uhf",    "name": "UHF transceiver",    "band": "UHF", "frequency_Hz": 4.35e8, "data_rate_bps": 9600,     "power_W": 2,  "mass_kg": 0.1, "price_USD": 10000,  "source": "kommunikation.md (band); data rate, power, price estimate" },
+  { "id": "s_band", "name": "S-band transmitter", "band": "S",   "frequency_Hz": 2.2e9,  "data_rate_bps": 1000000,  "power_W": 8,  "mass_kg": 0.3, "price_USD": 50000,  "source": "kommunikation.md (band); data rate, power, price estimate" },
+  { "id": "x_band", "name": "X-band transmitter", "band": "X",   "frequency_Hz": 8.4e9,  "data_rate_bps": 50000000, "power_W": 20, "mass_kg": 0.5, "price_USD": 150000, "source": "kommunikation.md (band); data rate, power, price estimate" }
+]

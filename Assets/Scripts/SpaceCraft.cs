@@ -11,12 +11,13 @@ namespace MissionGame
     {
         public int SimOrder { get; } = 1;
 
-        [SerializeField] PlanetManager planetManager;
         [SerializeField] int rk4Step = 10;
         public float startAltitude = 800e3f;
         public float mass = 100f;
         public float fuelMass = 100f;
-        public double isp = 220;
+        public double Isp { get; private set; }
+
+        public string propulsionId;
 
         public SpacecraftState state;
 
@@ -44,17 +45,22 @@ namespace MissionGame
 
         void OnEnable()
         {
-            planetManager.RegisterSimulatedObject(this);
+            PlanetManager.Instance.RegisterSimulatedObject(this);
         }
         void OnDisable()
         {
-            planetManager.UnregisterSimulatedObject(this);
+            PlanetManager.Instance.UnregisterSimulatedObject(this);
+        }
+
+        void Awake()
+        {
+            Isp = CatalogManager.Instance.Catalog.Propulsion[propulsionId].ispS;
         }
 
         public void Start()
         {
-            SimClock Clock = planetManager.Clock;
-            otherBodies = planetManager.planetData.Where(p => p != orbitingPlanet).ToList<ICelestialBody>();
+            SimClock Clock = PlanetManager.Instance.Clock;
+            otherBodies = PlanetManager.Instance.planetData.Where(p => p != orbitingPlanet).ToList<ICelestialBody>();
 
             KeplerOrbit orbit = KeplerOrbit.Circular(startAltitude, 51.6 * Math.PI / 180, 0, orbitingPlanet.radius * 1000, orbitingPlanet.Mu, Clock.SimTime);
             var (r0, v0) = orbit.StateAt(Clock.SimTime);
@@ -73,9 +79,9 @@ namespace MissionGame
                 for (int j = scheduledBurns.Count - 1; j >= 0; j--)
                 {
                     var burn = scheduledBurns[j];
-                    if (burn.executeAt <= planetManager.Clock.SimTime + i)
+                    if (burn.executeAt <= PlanetManager.Instance.Clock.SimTime + i)
                     {
-                        if (Maneuvers.TryApplyImpulse(state, burn.dvPrograde, burn.dvNormal, burn.dvRadial, isp, out state))
+                        if (Maneuvers.TryApplyImpulse(state, burn.dvPrograde, burn.dvNormal, burn.dvRadial, Isp, out state))
                             Debug.Log("Maneuver Successfull!");
                         else
                             Debug.Log("Not enough Fuel for Maneuver!");
@@ -85,16 +91,16 @@ namespace MissionGame
                     }
                 }
 
-                state = Integrator.RK4Step(state, planetManager.Clock.SimTime + i, rk4Step, orbitingPlanet, otherBodies);
+                state = Integrator.RK4Step(state, PlanetManager.Instance.Clock.SimTime + i, rk4Step, orbitingPlanet, otherBodies);
             }
         }
 
         public void RenderStep()
         {
-            SpacecraftState tempState = Integrator.RK4Step(state, planetManager.Clock.SimTime, planetManager.Clock.RenderTime - planetManager.Clock.SimTime, orbitingPlanet, otherBodies);
-            transform.position = orbitingPlanet.WorldPositionAt(planetManager.Clock.RenderTime).ToUnity(RenderScale.PosScale)
-            + tempState.relPos.ToUnity(RenderScale.PosScale * planetManager.bodyScale);
-            transform.LookAt(orbitingPlanet.WorldPositionAt(planetManager.Clock.RenderTime).ToUnity(RenderScale.PosScale), tempState.velocity.ToUnity(1).normalized);
+            SpacecraftState tempState = Integrator.RK4Step(state, PlanetManager.Instance.Clock.SimTime, PlanetManager.Instance.Clock.RenderTime - PlanetManager.Instance.Clock.SimTime, orbitingPlanet, otherBodies);
+            transform.position = orbitingPlanet.WorldPositionAt(PlanetManager.Instance.Clock.RenderTime).ToUnity(RenderScale.PosScale)
+            + tempState.relPos.ToUnity(RenderScale.PosScale * PlanetManager.Instance.bodyScale);
+            transform.LookAt(orbitingPlanet.WorldPositionAt(PlanetManager.Instance.Clock.RenderTime).ToUnity(RenderScale.PosScale), tempState.velocity.ToUnity(1).normalized);
 
             OrbitInfo = OrbitInfo.FromState(tempState.relPos, tempState.velocity, orbitingPlanet.Mu, orbitingPlanet.Axis.Normalized);
             altitudeKM = (tempState.relPos.Length - orbitingPlanet.radius * 1000) / 1000;

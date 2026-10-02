@@ -1,0 +1,6 @@
+[
+  { "id": "svalbard",       "name": "Svalbard (KSAT SvalSat, Norway)", "lat_deg": 78.23, "lon_deg": 15.40,  "bands": ["S", "X"],      "min_elevation_deg": 5,  "cost_per_contact_USD": 500, "source": "coordinates public; cost estimate" },
+  { "id": "weilheim",       "name": "Weilheim (DLR, Germany)",         "lat_deg": 47.88, "lon_deg": 11.08,  "bands": ["S", "X"],      "min_elevation_deg": 5,  "cost_per_contact_USD": 300, "source": "coordinates public; cost estimate" },
+  { "id": "wallops",        "name": "Wallops (NASA, USA)",             "lat_deg": 37.94, "lon_deg": -75.46, "bands": ["UHF", "S", "X"], "min_elevation_deg": 5, "cost_per_contact_USD": 300, "source": "coordinates public; cost estimate" },
+  { "id": "university_uhf", "name": "University station (UHF)",        "lat_deg": 48.15, "lon_deg": 11.57,  "bands": ["UHF"],        "min_elevation_deg": 10, "cost_per_contact_USD": 0,   "source": "fictional example" }
+]

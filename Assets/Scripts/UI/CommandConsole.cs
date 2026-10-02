@@ -12,7 +12,6 @@ namespace MissionGame
     public class CommandConsole : MonoBehaviour
     {
         public SpaceCraft spaceCraft;
-        public PlanetManager planetManager;
 
         record Command(string Usage, string Help, Func<string[], string> Run);
         readonly Dictionary<string, Command> commands = new(StringComparer.OrdinalIgnoreCase);
@@ -35,7 +34,8 @@ namespace MissionGame
         {
             commands["impulse"] = new("impulse <P> <N> <R> [in <Time> | at apo|peri]", "Schedules an Impulse Burn", CmdImpulse);
             commands["help"] = new("help", "Shows all Commands", _ => string.Join("\n", commands.Select(c => c.Value.Usage)));
-            commands["hohmann"] = new("hohmann <A> [in <Time> | at apo|peri]", "Executes a Hohmann Transfer", CmdHohmann);
+            commands["hohmann"] = new("hohmann <Altitude Km> [in <Time> | at apo|peri]", "Executes a Hohmann Transfer", CmdHohmann);
+            commands["timescale"] = new("timescale <F>", "Sets the timescale factor", CmdTimescale);
         }
 
         public string Execute(string input)
@@ -61,12 +61,26 @@ namespace MissionGame
             }
         }
 
+        string CmdTimescale(string[] args)
+        {
+            if (args.Length != 1)
+            {
+                return "Error: Usage: " + commands["timescale"].Usage;
+            }
+
+            if (!TryInt(args[0], out int factor))
+                return "Error: F must be an integer (timescale factor)";
+
+            PlanetManager.Instance.timeScale = factor;
+            return $"Timescale factor set to x{PlanetManager.Instance.timeScale}";
+        }
+
         string CmdHohmann(string[] args)
         {
             if (args.Length != 1 && args.Length != 3)
                 return "Error: Usage: " + commands["hohmann"].Usage;
 
-            if (!TryNumber(args[0], out double newAltitude))
+            if (!TryDouble(args[0], out double newAltitude))
                 return "Error: A must be a number (target altitude in km), for example 2000";
             if (newAltitude <= 0)
                 return "Error: Target altitude must be above the surface (> 0 km)";
@@ -85,11 +99,11 @@ namespace MissionGame
 
             // Check fuel for both burns up front, otherwise the craft gets stuck on the transfer ellipse
             double needed = Math.Abs(dv1) + Math.Abs(dv2);
-            double available = Maneuvers.AvailableDeltaV(state, spaceCraft.isp);
+            double available = Maneuvers.AvailableDeltaV(state, spaceCraft.Isp);
             if (needed > available)
                 return $"Error: Needs {needed.ToString("F1", CultureInfo.InvariantCulture)} m/s, only {available.ToString("F1", CultureInfo.InvariantCulture)} m/s available";
 
-            double now = planetManager.Clock.SimTime;
+            double now = PlanetManager.Instance.Clock.SimTime;
             double executeAt = -1;   // -1 = now (at the next step)
 
             if (args.Length == 3)
@@ -141,9 +155,9 @@ namespace MissionGame
             if (args.Length != 3 && args.Length != 5)
                 return "Error: Usage: " + commands["impulse"].Usage;
 
-            if (!TryNumber(args[0], out double dvPrograde) ||
-                !TryNumber(args[1], out double dvNormal) ||
-                !TryNumber(args[2], out double dvRadial))
+            if (!TryDouble(args[0], out double dvPrograde) ||
+                !TryDouble(args[1], out double dvNormal) ||
+                !TryDouble(args[2], out double dvRadial))
                 return "Error: P, N and R must be numbers, for example 282.5";
 
             // No time given: now (-1 = at the next step)
@@ -151,7 +165,7 @@ namespace MissionGame
 
             if (args.Length == 5)
             {
-                double now = planetManager.Clock.SimTime;
+                double now = PlanetManager.Instance.Clock.SimTime;
                 string mode = args[3].ToLowerInvariant();
                 string value = args[4].ToLowerInvariant();
 
@@ -186,12 +200,15 @@ namespace MissionGame
 
             spaceCraft.ScheduleBurn(dvPrograde, dvNormal, dvRadial, executeAt);
             var burn = new ScheduledBurn(dvPrograde, dvNormal, dvRadial, executeAt);
-            return "Burn scheduled: " + burn.ToString(planetManager.Clock.SimTime);
+            return "Burn scheduled: " + burn.ToString(PlanetManager.Instance.Clock.SimTime);
         }
 
         // Number always with a dot as decimal separator, regardless of the system language
-        static bool TryNumber(string text, out double value) =>
+        static bool TryDouble(string text, out double value) =>
             double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value);
+
+        static bool TryInt(string text, out int value) =>
+            int.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value);
 
         // "90s", "30m", "2h", "1d" (or just a number = seconds) → seconds
         static bool TryDuration(string text, out double seconds)
@@ -208,7 +225,7 @@ namespace MissionGame
                 case 'd': factor = 86400; text = text[..^1]; break;
             }
 
-            if (!TryNumber(text, out double amount) || amount < 0) return false;
+            if (!TryDouble(text, out double amount) || amount < 0) return false;
             seconds = amount * factor;
             return true;
         }

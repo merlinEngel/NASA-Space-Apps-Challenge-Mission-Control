@@ -1,0 +1,6 @@
+[
+  { "id": "electron",         "name": "Electron (Rocket Lab)",          "leo_kg": 300,   "sso_kg": 200, "price_USD": 7500000,  "success_rate": 0.90, "source": "traegerraketen.md" },
+  { "id": "falcon9_reusable", "name": "Falcon 9 Block 5 (reusable)",    "leo_kg": 17500, "gto_kg": 5500, "price_USD": 70000000,   "success_rate": 0.99, "source": "traegerraketen.md" },
+  { "id": "falcon9_expendable", "name": "Falcon 9 (expendable)",        "leo_kg": 22800, "gto_kg": 8300, "price_USD": 85000000,   "success_rate": 0.99, "source": "traegerraketen.md" },
+  { "id": "falcon_heavy",     "name": "Falcon Heavy (expendable)",      "leo_kg": 63800, "gto_kg": 26700, "price_USD": 140000000, "success_rate": 1.0,  "source": "traegerraketen.md" }
+]
