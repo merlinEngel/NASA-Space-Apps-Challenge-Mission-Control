@@ -27,8 +27,11 @@ namespace MissionCore
             ValidateIdsAndNames(list, i => i.id, i => i.name, fileName);
             foreach (var i in list)
             {
-                if (i.massKG <= 0) Fail(fileName, i.id, "has mass_kg <= 0");
+                if (i.massKg <= 0) Fail(fileName, i.id, "has mass_kg <= 0");
                 if (i.powerW < 0) Fail(fileName, i.id, "has power_W < 0");
+                if (i.priceUSD <= 0) Fail(fileName, i.id, "has price_USD <= 0");
+                if (i.dataRateBpS <= 0) Fail(fileName, i.id, "has data_rate_bps <= 0");
+                if (i.dutyCycle <= 0 || i.dutyCycle > 1) Fail(fileName, i.id, "has duty_cycle outside (0, 1]");
             }
         }
 
@@ -37,11 +40,42 @@ namespace MissionCore
             ValidateIdsAndNames(list, l => l.id, l => l.name, fileName);
             foreach (var l in list)
             {
-                if (l.leoKG <= 0) Fail(fileName, l.id, "has leo_kg <= 0");
-                if (l.ssoKG.HasValue && l.ssoKG <= 0) Fail(fileName, l.id, "has sso_kg <= 0");
-                if (l.gtoKG.HasValue && l.gtoKG <= 0) Fail(fileName, l.id, "has gto_kg <= 0");
                 if (l.successRate <= 0 || l.successRate > 1) Fail(fileName, l.id, "has success_rate outside (0, 1]");
-                if (l.priceUSD <= 0) Fail(fileName, l.id, "has price_USD <= 0");
+                switch (l.type)
+                {
+                    case LaunchType.Dedicated:
+                        ValidateDedicated(l, fileName);
+                        break;
+                    case LaunchType.Rideshare:
+                        ValidateRideshare(l, fileName);
+                        break;
+                    default:
+                        Fail(fileName, l.id, $"has unknown type '{l.type}'");
+                        break;
+                }
+            }
+        }
+
+        static void ValidateDedicated(LauncherSpec l, string fileName)
+        {
+            if (l.leoKg <= 0) Fail(fileName, l.id, "has leo_kg <= 0");
+            if (l.ssoKg.HasValue && l.ssoKg <= 0) Fail(fileName, l.id, "has sso_kg <= 0");
+            if (l.gtoKg.HasValue && l.gtoKg <= 0) Fail(fileName, l.id, "has gto_kg <= 0");
+            if (l.priceUSD <= 0) Fail(fileName, l.id, "has price_USD <= 0");
+        }
+
+        static void ValidateRideshare(LauncherSpec l, string fileName)
+        {
+            if (l.pricePerKgUSD <= 0) Fail(fileName, l.id, "is a rideshare with price_per_kg_USD <= 0");
+            if (l.maxPayloadPerCustomerKg <= 0) Fail(fileName, l.id, "is a rideshare with max_payload_per_customer_kg <= 0");
+            if (l.minBillableMassKg < 0) Fail(fileName, l.id, "is a rideshare with min_billable_mass_kg < 0");
+            if (l.minBillableMassKg > l.maxPayloadPerCustomerKg)
+                Fail(fileName, l.id, "is a rideshare with min_billable_mass_kg > max_payload_per_customer_kg");
+            if (l.orbits == null || l.orbits.Length == 0) Fail(fileName, l.id, "is a rideshare without orbits");
+            if (l.altitudeM != null)
+            {
+                if (l.altitudeM.Min <= 0) Fail(fileName, l.id, "has altitude_m.min <= 0");
+                if (l.altitudeM.Min > l.altitudeM.Max) Fail(fileName, l.id, "has altitude_m.min > altitude_m.max");
             }
         }
 
@@ -50,12 +84,13 @@ namespace MissionCore
             ValidateIdsAndNames(list, p => p.id, p => p.name, fileName);
             foreach (var p in list)
             {
-                if (p.busMassKG <= 0) Fail(fileName, p.id, "has bus_mass_kg <= 0");
-                if (p.maxMassKG <= p.busMassKG) Fail(fileName, p.id, "has max_mass_kg <= bus_mass_kg");
+                if (p.busMassKg <= 0) Fail(fileName, p.id, "has bus_mass_kg <= 0");
+                if (p.maxMassKg <= p.busMassKg) Fail(fileName, p.id, "has max_mass_kg <= bus_mass_kg");
                 if (p.busPowerW < 0) Fail(fileName, p.id, "has bus_power_W < 0");
                 if (p.maxSolarAreaM2 <= 0) Fail(fileName, p.id, "has max_solar_area_m2 <= 0");
                 if (p.lifetimeYears <= 0) Fail(fileName, p.id, "has lifetime_years <= 0");
                 if (p.priceUSD < 0) Fail(fileName, p.id, "has price_USD < 0");
+                if (p.storageBits <= 0) Fail(fileName, p.id, "has storage_bits <= 0");
             }
         }
 
@@ -92,7 +127,7 @@ namespace MissionCore
                 if (string.IsNullOrEmpty(c.band)) Fail(fileName, c.id, "has no band");
                 if (c.dataRateBpS <= 0) Fail(fileName, c.id, "has data_rate_bps <= 0");
                 if (c.powerW < 0) Fail(fileName, c.id, "has power_W < 0");
-                if (c.massKG <= 0) Fail(fileName, c.id, "has mass_kg <= 0");
+                if (c.massKg <= 0) Fail(fileName, c.id, "has mass_kg <= 0");
                 if (c.priceUSD < 0) Fail(fileName, c.id, "has price_USD < 0");
             }
         }
@@ -183,6 +218,22 @@ namespace MissionCore
             if (Math.Abs(sum - 1) > SumTolerance) Fail(fileName, $"dry mass fractions sum to {sum}, not 1");
             if (rules.MassMarginEarlyPhase < 0) Fail(fileName, "has mass_margin_early_phase < 0");
             if (rules.PowerMarginEarlyPhase < 0) Fail(fileName, "has power_margin_early_phase < 0");
+
+            // Every budget needs a threshold, so StatusFor() never gets null.
+            if (rules.StatusThresholds == null) Fail(fileName, "has no status_thresholds");
+            var budgetKeys = new HashSet<string>();
+            foreach (BudgetKind kind in Enum.GetValues(typeof(BudgetKind)))
+            {
+                string key = kind.ToSnakeCase();
+                budgetKeys.Add(key);
+                StatusThreshold t = kind.Threshold(rules.StatusThresholds);
+                if (t == null) Fail(fileName, $"has no status_thresholds for '{key}'");
+                if (t.YellowMinReserve > t.GreenMinReserve)
+                    Fail(fileName, $"status_thresholds '{key}' has yellow_min_reserve > green_min_reserve");
+            }
+            // A misspelled key would otherwise be ignored silently.
+            foreach (string key in rules.StatusThresholds.Keys)
+                if (!budgetKeys.Contains(key)) Fail(fileName, $"status_thresholds has unknown budget '{key}'");
         }
 
         public static void Validate(ScoringRules rules, string fileName)

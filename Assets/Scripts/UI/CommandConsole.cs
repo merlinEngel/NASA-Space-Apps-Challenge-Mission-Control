@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using MissionCore;
 using TMPro;
@@ -36,6 +37,24 @@ namespace MissionGame
             commands["help"] = new("help", "Shows all Commands", _ => string.Join("\n", commands.Select(c => c.Value.Usage)));
             commands["hohmann"] = new("hohmann <Altitude Km> [in <Time> | at apo|peri]", "Executes a Hohmann Transfer", CmdHohmann);
             commands["timescale"] = new("timescale <F>", "Sets the timescale factor", CmdTimescale);
+            commands["validatetestdesign"] = new("validatetestdesign <Test design name>", "Validates a Design From a Json File", CmdValidateTestDesign);
+        }
+
+        private string CmdValidateTestDesign(string[] args)
+        {
+            if (args.Length != 1)
+                return "Error: Usage: " + commands["validatetestdesign"].Usage;
+            
+            Debug.Log(Application.streamingAssetsPath);
+
+            string filePath = Application.streamingAssetsPath + "/data/TestDesigns/" + args[0] + ".json";
+            if (!File.Exists(filePath))
+                return $"Error: File '{filePath}' doesnt exist!";
+            
+            string json = File.ReadAllText(filePath);
+            MissionDesign design = CatalogLoader.LoadObject<MissionDesign>(json, Path.GetFileName(filePath));
+            DesignReport report = DesignValidator.Evaluate(CatalogManager.Instance.Catalog, design);
+            return report.Format(true);
         }
 
         public string Execute(string input)

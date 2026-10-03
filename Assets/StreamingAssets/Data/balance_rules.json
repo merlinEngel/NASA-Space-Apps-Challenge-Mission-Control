@@ -6,5 +6,12 @@
   },
   "mass_margin_early_phase": 0.25,
   "power_margin_early_phase": 0.25,
-  "source": "subsysteme-massenanteile.md (SMAD)"
+  "status_thresholds": {
+    "mass":    { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
+    "cost":    { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
+    "power":   { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
+    "delta_v": { "green_min_reserve": 0.20, "yellow_min_reserve": 0.0 },
+    "data":    { "green_min_reserve": 0.20, "yellow_min_reserve": 0.0 }
+  },
+  "source": "subsysteme-massenanteile.md (SMAD) for fractions and margins; status thresholds are game design choices"
 }

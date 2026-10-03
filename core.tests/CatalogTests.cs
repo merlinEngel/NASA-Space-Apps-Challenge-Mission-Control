@@ -15,8 +15,8 @@ namespace MissionCore.Tests
                 new PropulsionSpec { id = "cold_gas", ispS = 70 },
                 new PropulsionSpec { id = "ion", ispS = 3100, powerW = 2300 },
             },
-            new List<InstrumentSpec> { new InstrumentSpec { id = "mag", massKG = 3 } },
-            new List<LauncherSpec> { new LauncherSpec { id = "electron", leoKG = 300 } },
+            new List<InstrumentSpec> { new InstrumentSpec { id = "mag", massKg = 3 } },
+            new List<LauncherSpec> { new LauncherSpec { id = "electron", leoKg = 300 } },
             new List<CommsSpec>(), new List<BatterySpec>(), new List<PlatformSpec>(),
             new List<GroundStationSpec>(), new List<SolarCellSpec>(), new List<MissionTemplate>(),
             new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
@@ -26,8 +26,8 @@ namespace MissionCore.Tests
         {
             var c = SmallCatalog();
             Assert.That(c.Propulsion["ion"].ispS, Is.EqualTo(3100));
-            Assert.That(c.Instruments["mag"].massKG, Is.EqualTo(3));
-            Assert.That(c.Launchers["electron"].leoKG, Is.EqualTo(300));
+            Assert.That(c.Instruments["mag"].massKg, Is.EqualTo(3));
+            Assert.That(c.Launchers["electron"].leoKg, Is.EqualTo(300));
             Assert.That(c.Balance.MassMarginEarlyPhase, Is.EqualTo(0.25));
         }
 
@@ -141,14 +141,43 @@ namespace MissionCore.Tests
         }
 
         [Test]
-        public void RealFiles_LaunchersHavePositiveLeoCapacityAndValidSuccessRate()
+        public void RealFiles_DedicatedLaunchersHavePositiveLeoCapacityAndValidSuccessRate()
         {
-            foreach (var l in LoadRealCatalog().Launchers.Values)
+            foreach (var l in LoadRealCatalog().Launchers.Values.Where(l => !l.IsRideshare))
             {
-                Assert.That(l.leoKG, Is.GreaterThan(0), l.id);
+                Assert.That(l.leoKg, Is.GreaterThan(0), l.id);
                 Assert.That(l.priceUSD, Is.GreaterThan(0), l.id);
                 Assert.That(l.successRate, Is.InRange(0.0, 1.0), l.id);
             }
+        }
+
+        [Test]
+        public void RealFiles_LaunchersContainARideshareWithPositiveLaunchCost()
+        {
+            var rideshares = LoadRealCatalog().Launchers.Values.Where(l => l.IsRideshare).ToList();
+            Assert.That(rideshares, Is.Not.Empty);
+            foreach (var l in rideshares)
+            {
+                Assert.That(l.GetLaunchCost(0), Is.GreaterThan(0), l.id);
+                Assert.That(l.orbits, Is.Not.Empty, l.id);
+            }
+        }
+
+        [Test]
+        public void RealFiles_InstrumentsHavePositivePrice()
+        {
+            foreach (var i in LoadRealCatalog().Instruments.Values)
+                Assert.That(i.priceUSD, Is.GreaterThan(0), i.id);
+        }
+
+        // Rough guard: the tech demo must stay affordable with a camera on a CubeSat via rideshare.
+        [Test]
+        public void RealFiles_TechDemoAffordableWithWideCameraOnRideshare()
+        {
+            var c = LoadRealCatalog();
+            double hardwareUSD = c.Platforms["cubesat_6u"].priceUSD + c.Instruments["camera_wide"].priceUSD;
+            double launchUSD = c.Launchers["spacex_transporter"].GetLaunchCost(c.Platforms["cubesat_6u"].maxMassKg);
+            Assert.That(hardwareUSD + launchUSD, Is.LessThan(c.Missions["techdemo"].budgetUSD));
         }
 
         [Test]

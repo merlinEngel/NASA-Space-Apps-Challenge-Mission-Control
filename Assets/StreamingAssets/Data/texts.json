@@ -1,0 +1,27 @@
+{
+  "mission.techdemo.title":       { "de": "Tech-Demo: Erster Flug", "en": "Tech demo: First flight" },
+  "mission.techdemo.description": { "de": "Eine Universität will ihr erstes Experiment im All testen. Bring einen kleinen Satelliten in eine Bahn zwischen 400 und 600 km und sende genug Daten zur Erde.",
+                                    "en": "A university wants to test its first experiment in space. Put a small satellite into an orbit between 400 and 600 km and send enough data back to Earth." },
+
+  "goal.survive_days":            { "de": "{0} Tage im Orbit überleben",       "en": "Survive {0} days in orbit" },
+  "goal.data_downlinked_bytes":   { "de": "Mindestens {0} GB Daten senden",    "en": "Downlink at least {0} GB of data" },
+  "goal.max_cost_usd":            { "de": "Unter {0} Mio. USD bleiben",        "en": "Stay under {0} million USD" },
+
+  "event.solar_storm.title":      { "de": "Sonnensturm angekündigt",           "en": "Solar storm warning" },
+
+  "ui.language":                  { "de": "Sprache",                           "en": "Language" },
+  "ui.catalog":                   { "de": "Katalog",                           "en": "Catalog" },
+  "ui.budget":                    { "de": "Budget",                            "en": "Budget" },
+  "ui.mass":                      { "de": "Masse",                             "en": "Mass" },
+  "ui.power":                     { "de": "Energie",                           "en": "Power" },
+  "ui.data_per_day":              { "de": "Daten pro Tag",                     "en": "Data per day" },
+
+  "status.green":                 { "de": "In Ordnung",                        "en": "OK" },
+  "status.yellow":                { "de": "Knapp",                             "en": "Tight" },
+  "status.red":                   { "de": "Nicht erfüllt",                     "en": "Not met" },
+
+  "part.cubesat_3u":              { "de": "3U-CubeSat",                        "en": "3U CubeSat" },
+  "part.hydrazine":               { "de": "Hydrazin (Einstoff)",               "en": "Hydrazine (monopropellant)" },
+  "part.s_band":                  { "de": "S-Band-Sender",                     "en": "S-band transmitter" },
+  "part.rideshare":               { "de": "Mitflug (Rideshare)",               "en": "Rideshare" }
+}

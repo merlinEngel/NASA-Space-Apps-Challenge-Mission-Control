@@ -1,0 +1,15 @@
+{
+  "mission_id": "techdemo",
+  "name": "Invalid - many rule violations at once",
+  "platform_id": "cubesat_3u",
+  "instrument_ids": ["warp_scanner"],
+  "comms_id": "uhf",
+  "battery_id": "li_ion_small",
+  "battery_count": 0,
+  "solar_cell_id": "silicon",
+  "solar_area_m2": 0.5,
+  "propellant_mass_kg": 2,
+  "ground_station_ids": ["svalbard"],
+  "altitude_m": 700000,
+  "inclination_deg": 51.6
+}
