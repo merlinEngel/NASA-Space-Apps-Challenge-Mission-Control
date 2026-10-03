@@ -32,7 +32,7 @@ namespace MissionCore
             List<DesignIssue> issues = new();
 
             if (design.InclinationDeg < 0 || design.InclinationDeg > 180)
-                issues.Add(new(DesignIssueCode.InvalidInclination, $"{design.InclinationDeg:0.#}°"));
+                issues.Add(new(DesignIssueCode.InvalidInclination, FormattableString.Invariant($"{design.InclinationDeg:0.#}°")));
 
             LaunchOrbit? orbit = OrbitClassifier.Classify(design.AltitudeM, design.InclinationDeg);
             if (orbit == null)
@@ -49,7 +49,7 @@ namespace MissionCore
                 if (launcher.orbits == null || !launcher.orbits.Contains(orbit.Value))
                     issues.Add(new(DesignIssueCode.RideshareOrbitMismatch, orbit.Value.ToSnakeCase()));
                 if (launcher.altitudeM != null && !launcher.altitudeM.Contains(design.AltitudeM))
-                    issues.Add(new(DesignIssueCode.RideshareAltitudeMismatch, $"{design.AltitudeM / 1000:0} km ({launcher.altitudeM.Min / 1000:0}–{launcher.altitudeM.Max / 1000:0} km)"));
+                    issues.Add(new(DesignIssueCode.RideshareAltitudeMismatch, FormattableString.Invariant($"{design.AltitudeM / 1000:0} km ({launcher.altitudeM.Min / 1000:0}–{launcher.altitudeM.Max / 1000:0} km)")));
             }
             else if (orbit == LaunchOrbit.Gto && launcher.gtoKg == null)
             {
@@ -65,12 +65,12 @@ namespace MissionCore
             if (!IdIsSet(design.PlatformId) || !catalog.Platforms.TryGetValue(design.PlatformId, out PlatformSpec platform))
                 return issues;
 
-            if (platform.maxSolarAreaM2 < design.SolarAreaM2) issues.Add(new(DesignIssueCode.SolarAreaTooLarge, $"{design.SolarAreaM2:0.###} m² (max {platform.maxSolarAreaM2:0.###} m²)"));
+            if (platform.maxSolarAreaM2 < design.SolarAreaM2) issues.Add(new(DesignIssueCode.SolarAreaTooLarge, FormattableString.Invariant($"{design.SolarAreaM2:0.###} m² (max {platform.maxSolarAreaM2:0.###} m²)")));
 
             if (!IdIsSet(design.MissionId) || !catalog.Missions.TryGetValue(design.MissionId, out MissionTemplate mission))
                 return issues;
 
-            if (platform.lifetimeYears < mission.durationDays/Constants.DaysPerYear) issues.Add(new(DesignIssueCode.MissionLongerThanLifetime, $"{mission.durationDays:0} d (max {platform.lifetimeYears * Constants.DaysPerYear:0} d)"));
+            if (platform.lifetimeYears < mission.durationDays/Constants.DaysPerYear) issues.Add(new(DesignIssueCode.MissionLongerThanLifetime, FormattableString.Invariant($"{mission.durationDays:0} d (max {platform.lifetimeYears * Constants.DaysPerYear:0} d)")));
 
             return issues;
         }
@@ -102,12 +102,12 @@ namespace MissionCore
             List<DesignIssue> issues = new();
 
             if (!IdIsSet(design.PropulsionId))
-                if (design.PropellantMassKg > 0) issues.Add(new(DesignIssueCode.PropellantWithoutPropulsion, $"{design.PropellantMassKg:0.##} kg"));
+                if (design.PropellantMassKg > 0) issues.Add(new(DesignIssueCode.PropellantWithoutPropulsion, FormattableString.Invariant($"{design.PropellantMassKg:0.##} kg")));
 
-            if (double.IsFinite(design.AltitudeM) && design.AltitudeM <= 0) issues.Add(new(DesignIssueCode.InvalidValue, "altitude_m"));
-            if (double.IsFinite(design.SolarAreaM2) && design.SolarAreaM2 < 0) issues.Add(new(DesignIssueCode.InvalidValue, "solar_area_m2"));
-            if (double.IsFinite(design.PropellantMassKg) && design.PropellantMassKg < 0) issues.Add(new(DesignIssueCode.InvalidValue, "propellant_mass_kg"));
-            if (double.IsFinite(design.BatteryCount) && design.BatteryCount < 1) issues.Add(new(DesignIssueCode.InvalidValue, "battery_count"));
+            if (!double.IsFinite(design.AltitudeM) || design.AltitudeM <= 0) issues.Add(new(DesignIssueCode.InvalidValue, "altitude_m"));
+            if (!double.IsFinite(design.SolarAreaM2) || design.SolarAreaM2 < 0) issues.Add(new(DesignIssueCode.InvalidValue, "solar_area_m2"));
+            if (!double.IsFinite(design.PropellantMassKg) || design.PropellantMassKg < 0) issues.Add(new(DesignIssueCode.InvalidValue, "propellant_mass_kg"));
+            if (!double.IsFinite(design.BatteryCount) || design.BatteryCount < 1) issues.Add(new(DesignIssueCode.InvalidValue, "battery_count"));
 
             return issues;
         }
@@ -117,8 +117,8 @@ namespace MissionCore
             List<DesignIssue> issues = new();
             if (IdIsSet(design.MissionId) && catalog.Missions.TryGetValue(design.MissionId, out MissionTemplate mission))
             {
-                if (design.InstrumentIds != null && mission.minInstruments > ValidInstrumentCount(catalog, design.InstrumentIds)) issues.Add(new(DesignIssueCode.TooFewInstruments, $"{design.InstrumentIds.Count}/{mission.minInstruments}"));
-                if (!mission.altitudeM.Contains(design.AltitudeM)) issues.Add(new(DesignIssueCode.AltitudeOutsideMission, $"{design.AltitudeM / 1000:0} km ({mission.altitudeM.Min / 1000:0}–{mission.altitudeM.Max / 1000:0} km)"));
+                if (design.InstrumentIds != null && mission.minInstruments > ValidInstrumentCount(catalog, design.InstrumentIds)) issues.Add(new(DesignIssueCode.TooFewInstruments, FormattableString.Invariant($"{design.InstrumentIds.Count}/{mission.minInstruments}")));
+                if (!mission.altitudeM.Contains(design.AltitudeM)) issues.Add(new(DesignIssueCode.AltitudeOutsideMission, FormattableString.Invariant($"{design.AltitudeM / 1000:0} km ({mission.altitudeM.Min / 1000:0}–{mission.altitudeM.Max / 1000:0} km)")));
             }
             return issues;
         }

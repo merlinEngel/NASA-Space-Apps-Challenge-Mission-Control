@@ -358,7 +358,7 @@ namespace MissionCore.Tests
             Single(d, DesignIssueCode.PropellantWithoutPropulsion);
         }
 
-        [Test, Ignore("Bug: double.IsFinite(x) && x <= 0 lets NaN and Infinity pass without an issue")]
+        [Test]
         public void NaNOrInfinity_IsInvalidValue()
         {
             foreach (double value in new[] { double.NaN, double.PositiveInfinity })
