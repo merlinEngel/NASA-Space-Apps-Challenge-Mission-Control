@@ -12,7 +12,7 @@ namespace MissionCore
         public IReadOnlyDictionary<string, BatterySpec> Batteries { get; }
         public IReadOnlyDictionary<string, PlatformSpec> Platforms { get; }
         public IReadOnlyDictionary<string, GroundStationSpec> GroundStations { get; }
-        public IReadOnlyDictionary<string, SolarCellSpec> Solar { get; }
+        public IReadOnlyDictionary<string, SolarCellSpec> SolarCells { get; }
 
         public IReadOnlyDictionary<string, MissionTemplate> Missions { get; }
 
@@ -38,7 +38,7 @@ namespace MissionCore
             Batteries = ById(batteries, b => b.id, "batteries.json");
             Platforms = ById(platforms, p => p.id, "platforms.json");
             GroundStations = ById(groundStations, g => g.id, "groundstations.json");
-            Solar = ById(solar, s => s.id, "solar.json");
+            SolarCells = ById(solar, s => s.id, "solar.json");
             Missions = ById(missions, m => m.id, "missions.json");
 
             Balance = balance;
@@ -74,7 +74,7 @@ namespace MissionCore
             partIds.AddRange(Batteries.Keys);
             partIds.AddRange(Platforms.Keys);
             partIds.AddRange(GroundStations.Keys);
-            partIds.AddRange(Solar.Keys);
+            partIds.AddRange(SolarCells.Keys);
             foreach (string id in partIds)
                 if (!Texts.Contains("part." + id)) warnings.Add($"texts.json: missing 'part.{id}'");
 

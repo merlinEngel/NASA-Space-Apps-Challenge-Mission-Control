@@ -4,7 +4,6 @@ namespace MissionCore
 {
     public static class Maneuvers
     {
-        public const double g0 = 9.80665;
 
         public static (Vec3d prograde, Vec3d normal, Vec3d radial) LocalFrame(Vec3d relPos, Vec3d velocity)
         {
@@ -37,7 +36,7 @@ namespace MissionCore
 
         // Δv [m/s] the remaining fuel can still provide (rocket equation)
         public static double AvailableDeltaV(SpacecraftState state, double isp) =>
-            isp * g0 * Math.Log(state.mass / state.dryMass);
+            isp * Constants.G0Earth * Math.Log(state.mass / state.dryMass);
 
         public static bool TryApplyImpulse(SpacecraftState state, double dvPrograde, double dvNormal, double dvRadial, double isp, out SpacecraftState newState)
         {
@@ -49,7 +48,7 @@ namespace MissionCore
 
             Vec3d dvVec = dvPrograde*prograde + dvNormal*normal + dvRadial*radial;
 
-            double newMass = state.mass * Math.Exp(-dvVec.Length / (isp * g0));
+            double newMass = state.mass * Math.Exp(-dvVec.Length / (isp * Constants.G0Earth));
             if (newMass < state.dryMass)
                 return false;
 

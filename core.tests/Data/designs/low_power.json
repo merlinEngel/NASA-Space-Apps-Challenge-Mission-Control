@@ -1,0 +1,15 @@
+{
+  "mission_id": "techdemo",
+  "name": "Low power - tiny silicon panel, one small battery",
+  "platform_id": "cubesat_6u",
+  "instrument_ids": ["camera_wide"],
+  "launcher_id": "spacex_transporter",
+  "comms_id": "s_band",
+  "battery_id": "li_ion_small",
+  "battery_count": 1,
+  "solar_cell_id": "silicon",
+  "solar_area_m2": 0.05,
+  "ground_station_ids": ["svalbard", "weilheim"],
+  "altitude_m": 500000,
+  "inclination_deg": 97.5
+}

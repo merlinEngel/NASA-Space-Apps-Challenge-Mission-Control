@@ -41,7 +41,7 @@ namespace MissionGame
             Debug.Log($"Catalog loaded: {Catalog.Propulsion.Count} propulsion, {Catalog.Instruments.Count} instruments, " +
                       $"{Catalog.Launchers.Count} launchers, {Catalog.Comms.Count} comms, {Catalog.Batteries.Count} batteries, " +
                       $"{Catalog.Platforms.Count} platforms, {Catalog.GroundStations.Count} ground stations, " +
-                      $"{Catalog.Solar.Count} solar, {Catalog.Missions.Count} missions, {Catalog.Warnings.Count} warnings");
+                      $"{Catalog.SolarCells.Count} solar, {Catalog.Missions.Count} missions, {Catalog.Warnings.Count} warnings");
             foreach (string warning in Catalog.Warnings) Debug.LogWarning(warning);
         }
 

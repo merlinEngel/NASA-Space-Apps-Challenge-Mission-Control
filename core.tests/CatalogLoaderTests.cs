@@ -46,25 +46,26 @@ namespace MissionCore.Tests
             ]";
             var list = CatalogLoader.LoadList<LauncherSpec>(json, "launchers.json");
 
-            Assert.That(list[0].leoKG, Is.EqualTo(300));
-            Assert.That(list[0].ssoKG, Is.EqualTo(200));
-            Assert.That(list[0].gtoKG, Is.Null);
+            Assert.That(list[0].leoKg, Is.EqualTo(300));
+            Assert.That(list[0].ssoKg, Is.EqualTo(200));
+            Assert.That(list[0].gtoKg, Is.Null);
             Assert.That(list[0].priceUSD, Is.EqualTo(7500000));
             Assert.That(list[0].successRate, Is.EqualTo(0.9));
-            Assert.That(list[1].ssoKG, Is.Null);
-            Assert.That(list[1].gtoKG, Is.EqualTo(5500));
+            Assert.That(list[1].ssoKg, Is.Null);
+            Assert.That(list[1].gtoKg, Is.EqualTo(5500));
         }
 
         [Test]
         public void LoadList_ParsesInstruments()
         {
-            const string json = @"[{ ""id"": ""mag"", ""name"": ""Magnetometer"", ""mass_kg"": 3.5, ""power_W"": 3, ""data_rate_class"": ""very_low"" }]";
+            const string json = @"[{ ""id"": ""mag"", ""name"": ""Magnetometer"", ""mass_kg"": 3.5, ""power_W"": 3, ""data_rate_class"": ""very_low"", ""price_USD"": 300000 }]";
             var list = CatalogLoader.LoadList<InstrumentSpec>(json, "instruments.json");
 
             Assert.That(list[0].id, Is.EqualTo("mag"));
-            Assert.That(list[0].massKG, Is.EqualTo(3.5));
+            Assert.That(list[0].massKg, Is.EqualTo(3.5));
             Assert.That(list[0].powerW, Is.EqualTo(3));
             Assert.That(list[0].dataRateClass, Is.EqualTo("very_low"));
+            Assert.That(list[0].priceUSD, Is.EqualTo(300000));
         }
 
         [Test]
@@ -172,6 +173,54 @@ namespace MissionCore.Tests
             var list = new List<PropulsionSpec> { Prop(id, 70) };
             var ex = Assert.Throws<FormatException>(() => CatalogValidator.Validate(list, "propulsion.json"));
             Assert.That(ex.Message, Does.Contain("propulsion.json"));
+        }
+
+        static InstrumentSpec Instrument(double priceUSD) =>
+            new InstrumentSpec { id = "cam", name = "Camera", massKg = 3, powerW = 6, priceUSD = priceUSD, dataRateBpS = 2000000, dutyCycle = 0.05 };
+
+        [Test]
+        public void Validate_AcceptsInstrumentWithPrice()
+        {
+            var list = new List<InstrumentSpec> { Instrument(1500000) };
+            Assert.DoesNotThrow(() => CatalogValidator.Validate(list, "instruments.json"));
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        public void Validate_RejectsInstrumentWithoutPositivePrice(double priceUSD)
+        {
+            var list = new List<InstrumentSpec> { Instrument(priceUSD) };
+            var ex = Assert.Throws<FormatException>(() => CatalogValidator.Validate(list, "instruments.json"));
+            Assert.That(ex.Message, Does.Contain("instruments.json").And.Contain("'cam'").And.Contain("price_USD"));
+        }
+
+        [Test]
+        public void Validate_RejectsInstrumentWithMissingPriceField()
+        {
+            const string json = @"[{ ""id"": ""cam"", ""name"": ""Camera"", ""mass_kg"": 3, ""power_W"": 6, ""data_rate_bps"": 2000000, ""duty_cycle"": 0.05 }]";
+            var list = CatalogLoader.LoadList<InstrumentSpec>(json, "instruments.json");
+            var ex = Assert.Throws<FormatException>(() => CatalogValidator.Validate(list, "instruments.json"));
+            Assert.That(ex.Message, Does.Contain("'cam'").And.Contain("price_USD"));
+        }
+
+        [TestCase(0, 0.5, "data_rate_bps")]
+        [TestCase(1000, 0, "duty_cycle")]
+        [TestCase(1000, 1.5, "duty_cycle")]
+        public void Validate_RejectsInstrumentWithInvalidDataFields(double dataRateBpS, double dutyCycle, string field)
+        {
+            var i = Instrument(1500000);
+            i.dataRateBpS = dataRateBpS;
+            i.dutyCycle = dutyCycle;
+            var ex = Assert.Throws<FormatException>(() => CatalogValidator.Validate(new List<InstrumentSpec> { i }, "instruments.json"));
+            Assert.That(ex.Message, Does.Contain("'cam'").And.Contain(field));
+        }
+
+        [Test]
+        public void Validate_RejectsPlatformWithoutStorage()
+        {
+            var p = new PlatformSpec { id = "bus", name = "Bus", busMassKg = 1, maxMassKg = 2, maxSolarAreaM2 = 0.1, lifetimeYears = 1 };
+            var ex = Assert.Throws<FormatException>(() => CatalogValidator.Validate(new List<PlatformSpec> { p }, "platforms.json"));
+            Assert.That(ex.Message, Does.Contain("platforms.json").And.Contain("'bus'").And.Contain("storage_bits"));
         }
 
         [TestCase(0)]

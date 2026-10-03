@@ -1,0 +1,15 @@
+{
+  "mission_id": "techdemo",
+  "name": "Over budget - good design, but on a dedicated Electron",
+  "platform_id": "cubesat_12u",
+  "instrument_ids": ["camera_wide"],
+  "launcher_id": "electron",
+  "comms_id": "s_band",
+  "battery_id": "li_ion_medium",
+  "battery_count": 2,
+  "solar_cell_id": "triple_junction",
+  "solar_area_m2": 0.2,
+  "ground_station_ids": ["svalbard", "weilheim"],
+  "altitude_m": 500000,
+  "inclination_deg": 97.5
+}

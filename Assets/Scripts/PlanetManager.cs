@@ -43,7 +43,7 @@ namespace MissionGame
             simulatedObjects.Remove(obj);
         }
 
-        void Awake()
+        protected override void Awake()
         {
             base.Awake();
             Clock = new SimClock(stepSeconds, startTimeSinceJ2000);

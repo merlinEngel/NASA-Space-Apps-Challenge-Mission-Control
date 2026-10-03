@@ -1,7 +1,7 @@
 [
-  { "id": "cold_gas",      "name": "Cold gas (nitrogen)",         "isp_s": 70,   "thrust_N": 1,     "source": "antriebe.md" },
-  { "id": "hydrazine",     "name": "Hydrazine (monopropellant)",  "isp_s": 225,  "thrust_N": 22,    "source": "antriebe.md" },
-  { "id": "bipropellant",  "name": "Bipropellant (MMH/NTO)",      "isp_s": 315,  "thrust_N": 400,   "source": "antriebe.md" },
-  { "id": "hall_thruster", "name": "Hall thruster",               "isp_s": 1800, "thrust_N": 0.2,   "power_W": 5000, "source": "antriebe.md" },
-  { "id": "ion_thruster",  "name": "Ion thruster (gridded)",      "isp_s": 3100, "thrust_N": 0.092, "power_W": 2300, "source": "antriebe.md (Dawn NSTAR)" }
+  { "id": "cold_gas",      "name": "Cold gas (nitrogen)",        "isp_s": 70,   "thrust_N": 1,     "dry_mass_kg": 0.8, "price_USD": 60000,    "source": "antriebe.md (isp, thrust); dry mass and price estimate for a CubeSat module, verify" },
+  { "id": "hydrazine",     "name": "Hydrazine (monopropellant)", "isp_s": 225,  "thrust_N": 22,    "dry_mass_kg": 5,   "price_USD": 500000,   "source": "antriebe.md (isp, thrust); dry mass and price estimate for a smallsat system, verify" },
+  { "id": "bipropellant",  "name": "Bipropellant (MMH/NTO)",     "isp_s": 315,  "thrust_N": 400,   "dry_mass_kg": 30,  "price_USD": 2000000,  "source": "antriebe.md (isp, thrust); dry mass and price estimate, verify" },
+  { "id": "hall_thruster", "name": "Hall thruster",              "isp_s": 1800, "thrust_N": 0.2,   "power_W": 5000, "dry_mass_kg": 40, "price_USD": 3000000,  "source": "antriebe.md (isp, thrust, 25 kW/N rule); dry mass incl. PPU and tank, price estimate, verify" },
+  { "id": "ion_thruster",  "name": "Ion thruster (gridded)",     "isp_s": 3100, "thrust_N": 0.092, "power_W": 2300, "dry_mass_kg": 50, "price_USD": 10000000, "source": "antriebe.md (Dawn NSTAR); dry mass incl. PPU and feed system, price estimate, verify" }
 ]
