@@ -136,6 +136,8 @@ namespace MissionCore
 
         private static List<DesignIssue> ValidateExistingParts(Catalog catalog, MissionDesign design)
         {
+            
+
             List<DesignIssue> issues = new();
 
             if (IdIsUnknown(catalog.Platforms, design.PlatformId)) issues.Add(new(DesignIssueCode.UnknownPart, design.PlatformId));

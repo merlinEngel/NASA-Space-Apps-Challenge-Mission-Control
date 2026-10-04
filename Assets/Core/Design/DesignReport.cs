@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using NUnit.Framework.Interfaces;
 
 namespace MissionCore
 {
@@ -32,6 +33,28 @@ namespace MissionCore
         public bool AllGreen => IsValid && Statuses.Values.All(s => s == BudgetStatus.Green);
 
 
+
+        public BudgetStatus Status(Catalog catalog, BudgetKind k) => k switch
+        {
+            BudgetKind.Cost => catalog.Balance.StatusFor(BudgetKind.Cost, CostResult.ReserveFraction),
+            BudgetKind.Data => catalog.Balance.StatusFor(BudgetKind.Data, DataResult.ReserveFraction),
+            BudgetKind.DeltaV => catalog.Balance.StatusFor(BudgetKind.DeltaV, DeltaVResult.ReserveFraction),
+            BudgetKind.Mass => catalog.Balance.StatusFor(BudgetKind.Mass, MassResult.ReserveFraction),
+            BudgetKind.Power => catalog.Balance.StatusFor(BudgetKind.Power, PowerResult.ReserveFraction),
+            _ => throw new System.NotImplementedException()
+        };
+
+        public double Value(Metric m) => m switch
+        {
+            Metric.PowerUseW => PowerResult.ConsumptionW,
+            Metric.PowerGenerationW => PowerResult.AverageGenerationW,
+            Metric.MassKg => MassResult.TotalMassKg,
+            Metric.DeltaVMPerS => DeltaVResult.AvailableDeltaVMPerS,
+            Metric.DataGeneratedBitsPerDay => DataResult.GeneratedBitsPerDay,
+            Metric.DataDownlinkBitsPerDay => DataResult.DownlinkBitsPerDay,
+            Metric.CostUsd => CostResult.TotalCostUSD,
+            _ => throw new System.NotImplementedException()
+        };
 
         public string Format(bool richText)
         {

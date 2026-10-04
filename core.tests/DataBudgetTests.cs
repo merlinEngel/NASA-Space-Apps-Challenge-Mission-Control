@@ -135,15 +135,13 @@ namespace MissionCore.Tests
 
         static Catalog RealCatalog()
         {
-            var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-            while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, "Assets", "StreamingAssets", "Data"))) dir = dir.Parent;
-            string data = Path.Combine(dir.FullName, "Assets", "StreamingAssets", "Data");
+            string data = TestHelpers.StreamingDataDir();
             List<T> L<T>(string f) => CatalogLoader.LoadList<T>(File.ReadAllText(Path.Combine(data, f)), f);
             return new Catalog(L<PropulsionSpec>("propulsion.json"), L<InstrumentSpec>("instruments.json"),
                 L<LauncherSpec>("launchers.json"), L<CommsSpec>("comms.json"), L<BatterySpec>("batteries.json"),
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
-                CatalogLoader.LoadObject<BalanceRules>(File.ReadAllText(Path.Combine(data, "balance_rules.json")), "balance_rules.json"),
+                TestHelpers.LoadRealBalanceRules(),
                 null, null, null);
         }
 

@@ -17,6 +17,9 @@ namespace MissionGame
         {
             base.Awake();
 
+            if (Instance != this) return;
+            DontDestroyOnLoad(gameObject);
+
             dir = Path.Combine(Application.streamingAssetsPath, "Data");
 
             var propulsion = LoadList<PropulsionSpec>("propulsion.json", CatalogValidator.Validate);
@@ -29,10 +32,10 @@ namespace MissionGame
             var solar = LoadList<SolarCellSpec>("solar.json", CatalogValidator.Validate);
             var missions = LoadList<MissionTemplate>("missions.json", CatalogValidator.Validate);
 
-            var balance = LoadObject<BalanceRules>("balance_rules.json", CatalogValidator.Validate);
+            var balance = LoadObject<BalanceRules>("Rules/balance_rules.json", CatalogValidator.Validate);
             // Not written yet: load them as soon as the files exist, stay null until then.
-            var scoring = LoadOptionalObject<ScoringRules>("scoring.json", CatalogValidator.Validate);
-            var sim = LoadOptionalObject<SimRules>("sim_rules.json", CatalogValidator.Validate);
+            var scoring = LoadOptionalObject<ScoringRules>("Rules/scoring.json", CatalogValidator.Validate);
+            var sim = LoadOptionalObject<SimRules>("Rules/sim_rules.json", CatalogValidator.Validate);
             var texts = LoadOptionalTexts("texts.json");
 
             Catalog = new Catalog(propulsion, instruments, launchers, comms, batteries, platforms,

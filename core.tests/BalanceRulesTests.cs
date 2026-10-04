@@ -96,10 +96,7 @@ namespace MissionCore.Tests
         [Test]
         public void RealFile_HasThresholdForEveryBudget()
         {
-            var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-            while (dir != null && !Directory.Exists(Path.Combine(dir.FullName, "Assets", "StreamingAssets", "Data"))) dir = dir.Parent;
-            string json = File.ReadAllText(Path.Combine(dir.FullName, "Assets", "StreamingAssets", "Data", "balance_rules.json"));
-            var rules = CatalogLoader.LoadObject<BalanceRules>(json, "balance_rules.json");
+            var rules = TestHelpers.LoadRealBalanceRules();
             foreach (BudgetKind kind in Enum.GetValues(typeof(BudgetKind)))
                 Assert.That(kind.Threshold(rules.StatusThresholds), Is.Not.Null, kind.ToString());
         }
