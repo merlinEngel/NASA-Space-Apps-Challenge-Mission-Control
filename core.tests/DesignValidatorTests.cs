@@ -399,7 +399,7 @@ namespace MissionCore.Tests
                 L<LauncherSpec>("launchers.json"), L<CommsSpec>("comms.json"), L<BatterySpec>("batteries.json"),
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
-                CatalogLoader.LoadObject<BalanceRules>(File.ReadAllText(Path.Combine(data, "balance_rules.json")), "balance_rules.json"),
+                TestHelpers.LoadRealBalanceRules(),
                 null, null, null);
         }
 

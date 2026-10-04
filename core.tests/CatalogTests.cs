@@ -56,21 +56,9 @@ namespace MissionCore.Tests
 
         // ---------- Integration: the real files in Assets/StreamingAssets/Data ----------
 
-        static string DataDir()
-        {
-            // Walk up from the test assembly (core.tests/bin/...) until the repo root is found
-            var dir = new DirectoryInfo(TestContext.CurrentContext.TestDirectory);
-            while (dir != null)
-            {
-                string candidate = Path.Combine(dir.FullName, "Assets", "StreamingAssets", "Data");
-                if (Directory.Exists(candidate)) return candidate;
-                dir = dir.Parent;
-            }
-            Assert.Fail("Assets/StreamingAssets/Data not found above " + TestContext.CurrentContext.TestDirectory);
-            return null;
-        }
+        static string Read(string file) => File.ReadAllText(Path.Combine(TestHelpers.StreamingDataDir(), file));
 
-        static string Read(string file) => File.ReadAllText(Path.Combine(DataDir(), file));
+        static string ReadRules(string file) => File.ReadAllText(TestHelpers.RulesFile(file));
 
         static List<T> List<T>(string file) => CatalogLoader.LoadList<T>(Read(file), file);
 
@@ -80,7 +68,7 @@ namespace MissionCore.Tests
             List<BatterySpec>("batteries.json"), List<PlatformSpec>("platforms.json"),
             List<GroundStationSpec>("groundstations.json"), List<SolarCellSpec>("solar.json"),
             List<MissionTemplate>("missions.json"),
-            CatalogLoader.LoadObject<BalanceRules>(Read("balance_rules.json"), "balance_rules.json"),
+            CatalogLoader.LoadObject<BalanceRules>(ReadRules("balance_rules.json"), "balance_rules.json"),
             null, null, null);
 
         [Test]
@@ -108,9 +96,9 @@ namespace MissionCore.Tests
                 CatalogValidator.Validate(List<GroundStationSpec>("groundstations.json"), "groundstations.json");
                 CatalogValidator.Validate(List<SolarCellSpec>("solar.json"), "solar.json");
                 CatalogValidator.Validate(List<MissionTemplate>("missions.json"), "missions.json");
-                CatalogValidator.Validate(CatalogLoader.LoadObject<BalanceRules>(Read("balance_rules.json"), "balance_rules.json"), "balance_rules.json");
-                CatalogValidator.Validate(CatalogLoader.LoadObject<ScoringRules>(Read("scoring.json"), "scoring.json"), "scoring.json");
-                CatalogValidator.Validate(CatalogLoader.LoadObject<SimRules>(Read("sim_rules.json"), "sim_rules.json"), "sim_rules.json");
+                CatalogValidator.Validate(CatalogLoader.LoadObject<BalanceRules>(ReadRules("balance_rules.json"), "balance_rules.json"), "balance_rules.json");
+                CatalogValidator.Validate(CatalogLoader.LoadObject<ScoringRules>(ReadRules("scoring.json"), "scoring.json"), "scoring.json");
+                CatalogValidator.Validate(CatalogLoader.LoadObject<SimRules>(ReadRules("sim_rules.json"), "sim_rules.json"), "sim_rules.json");
             });
         }
 

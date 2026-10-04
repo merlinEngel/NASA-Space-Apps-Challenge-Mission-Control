@@ -15,16 +15,16 @@ namespace MissionCore
                 switch (value)
                 {
                     case "en":
-                        culture = new("en-US");
+                        Culture = new("en-US");
                         break;
                     case "de":
-                        culture = new("de-DE");
+                        Culture = new("de-DE");
                         break;
                 }
             }
         }
         private string _language = "en";
-        private CultureInfo culture = new("en-US");
+        public CultureInfo Culture { get; private set; } = new("en-US");
 
         public TextTable(Dictionary<string, Dictionary<string, string>> textTable)
         {
@@ -39,7 +39,7 @@ namespace MissionCore
             {
                 if (value.TryGetValue(Language, out string text))
                 {
-                    return string.Format(culture, text, args);
+                    return string.Format(Culture, text, args);
                 }
                 else return $"Language {Language} missing!";
             }
