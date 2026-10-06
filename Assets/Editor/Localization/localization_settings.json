@@ -1,0 +1,11 @@
+{
+    "textsPath": "Assets/StreamingAssets/Data/texts.json",
+    "languages": [
+        "de",
+        "en"
+    ],
+    "missingKeys": [
+        "mode.simple",
+        "mode.realistic"
+    ]
+}

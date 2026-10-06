@@ -1,5 +1,8 @@
+using System;
+
 namespace MissionCore
 {
+    [System.Serializable]
     public class ValueRange
     {
         public ValueRange(double min, double max)
@@ -12,5 +15,6 @@ namespace MissionCore
         public double Max {get; set;}
 
         public bool Contains(double value) => Min <= value && value <= Max;
+        public double RandomInsideRange => new Random().NextDouble() * Max - Min + Min;
     }
 }

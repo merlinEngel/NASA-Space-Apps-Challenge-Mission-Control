@@ -22,6 +22,15 @@ namespace MissionCore
             }
         }
 
+        public static void Validate(List<OrbitPresetSpec> list, string fileName)
+        {
+            ValidateIdsAndNames(list, o => o.id, o => o.name, fileName);
+            foreach (var o in list)
+            {
+                if (o.altitudeM <= 0) Fail(fileName, o.id, "has isp_s <= 0");
+            }
+        }
+
         public static void Validate(List<InstrumentSpec> list, string fileName)
         {
             ValidateIdsAndNames(list, i => i.id, i => i.name, fileName);

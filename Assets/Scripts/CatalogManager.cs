@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace MissionGame
 {
+    // Runs before every other script, so the catalog exists in all other Awake/Start calls.
+    [DefaultExecutionOrder(-100)]
     public class CatalogManager : Singleton<CatalogManager>
     {
         public Catalog Catalog { get; private set; }
@@ -16,7 +18,6 @@ namespace MissionGame
         protected override void Awake()
         {
             base.Awake();
-
             if (Instance != this) return;
             DontDestroyOnLoad(gameObject);
 
@@ -31,6 +32,7 @@ namespace MissionGame
             var groundStations = LoadList<GroundStationSpec>("groundstations.json", CatalogValidator.Validate);
             var solar = LoadList<SolarCellSpec>("solar.json", CatalogValidator.Validate);
             var missions = LoadList<MissionTemplate>("missions.json", CatalogValidator.Validate);
+            var orbitPresets = LoadList<OrbitPresetSpec>("orbit_presets.json", CatalogValidator.Validate);
 
             var balance = LoadObject<BalanceRules>("Rules/balance_rules.json", CatalogValidator.Validate);
             // Not written yet: load them as soon as the files exist, stay null until then.
@@ -39,12 +41,19 @@ namespace MissionGame
             var texts = LoadOptionalTexts("texts.json");
 
             Catalog = new Catalog(propulsion, instruments, launchers, comms, batteries, platforms,
-                                  groundStations, solar, missions, balance, scoring, sim, texts);
+                                  groundStations, solar, missions, balance, scoring, sim, texts, orbitPresets);
+
+            foreach (TextLocalizer localizer in FindObjectsByType<TextLocalizer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                localizer.UpdateRequested += UpdateUiText;
+                localizer.RequestUpdate();
+            }
 
             Debug.Log($"Catalog loaded: {Catalog.Propulsion.Count} propulsion, {Catalog.Instruments.Count} instruments, " +
                       $"{Catalog.Launchers.Count} launchers, {Catalog.Comms.Count} comms, {Catalog.Batteries.Count} batteries, " +
                       $"{Catalog.Platforms.Count} platforms, {Catalog.GroundStations.Count} ground stations, " +
-                      $"{Catalog.SolarCells.Count} solar, {Catalog.Missions.Count} missions, {Catalog.Warnings.Count} warnings");
+                      $"{Catalog.SolarCells.Count} solar, {Catalog.Missions.Count} missions, {Catalog.Warnings.Count} warnings, " +
+                      $"{Catalog.OrbitPresets.Count} orbit presets");
             foreach (string warning in Catalog.Warnings) Debug.LogWarning(warning);
         }
 
@@ -53,6 +62,11 @@ namespace MissionGame
             var list = CatalogLoader.LoadList<T>(Read(file), file);
             validate(list, file);
             return list;
+        }
+
+        public void UpdateUiText(TextLocalizer localizer, object[] args)
+        {
+            localizer.SetText(Texts.Get(localizer.key, args));
         }
 
         T LoadObject<T>(string file, Action<T, string> validate) where T : class

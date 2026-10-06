@@ -52,6 +52,8 @@ namespace MissionCore
             Metric.DeltaVMPerS => Unit.DeltaVMUnits,
             Metric.MassKg => Unit.MassUnits,
             Metric.PowerGenerationW or Metric.PowerUseW => Unit.PowerUnits,
+            Metric.AltitudeM => Unit.DistanceUnits,
+            Metric.InclinationDeg => Unit.AngleUnits,
             _ => throw new ArgumentOutOfRangeException(nameof(m), m, null)
         };
 
@@ -64,7 +66,7 @@ namespace MissionCore
 
             double rounded = Math.Round(v / unit.Factor, decimals, MidpointRounding.AwayFromZero);
             if (rounded == 0) rounded = 0;
-            return rounded.ToString("F" + decimals, Culture) + " " + unit.Name;
+            return string.Format(Culture, rounded.ToString("N" + decimals, Culture) + " " + unit.Name);
         }
     }
 }

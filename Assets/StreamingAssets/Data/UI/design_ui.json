@@ -1,0 +1,52 @@
+{
+  "tabs": [
+    { "id": "orbit",       "title_key": "tab.orbit",       "budgets": ["delta_v"] },
+    { "id": "platform",    "title_key": "tab.platform",    "budgets": ["mass"] },
+    { "id": "instruments", "title_key": "tab.instruments", "budgets": ["data"] },
+    { "id": "power",       "title_key": "tab.power",       "budgets": ["power"] },
+    { "id": "comms",       "title_key": "tab.comms",       "budgets": ["data"] },
+    { "id": "launch",      "title_key": "tab.launch",      "budgets": ["cost", "delta_v"] }
+  ],
+
+  "issue_tabs": {
+    "missing_platform": "platform",
+    "missing_mission": "orbit",
+    "missing_launcher": "launch",
+    "missing_comms": "comms",
+    "missing_battery": "power",
+    "missing_solar_cell": "power",
+    "no_ground_station": "comms",
+    "unknown_ground_station": "comms",
+    "unknown_part": "platform",
+    "too_few_instruments": "instruments",
+    "altitude_outside_mission": "orbit",
+    "orbit_not_supported": "orbit",
+    "invalid_inclination": "orbit",
+    "launcher_cannot_reach_orbit": "launch",
+    "rideshare_orbit_mismatch": "launch",
+    "rideshare_altitude_mismatch": "launch",
+    "solar_area_too_large": "power",
+    "mission_longer_than_lifetime": "platform",
+    "no_compatible_ground_station": "comms",
+    "invalid_value": "platform",
+    "propellant_without_propulsion": "launch"
+  },
+
+  "fixes": {
+    "mass":    [ { "text_key": "fix.mass.bigger_platform",  "tab": "platform" },
+                 { "text_key": "fix.mass.lighter_parts",    "tab": "instruments" } ],
+    "cost":    [ { "text_key": "fix.cost.cheaper_launch",   "tab": "launch" },
+                 { "text_key": "fix.cost.cheaper_parts",    "tab": "instruments" } ],
+    "power":   [ { "text_key": "fix.power.more_solar",      "tab": "power" },
+                 { "text_key": "fix.power.better_cells",    "tab": "power" },
+                 { "text_key": "fix.power.smaller_camera",  "tab": "instruments" } ],
+    "battery": [ { "text_key": "fix.battery.more_batteries", "tab": "power" } ],
+    "data":    [ { "text_key": "fix.data.faster_radio",     "tab": "comms" },
+                 { "text_key": "fix.data.more_stations",    "tab": "comms" } ],
+    "storage": [ { "text_key": "fix.storage.bigger_platform", "tab": "platform" },
+                 { "text_key": "fix.data.more_stations",    "tab": "comms" } ],
+    "delta_v": [ { "text_key": "fix.delta_v.more_propellant", "tab": "launch" } ]
+  },
+
+  "source": "game design choice (P4 step 6-8); tabs list their main budgets only, so the dots stay distinct"
+}

@@ -23,13 +23,18 @@ namespace MissionCore
                 }
             }
         }
-        private string _language = "en";
+        private string _language = "de";
         public CultureInfo Culture { get; private set; } = new("en-US");
+
+        readonly HashSet<string> missingKeys = new();
+        public IReadOnlyCollection<string> MissingKeys => missingKeys;
 
         public TextTable(Dictionary<string, Dictionary<string, string>> textTable)
         {
             this.textTable = textTable;
         }
+
+        public void ReportMissing(string key) => missingKeys.Add(key);
 
         public bool Contains(string key) => textTable.ContainsKey(key);
 
@@ -43,7 +48,7 @@ namespace MissionCore
                 }
                 else return $"Language {Language} missing!";
             }
-            else return key;
+            else { missingKeys.Add(key); return key; }
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace MissionCore
 {
-    public enum Metric { MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay }
+    public enum Metric { MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay, AltitudeM, InclinationDeg }
 
     public static class MetricExtensions
     {
@@ -30,7 +30,5 @@ namespace MissionCore
         public double After { get; }
         public double Delta => After - Before;
         public bool IsBetter => Metric.HigherIsBetter() ? Delta > 0 : Delta < 0;
-
-
     }
 }

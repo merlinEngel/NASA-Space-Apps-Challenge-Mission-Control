@@ -1,0 +1,135 @@
+{
+    "debugLevel": -1,
+    "currentThemeIndex": 0,
+    "colors": [
+        {
+            "guid": "c1127bb2-3de9-46ee-919e-8aadf3564086",
+            "name": "Accent"
+        },
+        {
+            "guid": "821a90e1-8d75-4f06-adc6-9799515e4a3c",
+            "name": "Background"
+        },
+        {
+            "guid": "a9c56d6a-529d-475d-9960-0e1e1399ea00",
+            "name": "Border"
+        },
+        {
+            "guid": "64086d6a-f309-4800-9633-ff859eddff04",
+            "name": "Green"
+        },
+        {
+            "guid": "922f85ca-92dc-48ed-8b73-ce49e8a32d37",
+            "name": "Panel"
+        },
+        {
+            "guid": "2a1204c4-b4ef-41c3-a59e-df6c21fa24e4",
+            "name": "Panel Hover"
+        },
+        {
+            "guid": "2818ea32-d4c5-4610-812d-57e1a363f3f7",
+            "name": "Red"
+        },
+        {
+            "guid": "87238e85-af1c-44d3-b2d3-54ffbea98065",
+            "name": "Text Primary"
+        },
+        {
+            "guid": "3a761d93-bc21-4f20-9a6c-c86b2d2d30b6",
+            "name": "Text Secondary"
+        },
+        {
+            "guid": "f0e98fc4-140e-48df-b39e-ac87b132a826",
+            "name": "Yellow"
+        }
+    ],
+    "themes": [
+        {
+            "guid": "37eb211a-0055-4f05-91eb-51b848e02b85",
+            "expanded": true,
+            "themeName": "Dark",
+            "colors": [
+                {
+                    "guid": "821a90e1-8d75-4f06-adc6-9799515e4a3c",
+                    "colorHex": "#171B19FF"
+                },
+                {
+                    "guid": "821a90e1-8d75-4f06-adc6-9799515e4a3c",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "922f85ca-92dc-48ed-8b73-ce49e8a32d37",
+                    "colorHex": "#212724FF"
+                },
+                {
+                    "guid": "922f85ca-92dc-48ed-8b73-ce49e8a32d37",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "2a1204c4-b4ef-41c3-a59e-df6c21fa24e4",
+                    "colorHex": "#2C3330FF"
+                },
+                {
+                    "guid": "2a1204c4-b4ef-41c3-a59e-df6c21fa24e4",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "a9c56d6a-529d-475d-9960-0e1e1399ea00",
+                    "colorHex": "#3A423EFF"
+                },
+                {
+                    "guid": "a9c56d6a-529d-475d-9960-0e1e1399ea00",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "87238e85-af1c-44d3-b2d3-54ffbea98065",
+                    "colorHex": "#EDE8DCFF"
+                },
+                {
+                    "guid": "87238e85-af1c-44d3-b2d3-54ffbea98065",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "3a761d93-bc21-4f20-9a6c-c86b2d2d30b6",
+                    "colorHex": "#9CA49DFF"
+                },
+                {
+                    "guid": "3a761d93-bc21-4f20-9a6c-c86b2d2d30b6",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "c1127bb2-3de9-46ee-919e-8aadf3564086",
+                    "colorHex": "#4FC3F7FF"
+                },
+                {
+                    "guid": "c1127bb2-3de9-46ee-919e-8aadf3564086",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "64086d6a-f309-4800-9633-ff859eddff04",
+                    "colorHex": "#7CC48AFF"
+                },
+                {
+                    "guid": "64086d6a-f309-4800-9633-ff859eddff04",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "f0e98fc4-140e-48df-b39e-ac87b132a826",
+                    "colorHex": "#E3C350FF"
+                },
+                {
+                    "guid": "f0e98fc4-140e-48df-b39e-ac87b132a826",
+                    "colorHex": "#FFFFFFFF"
+                },
+                {
+                    "guid": "2818ea32-d4c5-4610-812d-57e1a363f3f7",
+                    "colorHex": "#E5534BFF"
+                },
+                {
+                    "guid": "2818ea32-d4c5-4610-812d-57e1a363f3f7",
+                    "colorHex": "#FFFFFFFF"
+                }
+            ]
+        }
+    ]
+}

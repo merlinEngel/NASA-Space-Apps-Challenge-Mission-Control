@@ -17,6 +17,8 @@ namespace MissionCore
         [JsonProperty("solar_cell_id")] public string SolarCellId { get; set; }
         [JsonProperty("ground_station_ids", NullValueHandling = NullValueHandling.Ignore)] public List<string> GroundStationIds { get; set; } = new();
 
+        [JsonProperty("orbit_preset", NullValueHandling = NullValueHandling.Include)] public string OrbitPreset { get; set; }
+
         [JsonProperty("battery_count")]  public int BatteryCount { get; set; } = 1;
         [JsonProperty("solar_area_m2")] public double SolarAreaM2 { get; set; }
         [JsonProperty("propellant_mass_kg")] public double PropellantMassKg { get; set; }

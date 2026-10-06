@@ -13,6 +13,7 @@ namespace MissionCore
         public IReadOnlyDictionary<string, PlatformSpec> Platforms { get; }
         public IReadOnlyDictionary<string, GroundStationSpec> GroundStations { get; }
         public IReadOnlyDictionary<string, SolarCellSpec> SolarCells { get; }
+        public IReadOnlyDictionary<string, OrbitPresetSpec> OrbitPresets { get; }
 
         public IReadOnlyDictionary<string, MissionTemplate> Missions { get; }
 
@@ -29,7 +30,8 @@ namespace MissionCore
                        List<BatterySpec> batteries, List<PlatformSpec> platforms,
                        List<GroundStationSpec> groundStations, List<SolarCellSpec> solar,
                        List<MissionTemplate> missions,
-                       BalanceRules balance, ScoringRules scoring, SimRules sim, TextTable texts)
+                       BalanceRules balance, ScoringRules scoring, SimRules sim, TextTable texts,
+                       List<OrbitPresetSpec> orbitPresets)
         {
             Propulsion = ById(propulsion, p => p.id, "propulsion.json");
             Instruments = ById(instruments, i => i.id, "instruments.json");
@@ -40,6 +42,7 @@ namespace MissionCore
             GroundStations = ById(groundStations, g => g.id, "groundstations.json");
             SolarCells = ById(solar, s => s.id, "solar.json");
             Missions = ById(missions, m => m.id, "missions.json");
+            OrbitPresets = ById(orbitPresets, o => o.id, "orbit_presets.json");
 
             Balance = balance;
             Scoring = scoring;
@@ -76,13 +79,16 @@ namespace MissionCore
             partIds.AddRange(GroundStations.Keys);
             partIds.AddRange(SolarCells.Keys);
             foreach (string id in partIds)
-                if (!Texts.Contains("part." + id)) warnings.Add($"texts.json: missing 'part.{id}'");
+                if (!Texts.Contains("part." + id)) { Texts.ReportMissing("part." + id); warnings.Add($"texts.json: missing 'part.{id}'"); }
+            
+            foreach (string id in OrbitPresets.Keys)
+                if (!Texts.Contains("orbit_preset." + id)) { Texts.ReportMissing("orbit_preset." + id); warnings.Add($"texts.json: missing 'orbit_preset.{id}'"); }
 
             foreach (var m in Missions.Values)
             {
-                if (!Texts.Contains(m.titleKey)) warnings.Add($"texts.json: missing '{m.titleKey}'");
+                if (!Texts.Contains(m.titleKey)) { Texts.ReportMissing(m.titleKey); warnings.Add($"texts.json: missing '{m.titleKey}'"); }
                 if (!string.IsNullOrEmpty(m.descriptionKey) && !Texts.Contains(m.descriptionKey))
-                    warnings.Add($"texts.json: missing '{m.descriptionKey}'");
+                    { Texts.ReportMissing(m.descriptionKey); warnings.Add($"texts.json: missing '{m.descriptionKey}'"); }
             }
             return warnings;
         }
