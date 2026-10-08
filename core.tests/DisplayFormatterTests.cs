@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -128,6 +127,13 @@ namespace MissionCore.Tests
             Assert.That(En().Value(Metric.DataDownlinkBitsPerDay, 8e9), Is.EqualTo("1.0 GB/d"));
             Assert.That(En().Value(Metric.DataGeneratedBitsPerDay, 8e9), Is.EqualTo("1.0 GB/d"));
             Assert.That(En(DisplayMode.Realistic).Value(Metric.DataDownlinkBitsPerDay, 8e9), Is.EqualTo("1.00 GB/d"));
+        }
+
+        [Test]
+        public void DataStorageMetric_UsesDataUnitsWithoutPerDaySuffix()
+        {
+            Assert.That(En().Value(Metric.DataStorageBits, 8e9), Is.EqualTo("1.0 GB"));
+            Assert.That(En().Delta(new MetricDelta(Metric.DataStorageBits, 0, 8e9)), Is.EqualTo("+1.0 GB"));
         }
 
         [Test]

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {

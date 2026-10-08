@@ -1,6 +1,6 @@
 namespace MissionCore
 {
-    public class DataBudgetResult
+    public class DataBudgetResult : BudgetResult
     {
         public double GeneratedBitsPerDay { get; }
         public double ContactsPerDay { get; }
@@ -13,8 +13,11 @@ namespace MissionCore
         // Data can only be sent while a ground station is visible.
         public double DownlinkBitsPerDay { get => DownlinkBitsPerS * ContactTimeSPerDay; }
         public double ReserveBitsPerDay { get => DownlinkBitsPerDay - GeneratedBitsPerDay; }
-        public double ReserveFraction { get => GeneratedBitsPerDay > 0 ? ReserveBitsPerDay / GeneratedBitsPerDay : 0; }
+        public override double ReserveFraction { get => GeneratedBitsPerDay > 0 ? ReserveBitsPerDay / GeneratedBitsPerDay : 0; }
         public bool StorageOk { get => StorageNeededBits <= StorageCapacityBits; }
+
+        public override Metric TotalMetric => Metric.DataGeneratedBitsPerDay;
+        public override double Total => GeneratedBitsPerDay;
 
         public DataBudgetResult(double generatedBitsPerDay, double contactsPerDay, double contactTimeSPerDay,
                                 double longestGapS, double downlinkBitsPerS,

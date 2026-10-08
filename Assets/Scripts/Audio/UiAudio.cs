@@ -35,6 +35,10 @@ public class UiAudio : Singleton<UiAudio>
         }
     }
 
+    /// <summary>
+    /// Play a oneshot UI sound
+    /// </summary>
+    /// <param name="sound">kind of sound</param>
     public void Play(UiSound sound)
     {
         UiSoundEntry entry = soundLibrary.GetSoundEntry(sound);

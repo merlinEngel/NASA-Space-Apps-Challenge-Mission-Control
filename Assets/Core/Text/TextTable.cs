@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -44,7 +45,12 @@ namespace MissionCore
             {
                 if (value.TryGetValue(Language, out string text))
                 {
-                    return string.Format(Culture, text, args);
+                    if (args == null || args.Length == 0) return text;
+                    try { return string.Format(Culture, text, args); }
+                    catch (FormatException)
+                    {
+                        return text;
+                    }
                 }
                 else return $"Language {Language} missing!";
             }

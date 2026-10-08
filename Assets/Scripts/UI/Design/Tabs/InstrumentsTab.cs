@@ -1,38 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using MissionCore;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MissionGame.UI
 {
-    public class InstrumentsTab : MonoBehaviour
+    public class InstrumentsTab : Tab
     {
         [SerializeField] private CatalogListView cameraList;
         [SerializeField] private CatalogListView othersList;
 
-        private DisplayFormatter formatter;
-
-        [SerializeField] private RectTransform scrollContent;
-
-        private void OnEnable()
+        new void Start()
         {
-            if (formatter != null) OnDesignChanged(null, null);
-            StartCoroutine(RebuildLayoutNextFrame());
-        }
-
-        private IEnumerator RebuildLayoutNextFrame()
-        {
-            // Wait one frame so all rows exist and TMP has measured its texts.
-            yield return null;
-            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollContent);
-        }
-
-        private void Start()
-        {
-            TextTable texts = CatalogManager.Instance.Texts;
-            formatter = new DisplayFormatter(DisplayMode.Simple, texts);
-
             var (cameraRows, otherRows) = MakeRows();
 
             cameraList.RowClicked += OnCameraClicked;
@@ -40,17 +18,9 @@ namespace MissionGame.UI
 
             othersList.RowClicked += OnOthersClicked;
             othersList.Build(otherRows);
-
-            MissionDesignManager.Instance.DesignChanged += OnDesignChanged;
         }
 
-        private void OnDestroy()
-        {
-            if (MissionDesignManager.Instance != null)
-                MissionDesignManager.Instance.DesignChanged -= OnDesignChanged;
-        }
-
-        private void OnDesignChanged(DesignReport report, DesignReport previous)
+        public override void OnDesignChanged(DesignReport report, DesignReport previous, List<DesignChange> changes)
         {
             var (cameraRows, otherRows) = MakeRows();
             cameraList.Refresh(cameraRows);
@@ -89,10 +59,10 @@ namespace MissionGame.UI
                 DescriptionKey = "part." + spec.id + ".desc",
                 Values = new[]
                 {
-                    formatter.Value(Metric.MassKg, spec.massKg),
-                    formatter.Value(Metric.PowerUseW, spec.powerW),
-                    formatter.Value(Metric.DataGeneratedBitsPerDay, bitsPerDay),
-                    formatter.Value(Metric.CostUsd, spec.priceUSD),
+                    Formatter.Value(Metric.MassKg, spec.massKg),
+                    Formatter.Value(Metric.PowerUseW, spec.powerW),
+                    Formatter.Value(Metric.DataGeneratedBitsPerDay, bitsPerDay),
+                    Formatter.Value(Metric.CostUsd, spec.priceUSD),
                 },
                 Selected = design.InstrumentIds.Contains(spec.id),
                 Disabled = false,

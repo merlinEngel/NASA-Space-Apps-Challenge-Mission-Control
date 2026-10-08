@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -48,7 +46,7 @@ namespace MissionCore.Tests
                 new MissionTemplate { id = "techdemo", durationDays = 90, minInstruments = 1, altitudeM = new ValueRange(400000, 600000) },
                 new MissionTemplate { id = "two_instruments", durationDays = 90, minInstruments = 2, altitudeM = new ValueRange(400000, 600000) },
             },
-            new BalanceRules(), null, null, null);
+            new BalanceRules(), null, null, null, new List<OrbitPresetSpec>());
 
         // Passes every rule: SSO rideshare at 500 km, S-band with an S-band station.
         static MissionDesign Valid() => new MissionDesign
@@ -400,7 +398,7 @@ namespace MissionCore.Tests
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
                 TestHelpers.LoadRealBalanceRules(),
-                null, null, null);
+                null, null, null, new List<OrbitPresetSpec>());
         }
 
         static DesignReport EvaluateTestDesign(string file)

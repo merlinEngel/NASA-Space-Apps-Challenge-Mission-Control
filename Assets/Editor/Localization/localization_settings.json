@@ -5,7 +5,10 @@
         "en"
     ],
     "missingKeys": [
-        "mode.simple",
-        "mode.realistic"
+        "ui.mission.altitude_range",
+        "part.camerea",
+        "cubesat_1u",
+        "cubesat_12u",
+        "smallsat_150"
     ]
 }

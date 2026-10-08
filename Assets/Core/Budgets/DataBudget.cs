@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 namespace MissionCore
 {
-    public static class DataBudget
+    public class DataBudget : Budget<DataBudgetResult>
     {
-        public static DataBudgetResult Evaluate(Catalog catalog, MissionDesign design)
+        public override DataBudgetResult Evaluate(BudgetContext ctx)
         {
+            Catalog catalog = ctx.Catalog;
+            MissionDesign design = ctx.Design;
+
             double generatedBitsPerDay = GetGeneratedBitsPerDay(catalog, design);
 
             double downlinkBitsPerS = 0;
@@ -37,7 +40,7 @@ namespace MissionCore
             );
         }
 
-        public static double GetGeneratedBitsPerDay(Catalog catalog, MissionDesign design)
+        public double GetGeneratedBitsPerDay(Catalog catalog, MissionDesign design)
         {
             double bitsPerDay = 0;
             foreach (string instrumentId in design.InstrumentIds)
@@ -49,7 +52,7 @@ namespace MissionCore
         }
 
         // Selected ground stations that can receive the given band.
-        public static List<GroundStationSpec> GetCompatibleStations(Catalog catalog, MissionDesign design, string band)
+        public List<GroundStationSpec> GetCompatibleStations(Catalog catalog, MissionDesign design, string band)
         {
             var stations = new List<GroundStationSpec>();
             if (string.IsNullOrEmpty(band)) return stations;

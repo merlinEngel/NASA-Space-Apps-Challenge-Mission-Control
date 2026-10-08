@@ -89,6 +89,13 @@
   "ui.price_from":                       { "de": "ab {0}", "en": "from {0}" },
   "ui.propellant":                       { "de": "Treibstoff", "en": "Propellant" },
   "ui.propellant.needs_propulsion":      { "de": "Erst einen Antrieb wählen", "en": "Choose a propulsion system first" },
+  "ui.delta.mass":                       { "de": "Masse", "en": "Mass" },
+  "ui.delta.cost":                       { "de": "Kosten", "en": "Cost" },
+  "ui.delta.power":                      { "de": "Strom", "en": "Power" },
+  "ui.delta.data":                       { "de": "Daten", "en": "Data" },
+  "ui.delta.delta_v":                    { "de": "Δv", "en": "Δv" },
+  "ui.last.change":                      { "de": "Letzte Änderung", "en": "Last Change" },
+  "ui.battery_count":                    { "de": "Batterie Anzahl", "en": "Battery Count" },
 
   "budget.delta_v.not_needed":           { "de": "Für diesen Auftrag nicht nötig", "en": "Not needed for this mission" },
 
@@ -242,5 +249,10 @@
   "note.over_budget":                    { "de": "Ausgegraut: über dem Budget.", "en": "Greyed out: over budget." },
 
   "propulsion.none":                     { "de": "Kein Antrieb", "en": "No propulsion" },
-  "propulsion.none.desc":                { "de": "Satellit bleibt auf seiner Bahn", "en": "The satellite stays in its orbit" }
+  "propulsion.none.desc":                { "de": "Satellit bleibt auf seiner Bahn", "en": "The satellite stays in its orbit" },
+
+  "mode.simple":                         { "de": "Einfach", "en": "Simple" },
+  "mode.realistic":                      { "de": "Realistisch", "en": "Realistic" },
+
+  "newtext":                             { "de": "Neuer Text", "en": "New Text" }
 }

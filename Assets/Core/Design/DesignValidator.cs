@@ -188,11 +188,19 @@ namespace MissionCore
         {
             List<DesignIssue> issues = Validate(catalog, design);
 
-            MassBudgetResult massResult = MassBudget.Evaluate(catalog, design);
-            CostBudgetResult costResult = CostBudget.Evaluate(catalog, design);
-            DeltaVBudgetResult deltaVResult = DeltaVBudget.Evaluate(catalog, design);
-            PowerBudgetResult powerResult = PowerBudget.Evaluate(catalog, design);
-            DataBudgetResult dataResult = DataBudget.Evaluate(catalog, design);
+            MassBudget massBudget = new();
+            CostBudget costBudget = new();
+            DeltaVBudget deltaVBudget = new();
+            PowerBudget powerBudget = new();
+            DataBudget dataBudget = new();
+
+            var ctx = new BudgetContext(catalog, design);
+            ctx.Mass  = massBudget.Evaluate(ctx);      // needs nothing
+            var massResult  = ctx.Mass;
+            var costResult  = costBudget.Evaluate(ctx);      // uses ctx.Mass.TotalMassKg for the launch price
+            var deltaVResult    = deltaVBudget.Evaluate(ctx);    // uses ctx.Mass for m0 and m1
+            var powerResult = powerBudget.Evaluate(ctx);
+            var dataResult  = dataBudget.Evaluate(ctx);
 
             Dictionary<BudgetKind, BudgetStatus> statuses = new()
             {

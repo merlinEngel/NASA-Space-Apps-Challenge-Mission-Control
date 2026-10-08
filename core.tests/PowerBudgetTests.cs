@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -22,7 +21,7 @@ namespace MissionCore.Tests
                 new SolarCellSpec { id = "gaas", efficiency = 0.30, packingFactor = 0.85, degradationPerYear = 0.01 },
             },
             new List<MissionTemplate> { new MissionTemplate { id = "techdemo", durationDays = 90 } },
-            new BalanceRules { PowerMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { PowerMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign Design(int batteryCount = 2, double solarAreaM2 = 0.06) => new MissionDesign
         {

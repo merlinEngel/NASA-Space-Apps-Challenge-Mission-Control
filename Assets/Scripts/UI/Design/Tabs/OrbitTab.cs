@@ -1,66 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
 using MissionCore;
 using MissionGame;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class OrbitTab : MonoBehaviour
+public class OrbitTab : Tab
 {
     [SerializeField] private CatalogListView orbitPresetList;
 
-    private DisplayFormatter formatter;
+    [SerializeField] private MySlider altitudeSlider;
+    [SerializeField] private MySlider inclinationSlider;
 
-    [SerializeField] private RectTransform scrollContent;
-
-    private IEnumerator RebuildLayoutNextFrame()
-    {
-        // Wait one frame so all rows exist and TMP has measured its texts.
-        yield return null;
-        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollContent);
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    new void Start()
     {
-        TextTable texts = CatalogManager.Instance.Texts;
-        formatter = new DisplayFormatter(DisplayMode.Simple, texts);
+        base.Start();
 
         var rows = MakeRows();
 
         orbitPresetList.RowClicked += OnOrbitPresetClicked;
         orbitPresetList.Build(rows);
-        
-        MissionDesignManager.Instance.DesignChanged += OnDesignChanged;
+
+        altitudeSlider.ValueChanged += OnAltitudeSliderChanged;
+        inclinationSlider.ValueChanged += OnInclinationSliderChanged;
     }
 
-    private void OnEnable()
+    new private void OnDestroy()
     {
-        if (formatter != null) OnDesignChanged(null, null);
-        StartCoroutine(RebuildLayoutNextFrame());
+        base.OnDestroy();
+        orbitPresetList.RowClicked -= OnOrbitPresetClicked;
+        altitudeSlider.ValueChanged -= OnAltitudeSliderChanged;
+        inclinationSlider.ValueChanged -= OnInclinationSliderChanged;
     }
 
-    private void OnDestroy()
-    {
-        if (MissionDesignManager.Instance != null)
-            MissionDesignManager.Instance.DesignChanged -= OnDesignChanged;
-    }
-
-    private void OnDesignChanged(DesignReport report, DesignReport previous)
+    public override void OnDesignChanged(DesignReport report, DesignReport previous, List<DesignChange> changes)
     {
         List<CatalogRowData> rows = MakeRows();
+        MissionDesign design = MissionDesignManager.Instance.Design;
+
         orbitPresetList.Refresh(rows);
+        altitudeSlider.SetValueWithoutNotify((float)design.AltitudeM);
+        inclinationSlider.SetValueWithoutNotify((float)design.InclinationDeg);
     }
 
     private List<CatalogRowData> MakeRows()
     {
         Catalog catalog = CatalogManager.Instance.Catalog;
         List<CatalogRowData> rows = new();
+        MissionDesign design = MissionDesignManager.Instance.Design;
 
         foreach (OrbitPresetSpec spec in catalog.OrbitPresets.Values)
         {
-            MissionDesign design = MissionDesignManager.Instance.Design;
-
             rows.Add(new CatalogRowData
             {
                 Id = spec.id,
@@ -68,20 +58,18 @@ public class OrbitTab : MonoBehaviour
                 DescriptionKey = "orbit_preset." + spec.id + ".desc",
                 Values = new[]
                 {
-                    formatter.Value(Metric.AltitudeM, spec.altitudeM),
-                    formatter.Value(Metric.InclinationDeg, spec.inclinationDeg)
+                    Formatter.Value(Metric.AltitudeM, spec.altitudeM),
+                    Formatter.Value(Metric.InclinationDeg, spec.inclinationDeg)
                 },
                 Selected = design.OrbitPreset == spec.id,
                 Disabled = false
             });
-            Debug.Log(spec.id + "; " + design.OrbitPreset);
         }
         return rows;
     }
 
     private void OnOrbitPresetClicked(string id, bool isOn)
     {
-        Catalog catalog = CatalogManager.Instance.Catalog;
         MissionDesignManager.Instance.ModifyDesign(d =>
         {
             OrbitPresetSpec preset = CatalogManager.Instance.Catalog.OrbitPresets[id];
@@ -89,5 +77,14 @@ public class OrbitTab : MonoBehaviour
             d.AltitudeM = preset.altitudeM;
             d.InclinationDeg = preset.inclinationDeg;
         });
+    }
+
+    private void OnAltitudeSliderChanged(double newValue)
+    {
+        MissionDesignManager.Instance.ModifyDesign(d => d.AltitudeM = newValue);
+    }
+    private void OnInclinationSliderChanged(double newValue)
+    {
+        MissionDesignManager.Instance.ModifyDesign(d => d.InclinationDeg = newValue);
     }
 }

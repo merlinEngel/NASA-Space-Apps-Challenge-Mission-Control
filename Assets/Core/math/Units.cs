@@ -10,6 +10,9 @@ namespace MissionCore
         public static Unit[] MassUnits { get; } = new Unit[] { ("kg", 1, 1, 2), ("t", 1000, 2, 3) };
         public static Unit[] DistanceUnits { get; } = new Unit[] { ("m", 1, 0, 0), ("km", 1000, 0, 0) };
         public static Unit[] AngleUnits { get; } = new Unit[] { ("°", 1, 2, 2) };
+        public static Unit[] PowerStorageUnits { get; } = new Unit[] { ("Wh", 1, 2, 2), ("kWh", 1000, 2, 3), ("MWh", 1000000, 2, 4) };
+        public static Unit[] AreaUnits { get; } = new Unit[] { ("cm²", 1e-4, 0, 0), ("m²",  1,    1, 2) };
+    
 
         public Unit(string name, double factor, int simpleDecimalPlaces, int realisticDecimalPlaces)
         {

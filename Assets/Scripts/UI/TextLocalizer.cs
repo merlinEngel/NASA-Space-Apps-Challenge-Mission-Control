@@ -1,4 +1,5 @@
 using System;
+using MissionGame;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ public class TextLocalizer : MonoBehaviour
         text = GetComponent<TMP_Text>();
     }
 
+    void OnEnable()
+    {
+        if (CatalogManager.Instance != null) CatalogManager.Instance.UpdateTextLocalizers();
+    }
+
     public void RequestUpdate(object[] args = null, string key = null)
     {
         key ??= this.key;
@@ -27,7 +33,10 @@ public class TextLocalizer : MonoBehaviour
 
     void OnValidate()
     {
-        if (setTextAsKey) text.text = key;
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            if (setTextAsKey) text.text = key;
+#endif
     }
 
     public void SetText(string text)

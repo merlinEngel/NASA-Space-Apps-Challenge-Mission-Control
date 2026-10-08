@@ -31,8 +31,6 @@ namespace MissionCore
         public bool AnyRed => Statuses.Values.Contains(BudgetStatus.Red);
         public bool AllGreen => IsValid && Statuses.Values.All(s => s == BudgetStatus.Green);
 
-
-
         public BudgetStatus Status(Catalog catalog, BudgetKind k) => k switch
         {
             BudgetKind.Cost => catalog.Balance.StatusFor(BudgetKind.Cost, CostResult.ReserveFraction),

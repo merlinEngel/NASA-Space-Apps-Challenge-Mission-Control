@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -35,7 +34,7 @@ namespace MissionCore.Tests
             new List<GroundStationSpec>(),
             new List<SolarCellSpec> { new SolarCellSpec { id = "gaas", massPerAreaKgM2 = 3.5, pricePerAreaUSDM2 = 400000 } },
             new List<MissionTemplate> { new MissionTemplate { id = "techdemo", budgetUSD = 5000000 } },
-            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign SixU() => new MissionDesign
         {

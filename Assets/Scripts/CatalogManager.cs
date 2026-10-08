@@ -12,6 +12,7 @@ namespace MissionGame
     {
         public Catalog Catalog { get; private set; }
         public TextTable Texts => Catalog.Texts;
+        public DisplayFormatter Formatter { get; private set; }
 
         string dir;
 
@@ -43,11 +44,7 @@ namespace MissionGame
             Catalog = new Catalog(propulsion, instruments, launchers, comms, batteries, platforms,
                                   groundStations, solar, missions, balance, scoring, sim, texts, orbitPresets);
 
-            foreach (TextLocalizer localizer in FindObjectsByType<TextLocalizer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-            {
-                localizer.UpdateRequested += UpdateUiText;
-                localizer.RequestUpdate();
-            }
+            Formatter = new DisplayFormatter(DisplayMode.Simple, Texts);
 
             Debug.Log($"Catalog loaded: {Catalog.Propulsion.Count} propulsion, {Catalog.Instruments.Count} instruments, " +
                       $"{Catalog.Launchers.Count} launchers, {Catalog.Comms.Count} comms, {Catalog.Batteries.Count} batteries, " +
@@ -55,6 +52,21 @@ namespace MissionGame
                       $"{Catalog.SolarCells.Count} solar, {Catalog.Missions.Count} missions, {Catalog.Warnings.Count} warnings, " +
                       $"{Catalog.OrbitPresets.Count} orbit presets");
             foreach (string warning in Catalog.Warnings) Debug.LogWarning(warning);
+        }
+
+        void Start()
+        {
+            UpdateTextLocalizers();
+        }
+
+        public void UpdateTextLocalizers()
+        {
+            foreach (TextLocalizer localizer in FindObjectsByType<TextLocalizer>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                localizer.UpdateRequested -= UpdateUiText;
+                localizer.UpdateRequested += UpdateUiText;
+                localizer.RequestUpdate();
+            }
         }
 
         List<T> LoadList<T>(string file, Action<List<T>, string> validate)

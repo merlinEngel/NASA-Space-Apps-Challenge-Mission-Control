@@ -2,7 +2,7 @@ using System;
 
 namespace MissionCore
 {
-    public class DeltaVBudgetResult
+    public class DeltaVBudgetResult : BudgetResult
     {
         public DeltaVBudgetResult(double ispS, double wetMassKg, double propellantMassKg, double requiredDeltaVMPerS)
         {
@@ -20,6 +20,9 @@ namespace MissionCore
         public double EmptyMassKg { get => WetMassKg - PropellantMassKg; }
         public double AvailableDeltaVMPerS { get => IspS > 0 && EmptyMassKg > 0 ? IspS * Constants.G0Earth * Math.Log(WetMassKg/EmptyMassKg) : 0; }
         public double ReserveMPerS { get => AvailableDeltaVMPerS - RequiredDeltaVMPerS; }
-        public double ReserveFraction { get => RequiredDeltaVMPerS > 0 ? ReserveMPerS/RequiredDeltaVMPerS : 0; }
+        public override double ReserveFraction { get => RequiredDeltaVMPerS > 0 ? ReserveMPerS/RequiredDeltaVMPerS : 0; }
+
+        public override Metric TotalMetric => Metric.DeltaVMPerS;
+        public override double Total => AvailableDeltaVMPerS;
     }
 }

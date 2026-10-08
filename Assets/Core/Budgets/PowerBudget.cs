@@ -2,10 +2,13 @@ using System;
 
 namespace MissionCore
 {
-    public static class PowerBudget
+    public class PowerBudget : Budget<PowerBudgetResult> 
     {
-        public static PowerBudgetResult Evaluate(Catalog catalog, MissionDesign design)
+        public override PowerBudgetResult Evaluate(BudgetContext ctx)
         {
+            Catalog catalog = ctx.Catalog;
+            MissionDesign design = ctx.Design;
+
             double r = Constants.RadiusEarth + design.AltitudeM;
             double mu = Constants.MuEarth;
             double orbitPeriodS = 2 * Math.PI * Math.Sqrt(r * r * r / mu);
@@ -43,7 +46,7 @@ namespace MissionCore
             );
         }
 
-        public static double GetConsumptionW(Catalog catalog, MissionDesign design)
+        public double GetConsumptionW(Catalog catalog, MissionDesign design)
         {
             double consumption = 0;
 

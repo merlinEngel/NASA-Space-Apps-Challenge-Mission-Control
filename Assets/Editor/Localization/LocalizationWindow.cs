@@ -53,7 +53,9 @@ namespace MissionGame.EditorTools
         bool focusFill = true;
         int filledThisSession;
 
-        GUIStyle wrapStyle, chipStyle, sidebarStyle, countStyle, titleStyle, bigKeyStyle,
+        // NonSerialized: Unity keeps private window fields across domain reloads (e.g. entering Play Mode),
+        // but GUIStyles come back broken (no padding, no font size). Rebuilding them is cheap.
+        [NonSerialized] GUIStyle wrapStyle, chipStyle, sidebarStyle, countStyle, titleStyle, bigKeyStyle,
                  cardStyle, contentStyle, fillFieldStyle, hintStyle, foldoutStyle;
 
         [MenuItem("Tools/Localization")]
@@ -381,7 +383,9 @@ namespace MissionGame.EditorTools
             Header("Missing keys", "requested in Play Mode, not in texts.json");
             if (missing.Count == 0)
             {
-                Empty("No missing keys. Keys that the game asks for but cannot find are collected when you leave Play Mode.");
+                Empty(string.IsNullOrEmpty(search)
+                    ? "No missing keys. Keys that the game asks for but cannot find are collected when you leave Play Mode."
+                    : $"Nothing matches “{search}”.");
                 return;
             }
 

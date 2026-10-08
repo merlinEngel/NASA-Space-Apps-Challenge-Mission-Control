@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -35,7 +34,7 @@ namespace MissionCore.Tests
             },
             new List<SolarCellSpec>(),
             new List<MissionTemplate>(),
-            new BalanceRules(), null, null, null);
+            new BalanceRules(), null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign Design() => new MissionDesign
         {
@@ -142,7 +141,7 @@ namespace MissionCore.Tests
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
                 TestHelpers.LoadRealBalanceRules(),
-                null, null, null);
+                null, null, null, new List<OrbitPresetSpec>());
         }
 
         // Tech demo: 6U, wide camera, S-band, SSO 500 km, Svalbard + Weilheim must close the data budget.

@@ -8,7 +8,6 @@
 └──────────────────────────────────────────────────────────────────┘
 */
 using System.IO;
-using com.IvanMurzak.Unity.Theme.Installer.SimpleJSON;
 using NUnit.Framework;
 using UnityEngine;
 

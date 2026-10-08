@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -18,7 +17,7 @@ namespace MissionCore.Tests
             new List<InstrumentSpec>(), new List<LauncherSpec>(), new List<CommsSpec>(), new List<BatterySpec>(),
             new List<PlatformSpec> { new PlatformSpec { id = "smallsat", busMassKg = 35, maxMassKg = 150 } },
             new List<GroundStationSpec>(), new List<SolarCellSpec>(), new List<MissionTemplate>(),
-            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign Design(string propulsionId, double propellantKg) => new MissionDesign
         {

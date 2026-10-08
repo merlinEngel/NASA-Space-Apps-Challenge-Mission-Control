@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
-using MissionCore;
 
 namespace MissionCore.Tests
 {
@@ -27,7 +26,7 @@ namespace MissionCore.Tests
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
                 TestHelpers.LoadRealBalanceRules(),
-                null, null, null);
+                null, null, null, new List<OrbitPresetSpec>());
         }
 
         static MissionDesign LoadDesign(string file)
@@ -240,9 +239,9 @@ namespace MissionCore.Tests
         // ---------- MetricDelta / StatusChange / HigherIsBetter ----------
 
         [Test]
-        public void HigherIsBetter_ExactlyForGenerationDeltaVAndDownlink()
+        public void HigherIsBetter_ExactlyForGenerationDeltaVDownlinkAndStorage()
         {
-            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay };
+            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay, Metric.DataStorageBits };
             foreach (Metric m in Enum.GetValues(typeof(Metric)))
                 Assert.That(m.HigherIsBetter(), Is.EqualTo(expected.Contains(m)), m.ToString());
         }
