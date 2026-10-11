@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using MissionCore;
 using TMPro;
 using UnityEngine;
+using MissionCore.Text;
 
-namespace MissionGame
+namespace MissionGame.UI
 {
     public enum SelectionMode
     {

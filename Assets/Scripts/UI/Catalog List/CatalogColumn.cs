@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MissionGame
+namespace MissionGame.UI
 {
     /// <summary>
     /// One column of a catalog table, set up in the Inspector of CatalogListView.

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using MissionCore.Bodies;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Simulation
 {
     public static class Integrator
     {

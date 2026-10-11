@@ -1,6 +1,9 @@
 using System;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     public class PowerBudget : Budget<PowerBudgetResult> 
     {

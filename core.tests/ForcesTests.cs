@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using static MissionCore.Tests.TestHelpers;
+using MissionCore.Bodies;
+using MissionCore.Numerics;
+using MissionCore.Simulation;
 
 namespace MissionCore.Tests
 {

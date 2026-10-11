@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Theme;
+using Unity.Theme.Binders;
 
-namespace Unity.Theme.Binders
+namespace MissionGame.UI
 {
     // Applies one theme color to several UI graphics (Image, RawImage, TMP text).
     [AddComponentMenu("Theme/Graphics Color Binder")]

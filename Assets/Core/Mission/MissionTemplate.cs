@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MissionCore.Design;
+using MissionCore.Numerics;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Mission
 {
     public class MissionTemplate
     {

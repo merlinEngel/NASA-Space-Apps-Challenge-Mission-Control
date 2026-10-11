@@ -1,4 +1,4 @@
-namespace MissionGame
+namespace MissionGame.Audio
 {
     public class UiSoundOverride : UnityEngine.MonoBehaviour
     {

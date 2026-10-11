@@ -1,4 +1,6 @@
-namespace MissionCore
+using MissionCore.Catalogs;
+using MissionCore.Numerics;
+namespace MissionCore.Budgets
 {
     public static class OrbitClassifier
     {

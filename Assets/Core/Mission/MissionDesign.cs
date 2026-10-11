@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Mission
 {
     public class MissionDesign
     {

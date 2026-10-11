@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public enum Metric { Area, PowerStorage, Raw, MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay, AltitudeM, InclinationDeg, DataStorageBits, IspS }
 

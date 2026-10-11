@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
-using MissionCore;
 using MissionGame;
+using MissionCore.Bodies;
+using MissionCore.Numerics;
 
 [CreateAssetMenu(fileName = "Planet", menuName = "Scriptable Objects/Planet")]
 public class Planet : ScriptableObject, ICelestialBody

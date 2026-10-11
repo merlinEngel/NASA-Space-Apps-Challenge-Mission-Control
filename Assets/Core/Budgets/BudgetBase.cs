@@ -1,4 +1,7 @@
-namespace MissionCore
+using MissionCore.Catalogs;
+using MissionCore.Design;
+using MissionCore.Mission;
+namespace MissionCore.Budgets
 {
     public abstract class Budget<TResult> where TResult : BudgetResult
     {

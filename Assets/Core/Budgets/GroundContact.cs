@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Catalogs;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     // Result of a ground contact scan, averaged per day.
     public class ContactStats

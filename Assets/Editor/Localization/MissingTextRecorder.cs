@@ -1,8 +1,8 @@
-using MissionCore;
 using UnityEditor;
 using UnityEngine;
+using MissionCore.Text;
 
-namespace MissionGame.EditorTools
+namespace MissionGame.Editor
 {
     // When Play Mode ends, copies the keys TextTable could not find into the localization settings.
     // ExitingPlayMode fires while the scene objects still exist, so CatalogManager is still reachable.

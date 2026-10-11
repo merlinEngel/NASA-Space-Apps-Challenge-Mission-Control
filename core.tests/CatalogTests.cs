@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {

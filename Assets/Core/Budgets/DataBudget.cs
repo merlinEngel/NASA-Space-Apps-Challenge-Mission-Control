@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     public class DataBudget : Budget<DataBudgetResult>
     {

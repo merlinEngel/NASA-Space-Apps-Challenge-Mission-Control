@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
     public enum InstrumentCategory { Camera, Radiometer, Magnetometer, ParticleDetector }
 

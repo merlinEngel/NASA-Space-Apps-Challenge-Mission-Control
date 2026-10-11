@@ -1,4 +1,4 @@
-namespace MissionCore
+namespace MissionCore.Design
 {
     public enum DesignIssueCode
     {

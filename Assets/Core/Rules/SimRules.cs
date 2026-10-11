@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using MissionCore.Mission;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Rules
 {
     // Values from sim_rules.json: fixed rules of the simulation loop.
     public class SimRules

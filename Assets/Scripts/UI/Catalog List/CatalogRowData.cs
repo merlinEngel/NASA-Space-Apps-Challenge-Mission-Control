@@ -1,4 +1,4 @@
-namespace MissionGame
+namespace MissionGame.UI
 {
     /// <summary>
     /// Everything one catalog row needs to draw itself.

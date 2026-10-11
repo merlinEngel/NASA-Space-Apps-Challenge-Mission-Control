@@ -1,4 +1,5 @@
-namespace MissionCore
+using MissionCore.Design;
+namespace MissionCore.Budgets
 {
     public class DataBudgetResult : BudgetResult
     {

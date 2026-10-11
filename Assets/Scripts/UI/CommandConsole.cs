@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using MissionCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MissionCore.Bodies;
+using MissionCore.Catalogs;
+using MissionCore.Design;
+using MissionCore.Mission;
+using MissionCore.Simulation;
 
-namespace MissionGame
+namespace MissionGame.UI
 {
     public class CommandConsole : MonoBehaviour
     {

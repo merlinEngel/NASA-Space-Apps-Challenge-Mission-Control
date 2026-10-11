@@ -1,8 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Numerics;
+using MissionCore.Rules;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public static class DesignValidator
     {

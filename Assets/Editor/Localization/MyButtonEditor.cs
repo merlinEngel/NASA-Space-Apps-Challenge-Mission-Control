@@ -1,23 +1,27 @@
 using UnityEditor;
 using UnityEditor.UI;
+using MissionGame.UI;
 
-[CustomEditor(typeof(MyButton), true)]
-[CanEditMultipleObjects]
-public class MyButtonEditor : ButtonEditor
+namespace MissionGame.Editor
 {
-    SerializedProperty text;
-
-    protected override void OnEnable()
+    [CustomEditor(typeof(MyButton), true)]
+    [CanEditMultipleObjects]
+    public class MyButtonEditor : ButtonEditor
     {
-        base.OnEnable();
-        text = serializedObject.FindProperty("text");
-    }
+        SerializedProperty text;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();          // draws all Button fields
-        serializedObject.Update();
-        EditorGUILayout.PropertyField(text);
-        serializedObject.ApplyModifiedProperties();
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            text = serializedObject.FindProperty("text");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();          // draws all Button fields
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(text);
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }

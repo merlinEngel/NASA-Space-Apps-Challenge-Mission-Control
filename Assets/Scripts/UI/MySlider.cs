@@ -1,86 +1,90 @@
 using System;
-using MissionCore;
 using MissionGame;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MissionCore.Design;
+using MissionCore.Text;
 
-/// <summary>
-/// Wraps a Unity Slider that always runs from 0 to 1 and maps it to a real range (min..max).
-/// Player input raises ValueChanged with the real value.
-/// Updates coming from the design use SetValueWithoutNotify, so they never raise ValueChanged.
-/// </summary>
-public class MySlider : MonoBehaviour
+namespace MissionGame.UI
 {
-    public Slider slider;
-    public TMP_Text valueText;
-    public Metric metric;
-    [Label("Min/Max")] public Vector2 range;
-
-    /// <summary>Raised only when the player moves the slider. Argument: real value.</summary>
-    public event Action<double> ValueChanged;
-
-    private DisplayFormatter Formatter => CatalogManager.Instance.Formatter;
-
-    public float Min => range.x;
-    public float Max => range.y;
-
-    /// <summary>Real value. Setting it behaves like player input and raises ValueChanged.</summary>
-    public float Value
+    /// <summary>
+    /// Wraps a Unity Slider that always runs from 0 to 1 and maps it to a real range (min..max).
+    /// Player input raises ValueChanged with the real value.
+    /// Updates coming from the design use SetValueWithoutNotify, so they never raise ValueChanged.
+    /// </summary>
+    public class MySlider : MonoBehaviour
     {
-        get => GetTrueValue(slider.value);
-        set => slider.value = GetNormalizedValue(value);
-    }
+        public Slider slider;
+        public TMP_Text valueText;
+        public Metric metric;
+        [Label("Min/Max")] public Vector2 range;
 
-    /// <summary>Slider position 0..1. Setting it raises ValueChanged.</summary>
-    public float NormalizedValue
-    {
-        get => slider.value;
-        set => slider.value = value;
-    }
+        /// <summary>Raised only when the player moves the slider. Argument: real value.</summary>
+        public event Action<double> ValueChanged;
 
-    private void Reset()
-    {
-        TryGetComponent(out slider);
-        if (slider != null)
+        private DisplayFormatter Formatter => CatalogManager.Instance.Formatter;
+
+        public float Min => range.x;
+        public float Max => range.y;
+
+        /// <summary>Real value. Setting it behaves like player input and raises ValueChanged.</summary>
+        public float Value
         {
-            slider.minValue = 0f;
-            slider.maxValue = 1f;
+            get => GetTrueValue(slider.value);
+            set => slider.value = GetNormalizedValue(value);
         }
-    }
 
-    private void Start()
-    {
-        slider.onValueChanged.AddListener(OnSliderChanged);
-    }
+        /// <summary>Slider position 0..1. Setting it raises ValueChanged.</summary>
+        public float NormalizedValue
+        {
+            get => slider.value;
+            set => slider.value = value;
+        }
 
-    private void OnDestroy()
-    {
-        if (slider != null) slider.onValueChanged.RemoveListener(OnSliderChanged);
-    }
+        private void Reset()
+        {
+            TryGetComponent(out slider);
+            if (slider != null)
+            {
+                slider.minValue = 0f;
+                slider.maxValue = 1f;
+            }
+        }
 
-    /// <summary>Design → UI: shows a real value without raising ValueChanged. Use this in OnDesignChanged.</summary>
-    public void SetValueWithoutNotify(float trueValue)
-    {
-        float normalized = GetNormalizedValue(trueValue);
-        slider.SetValueWithoutNotify(normalized);
-        UpdateText(normalized);
-    }
+        private void Start()
+        {
+            slider.onValueChanged.AddListener(OnSliderChanged);
+        }
 
-    public float GetNormalizedValue(float trueValue) => Mathf.InverseLerp(Min, Max, trueValue);
-    public float GetTrueValue(float normalizedValue) => Mathf.Lerp(Min, Max, normalizedValue);
+        private void OnDestroy()
+        {
+            if (slider != null) slider.onValueChanged.RemoveListener(OnSliderChanged);
+        }
 
-    // UI → design: only runs for real slider changes (player drag or Value/NormalizedValue setter).
-    private void OnSliderChanged(float normalizedValue)
-    {
-        UpdateText(normalizedValue);
-        ValueChanged?.Invoke(GetTrueValue(normalizedValue));
-    }
+        /// <summary>Design → UI: shows a real value without raising ValueChanged. Use this in OnDesignChanged.</summary>
+        public void SetValueWithoutNotify(float trueValue)
+        {
+            float normalized = GetNormalizedValue(trueValue);
+            slider.SetValueWithoutNotify(normalized);
+            UpdateText(normalized);
+        }
 
-    private void UpdateText(float normalizedValue)
-    {
-        if (valueText == null) return;
-        valueText.text = Formatter.Value(metric, GetTrueValue(normalizedValue));
+        public float GetNormalizedValue(float trueValue) => Mathf.InverseLerp(Min, Max, trueValue);
+        public float GetTrueValue(float normalizedValue) => Mathf.Lerp(Min, Max, normalizedValue);
+
+        // UI → design: only runs for real slider changes (player drag or Value/NormalizedValue setter).
+        private void OnSliderChanged(float normalizedValue)
+        {
+            UpdateText(normalizedValue);
+            ValueChanged?.Invoke(GetTrueValue(normalizedValue));
+        }
+
+        private void UpdateText(float normalizedValue)
+        {
+            if (valueText == null) return;
+            valueText.text = Formatter.Value(metric, GetTrueValue(normalizedValue));
+        }
     }
 }

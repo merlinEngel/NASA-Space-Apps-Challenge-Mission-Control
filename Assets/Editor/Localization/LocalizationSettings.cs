@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace MissionGame.EditorTools
+namespace MissionGame.Editor
 {
     // Editor-only settings, stored next to the scripts so they are in git and shared with the team.
     // Languages live here (not only in texts.json), so a new language exists before it has any text.

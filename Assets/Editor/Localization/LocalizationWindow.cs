@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace MissionGame.EditorTools
+namespace MissionGame.Editor
 {
     // Tools > Localization: view, edit and complete texts.json.
     // Layout: toolbar (file, search, save) on top, navigation on the left, content on the right.

@@ -1,7 +1,8 @@
 using UnityEditor;
 using UnityEngine;
+using MissionGame.Audio;
 
-namespace MissionGame
+namespace MissionGame.Editor
 {
     // Inspector layout for UiSoundEntry:
     // a foldout header with name + summary, then clips, volume and two min-max sliders.

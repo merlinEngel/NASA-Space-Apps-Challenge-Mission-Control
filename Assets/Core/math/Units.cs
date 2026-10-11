@@ -1,4 +1,4 @@
-namespace MissionCore
+namespace MissionCore.Numerics
 {
     public class Unit
     {

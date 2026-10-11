@@ -3,44 +3,47 @@ using MissionGame;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public class TextLocalizer : MonoBehaviour
+namespace MissionGame.UI
 {
-    public string key;
-    [SerializeField] TMP_Text text;
-    public bool setTextAsKey = true;
-
-    public Action<TextLocalizer, object[]> UpdateRequested;
-
-    void Reset()
+    [RequireComponent(typeof(TMP_Text))]
+    public class TextLocalizer : MonoBehaviour
     {
-        text = GetComponent<TMP_Text>();
-    }
+        public string key;
+        [SerializeField] TMP_Text text;
+        public bool setTextAsKey = true;
 
-    void OnEnable()
-    {
-        if (CatalogManager.Instance != null) CatalogManager.Instance.UpdateTextLocalizers();
-    }
+        public Action<TextLocalizer, object[]> UpdateRequested;
 
-    public void RequestUpdate(object[] args = null, string key = null)
-    {
-        key ??= this.key;
-        this.key = key;
+        void Reset()
+        {
+            text = GetComponent<TMP_Text>();
+        }
 
-        args ??= new object[]{};
-        UpdateRequested?.Invoke(this, args);
-    }
+        void OnEnable()
+        {
+            if (CatalogManager.Instance != null) CatalogManager.Instance.UpdateTextLocalizers();
+        }
 
-    void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (!Application.isPlaying)
-            if (setTextAsKey) text.text = key;
-#endif
-    }
+        public void RequestUpdate(object[] args = null, string key = null)
+        {
+            key ??= this.key;
+            this.key = key;
 
-    public void SetText(string text)
-    {
-        this.text.text = text;
-    }
-}   
+            args ??= new object[]{};
+            UpdateRequested?.Invoke(this, args);
+        }
+
+        void OnValidate()
+        {
+    #if UNITY_EDITOR
+            if (!Application.isPlaying)
+                if (setTextAsKey) text.text = key;
+    #endif
+        }
+
+        public void SetText(string text)
+        {
+            this.text.text = text;
+        }
+    }   
+}

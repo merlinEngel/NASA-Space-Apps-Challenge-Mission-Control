@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace MissionGame.EditorTools
+namespace MissionGame.Editor
 {
     // Editable in-memory copy of texts.json. Keeps the key order of the file,
     // so a save produces a small, readable git diff.

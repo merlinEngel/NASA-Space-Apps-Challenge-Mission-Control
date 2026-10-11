@@ -1,8 +1,10 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using MissionCore.Design;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Text
 {
     public enum DisplayMode { Simple, Realistic }
 

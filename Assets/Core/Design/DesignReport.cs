@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Rules;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public class DesignReport
     {

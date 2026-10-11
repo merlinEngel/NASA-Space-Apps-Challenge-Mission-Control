@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MissionCore;
 using UnityEngine;
+using MissionGame.UI;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Rules;
+using MissionCore.Text;
 
 namespace MissionGame
 {

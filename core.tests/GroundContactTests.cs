@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Numerics;
 
 namespace MissionCore.Tests
 {

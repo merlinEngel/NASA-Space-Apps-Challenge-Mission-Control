@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using MissionCore;
 using TMPro;
 using UnityEngine;
+using MissionGame.Design;
+using MissionCore.Budgets;
+using MissionCore.Design;
 
-namespace MissionGame.UI
+namespace MissionGame.UI.Design
 {
     public class TradeOffBar : MonoBehaviour
     {

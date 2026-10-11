@@ -25586,7 +25586,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1872389661}
-        m_TargetAssemblyTypeName: TabManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: MissionGame.UI.TabManager, Assembly-CSharp
         m_MethodName: TabClicked
         m_Mode: 0
         m_Arguments:
@@ -25875,21 +25875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596dacb03e0f4446c963a38a0d16584a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onOptionSelected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MissionGame.UI.ModeSelector, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8807510256510987891
 MonoBehaviour:
   m_ObjectHideFlags: 0

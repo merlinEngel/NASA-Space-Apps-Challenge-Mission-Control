@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using MissionCore.Design;
 
 namespace MissionCore.Tests
 {

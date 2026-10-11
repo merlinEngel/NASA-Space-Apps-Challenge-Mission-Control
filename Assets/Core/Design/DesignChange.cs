@@ -1,6 +1,8 @@
 using System;
+using MissionCore.Mission;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public enum ChangeKind
     {

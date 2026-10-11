@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace MissionGame
+namespace MissionGame.Audio
 {
     [Serializable]
     public struct UiSoundEntry

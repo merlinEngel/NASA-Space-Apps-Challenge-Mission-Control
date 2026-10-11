@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
-using MissionCore;
 using UnityEngine;
+using MissionGame.Design;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Design;
+using MissionCore.Mission;
 
-namespace MissionGame.UI
+namespace MissionGame.UI.Design
 {
     public class LaunchTab : Tab
     {

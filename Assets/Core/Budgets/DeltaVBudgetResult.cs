@@ -1,6 +1,8 @@
 using System;
+using MissionCore.Design;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     public class DeltaVBudgetResult : BudgetResult
     {

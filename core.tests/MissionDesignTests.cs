@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
 
 namespace MissionCore.Tests
 {

@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using System;
 using MissionGame;
 using System.Linq;
+using MissionGame.Audio;
 
 [CreateAssetMenu(fileName = "UiSoundLibrary", menuName = "Scriptable Objects/UiSoundLibrary")]
 public class UiSoundLibrary : ScriptableObject

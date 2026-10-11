@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using MissionCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MissionCore.Text;
 
-namespace MissionGame
+namespace MissionGame.UI
 {
     /// <summary>
     /// One row of a catalog table. Only knows how to show a CatalogRowData

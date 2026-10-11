@@ -1,4 +1,6 @@
-namespace MissionCore
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+namespace MissionCore.Budgets
 {
     public class DeltaVBudget : Budget<DeltaVBudgetResult>
     {

@@ -6,7 +6,7 @@ using Unity.Theme.Binders;
 // NaughtyInspector überschreibt alle Inspectors mit IMGUI. Die Drawer von Unity Theme
 // nutzen nur UI Toolkit (CreatePropertyGUI) und zeigen sonst "No GUI Implemented".
 // Diese Editoren sind spezifischer als NaughtyInspector und erzwingen UI Toolkit.
-namespace MissionControl.Editor
+namespace MissionGame.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(BaseColorBinder), true)]

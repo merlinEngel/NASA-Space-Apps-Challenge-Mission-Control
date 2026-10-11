@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Theme.Binders;
 
-namespace Unity.Theme.Binders
+namespace MissionGame.UI
 {
     /// <summary>
     /// Binds theme colors to a Unity Slider: Background, Fill and Handle.

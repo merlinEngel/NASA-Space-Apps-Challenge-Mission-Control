@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace MissionCore
+namespace MissionCore.Text
 {
     public class TextTable
     {

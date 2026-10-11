@@ -1,3 +1,6 @@
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
 namespace MissionCore.Tests
 {
     // Runs a single budget the same way DesignValidator does:

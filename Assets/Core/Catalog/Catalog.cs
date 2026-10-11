@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Mission;
+using MissionCore.Rules;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
     public class Catalog
     {

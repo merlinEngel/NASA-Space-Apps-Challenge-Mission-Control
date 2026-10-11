@@ -1,6 +1,8 @@
 using System;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     public class MassBudget : Budget<MassBudgetResult>
     {

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Budgets;
+using MissionCore.Rules;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public class DesignReportDiff
     {

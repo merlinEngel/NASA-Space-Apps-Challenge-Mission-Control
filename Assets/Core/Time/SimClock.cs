@@ -1,6 +1,6 @@
 using System;
 
-namespace MissionCore
+namespace MissionCore.Time
 {
     public sealed class SimClock
     {

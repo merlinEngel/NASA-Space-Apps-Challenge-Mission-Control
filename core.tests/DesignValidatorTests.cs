@@ -2,6 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Design;
+using MissionCore.Mission;
+using MissionCore.Numerics;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {

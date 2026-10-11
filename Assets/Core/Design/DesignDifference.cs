@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using MissionCore.Mission;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public static class DesignDifference
     {

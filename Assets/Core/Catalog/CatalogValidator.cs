@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Budgets;
+using MissionCore.Mission;
+using MissionCore.Rules;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
     // Sanity checks for loaded data files. Every problem throws a FormatException
     // "<file>: '<id>' <problem>" so a broken JSON value is found right at startup.

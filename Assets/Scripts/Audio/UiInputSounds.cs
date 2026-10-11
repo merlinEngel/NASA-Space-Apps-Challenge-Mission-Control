@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace MissionGame
+namespace MissionGame.Audio
 {
     // Plays UI sounds for every Selectable under the mouse. No per-button setup needed.
     public class UiInputSounds : MonoBehaviour

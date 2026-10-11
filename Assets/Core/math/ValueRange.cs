@@ -1,6 +1,6 @@
 using System;
 
-namespace MissionCore
+namespace MissionCore.Numerics
 {
     [System.Serializable]
     public class ValueRange
