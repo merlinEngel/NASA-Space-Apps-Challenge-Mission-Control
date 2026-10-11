@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace MissionCore
 {
@@ -55,6 +56,13 @@ namespace MissionCore
                 else return $"Language {Language} missing!";
             }
             else { missingKeys.Add(key); return key; }
+        }
+
+        public string Get(string key, IReadOnlyDictionary<string, string> values)
+        {
+            string text = Get(key);
+            return Regex.Replace(text, @"\{([a-z_]+)\}",
+                m => values.TryGetValue(m.Groups[1].Value, out string v) ? v : m.Value);
         }
     }
 }

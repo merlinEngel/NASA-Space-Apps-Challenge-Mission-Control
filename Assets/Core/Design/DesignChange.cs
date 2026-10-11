@@ -78,14 +78,60 @@ namespace MissionCore
 
         public string Format(TextTable texts, DisplayFormatter formatter)
         {
+            string prefix = Field == DesignField.OrbitPreset ? "orbit_preset." : "part.";
             return Kind switch
             {
-                ChangeKind.Replace => texts.Get("change.replace", texts.Get("part." + AfterId), texts.Get("part." + BeforeId)),
-                ChangeKind.Add => texts.Get("change.add", texts.Get("part." + AfterId)),
-                ChangeKind.Remove => texts.Get("change.remove", texts.Get("part." + BeforeId)),
+                ChangeKind.Replace => texts.Get("change.replace", texts.Get(prefix + AfterId), texts.Get(prefix + BeforeId)),
+                ChangeKind.Add => texts.Get("change.add", texts.Get(prefix + AfterId)),
+                ChangeKind.Remove => texts.Get("change.remove", texts.Get(prefix + BeforeId)),
                 ChangeKind.Value => Value != null ? texts.Get("change.value", texts.Get(Field.TextKey()), formatter.Value(Value.Value.Metric, Value.Value.After)) : "",
                 _ => "Not Implemented"
             };
+        }
+
+        public MissionDesign Undo(MissionDesign design)
+        {
+            if (Kind == ChangeKind.Value)
+            {
+                switch (Field)
+                {
+                    case DesignField.SolarArea: design.SolarAreaM2 = Value.Value.Before; break;
+                    case DesignField.PropellantMass: design.PropellantMassKg = Value.Value.Before; break;
+                    case DesignField.BatteryCount: design.BatteryCount = (int)Value.Value.Before; break;
+                    case DesignField.Inclination: design.InclinationDeg = Value.Value.Before; break;
+                    case DesignField.Altitude: design.AltitudeM = Value.Value.Before; break;
+                }
+            } else
+            {
+                switch (Field)
+                {
+                    case DesignField.Platform: design.PlatformId = BeforeId; break;
+                    case DesignField.Launcher: design.LauncherId = BeforeId; break;
+                    case DesignField.Propulsion: design.PropulsionId = BeforeId; break;
+                    case DesignField.Comms: design.CommsId = BeforeId; break;
+                    case DesignField.Battery: design.BatteryId = BeforeId; break;
+                    case DesignField.SolarCell: design.SolarCellId = BeforeId; break;
+                    case DesignField.OrbitPreset: design.OrbitPreset = BeforeId; break;
+
+                    case DesignField.Instruments:
+                        switch (Kind)
+                        {
+                            case ChangeKind.Add: design.InstrumentIds.Remove(AfterId); break;
+                            case ChangeKind.Remove: design.InstrumentIds.Add(BeforeId); break;
+                        }
+                    break;
+
+                    case DesignField.GroundStations:
+                        switch (Kind)
+                        {
+                            case ChangeKind.Add: design.GroundStationIds.Remove(AfterId); break;
+                            case ChangeKind.Remove: design.GroundStationIds.Add(BeforeId); break;
+                        }
+                    break;
+                }
+            }
+
+            return design;
         }
     }
 }

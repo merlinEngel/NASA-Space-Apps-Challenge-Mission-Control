@@ -29,7 +29,7 @@ namespace MissionCore.Tests
         [Test]
         public void Hydrazine_MatchesRocketEquation()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), Design("hydrazine", 10));
+            var r = BudgetRunner.DeltaV(TestCatalog(), Design("hydrazine", 10));
             Assert.That(r.IspS, Is.EqualTo(225));
             Assert.That(r.WetMassKg, Is.EqualTo(60).Within(Tol));
             Assert.That(r.EmptyMassKg, Is.EqualTo(50).Within(Tol));
@@ -41,7 +41,7 @@ namespace MissionCore.Tests
         [Test]
         public void MarginIsPartOfDryMass()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), Design("hydrazine", 10));
+            var r = BudgetRunner.DeltaV(TestCatalog(), Design("hydrazine", 10));
             Assert.That(r.AvailableDeltaVMPerS, Is.LessThan(225 * 9.80665 * Math.Log(50.0 / 40.0)));
         }
 
@@ -50,14 +50,14 @@ namespace MissionCore.Tests
         [Test]
         public void IonEngine_GivesMuchMoreDeltaVPerKg()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), Design("ion", 20));
+            var r = BudgetRunner.DeltaV(TestCatalog(), Design("ion", 20));
             Assert.That(r.AvailableDeltaVMPerS, Is.EqualTo(3100 * 9.80665 * Math.Log(76.25 / 56.25)).Within(Tol));
         }
 
         [Test]
         public void NoPropulsion_GivesZero()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), Design(null, 10));
+            var r = BudgetRunner.DeltaV(TestCatalog(), Design(null, 10));
             Assert.That(r.IspS, Is.EqualTo(0));
             Assert.That(r.AvailableDeltaVMPerS, Is.EqualTo(0));
         }
@@ -65,20 +65,20 @@ namespace MissionCore.Tests
         [Test]
         public void NoPropellant_GivesZero()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), Design("hydrazine", 0));
+            var r = BudgetRunner.DeltaV(TestCatalog(), Design("hydrazine", 0));
             Assert.That(r.AvailableDeltaVMPerS, Is.EqualTo(0));
         }
 
         [Test]
         public void RequiredDeltaV_IsZeroForNow()
         {
-            Assert.That(DeltaVBudget.Evaluate(TestCatalog(), Design("hydrazine", 10)).RequiredDeltaVMPerS, Is.EqualTo(0));
+            Assert.That(BudgetRunner.DeltaV(TestCatalog(), Design("hydrazine", 10)).RequiredDeltaVMPerS, Is.EqualTo(0));
         }
 
         [Test]
         public void EmptyDesign_HasNoNaN()
         {
-            var r = DeltaVBudget.Evaluate(TestCatalog(), new MissionDesign());
+            var r = BudgetRunner.DeltaV(TestCatalog(), new MissionDesign());
             Assert.That(r.AvailableDeltaVMPerS, Is.EqualTo(0));
             Assert.That(r.ReserveMPerS, Is.EqualTo(0));
         }
@@ -86,7 +86,7 @@ namespace MissionCore.Tests
         [Test]
         public void ReserveFraction_WithoutRequirement_IsZero()
         {
-            Assert.That(DeltaVBudget.Evaluate(TestCatalog(), Design("hydrazine", 10)).ReserveFraction, Is.EqualTo(0));
+            Assert.That(BudgetRunner.DeltaV(TestCatalog(), Design("hydrazine", 10)).ReserveFraction, Is.EqualTo(0));
         }
     }
 }

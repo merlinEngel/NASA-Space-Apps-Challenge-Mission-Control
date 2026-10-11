@@ -12,7 +12,7 @@ public class OrbitTab : Tab
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    new void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -25,7 +25,7 @@ public class OrbitTab : Tab
         inclinationSlider.ValueChanged += OnInclinationSliderChanged;
     }
 
-    new private void OnDestroy()
+    protected override void OnDestroy()
     {
         base.OnDestroy();
         orbitPresetList.RowClicked -= OnOrbitPresetClicked;
@@ -48,6 +48,7 @@ public class OrbitTab : Tab
         Catalog catalog = CatalogManager.Instance.Catalog;
         List<CatalogRowData> rows = new();
         MissionDesign design = MissionDesignManager.Instance.Design;
+        MissionTemplate mission = CatalogManager.Instance.Catalog.Missions[MissionDesignManager.Instance.Design.MissionId];
 
         foreach (OrbitPresetSpec spec in catalog.OrbitPresets.Values)
         {
@@ -62,7 +63,7 @@ public class OrbitTab : Tab
                     Formatter.Value(Metric.InclinationDeg, spec.inclinationDeg)
                 },
                 Selected = design.OrbitPreset == spec.id,
-                Disabled = false
+                Disabled = !mission.altitudeM.Contains(spec.altitudeM)
             });
         }
         return rows;

@@ -8,7 +8,7 @@ namespace MissionCore
 
     public class DisplayFormatter
     {
-        public DisplayMode Mode { get; private set; }
+        public DisplayMode Mode { get; set; }
         public CultureInfo Culture => texts.Culture;
         private TextTable texts;
 
@@ -29,7 +29,7 @@ namespace MissionCore
 
         public string Delta(MetricDelta delta)
         {
-            return (Math.Abs(delta.Delta) < 1e-09 ? @"\u00B1" : (delta.Delta > 0 ? "+" : "")) + Value(delta.Metric, delta.Delta);
+            return (Math.Abs(delta.Delta) < 1e-09 ? "\u00B1" : (delta.Delta > 0 ? "+" : "")) + Value(delta.Metric, delta.Delta);
         }
 
         (Unit unit, int decimals) Pick(double v, Unit[] units)
@@ -57,6 +57,7 @@ namespace MissionCore
             Metric.Raw => new[] {new Unit("", 1, 2, 2)},
             Metric.PowerStorage => Unit.PowerStorageUnits,
             Metric.Area => Unit.AreaUnits,
+            Metric.IspS => Unit.IspUnits,
             _ => throw new ArgumentOutOfRangeException(nameof(m), m, null)
         };
 

@@ -16,8 +16,8 @@ namespace MissionCore
         public override double ReserveFraction { get => GeneratedBitsPerDay > 0 ? ReserveBitsPerDay / GeneratedBitsPerDay : 0; }
         public bool StorageOk { get => StorageNeededBits <= StorageCapacityBits; }
 
-        public override Metric TotalMetric => Metric.DataGeneratedBitsPerDay;
-        public override double Total => GeneratedBitsPerDay;
+        public override Metric TotalMetric => Metric.DataDownlinkBitsPerDay;
+        public override double Total => DownlinkBitsPerDay;
 
         public DataBudgetResult(double generatedBitsPerDay, double contactsPerDay, double contactTimeSPerDay,
                                 double longestGapS, double downlinkBitsPerS,

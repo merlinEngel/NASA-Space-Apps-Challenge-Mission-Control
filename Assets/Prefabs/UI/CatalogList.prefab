@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.3
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!114 &7324982989350099565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,10 +145,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6132898211090533048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -85.11246}
-  m_SizeDelta: {x: 180, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &5419954000064900988
 MonoBehaviour:
@@ -181,7 +181,6 @@ GameObject:
   - component: {fileID: 2445998200975495168}
   - component: {fileID: 8191937090086479288}
   - component: {fileID: 6512204613496768332}
-  - component: {fileID: 5321979577871682268}
   - component: {fileID: 7771394260736359150}
   m_Layer: 5
   m_Name: Name
@@ -308,21 +307,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5321979577871682268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3232437230980124949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 711cd09b974ba4f75906c364c473905b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: ui.col.model
-  text: {fileID: 6512204613496768332}
-  setTextAsKey: 1
 --- !u!114 &7771394260736359150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +338,6 @@ GameObject:
   - component: {fileID: 5534298853806070403}
   - component: {fileID: 7782754331413852391}
   - component: {fileID: 4637280438279705911}
-  - component: {fileID: 6686711121343246880}
   m_Layer: 5
   m_Name: HeaderCellTemplate
   m_TagString: Untagged
@@ -480,21 +463,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6686711121343246880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3499904430810761578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 711cd09b974ba4f75906c364c473905b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: ui.cost
-  text: {fileID: 4637280438279705911}
-  setTextAsKey: 1
 --- !u!1 &3684913093229355446
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,21 +523,18 @@ MonoBehaviour:
   content: {fileID: 6364722428090822667}
   selectionMode: 0
   firstColumn:
-    headerKey: ui.col.model
+    headerKey: ui.col.battery
     weight: 3
     alignment: 1
   columns:
+  - headerKey: ui.col.energy
+    weight: 1
+    alignment: 0
   - headerKey: ui.col.mass
     weight: 1
     alignment: 0
-  - headerKey: ui.col.power
-    weight: 1
-    alignment: 0
-  - headerKey: ui.col.data_per_day
-    weight: 1
-    alignment: 0
   - headerKey: ui.col.cost
-    weight: 0.75
+    weight: 1
     alignment: 0
   firstColumnHeader: {fileID: 6512204613496768332}
   headerCellTemplate: {fileID: 4637280438279705911}
@@ -626,7 +591,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.3
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!114 &466185495981118274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +672,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2422898527777914692
 MonoBehaviour:

@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace MissionCore
 {
-    public enum Metric { Area, PowerStorage, Raw, MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay, AltitudeM, InclinationDeg, DataStorageBits }
+    public enum Metric { Area, PowerStorage, Raw, MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay, AltitudeM, InclinationDeg, DataStorageBits, IspS }
 
     public static class MetricExtensions
     {
@@ -14,7 +14,8 @@ namespace MissionCore
                 Metric.DataDownlinkBitsPerDay,
                 Metric.DataStorageBits,
                 Metric.PowerStorage,
-                Metric.Area
+                Metric.Area,
+                Metric.IspS
             }.Contains(self);
         }
     }

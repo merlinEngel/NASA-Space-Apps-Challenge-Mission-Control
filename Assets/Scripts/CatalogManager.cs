@@ -13,6 +13,14 @@ namespace MissionGame
         public Catalog Catalog { get; private set; }
         public TextTable Texts => Catalog.Texts;
         public DisplayFormatter Formatter { get; private set; }
+        public event Action DisplayModeChanged;
+
+        public void SetDisplayMode(DisplayMode mode)
+        {
+            if (Formatter.Mode == mode) return;
+            Formatter.Mode = mode;
+            DisplayModeChanged?.Invoke();
+        }
 
         string dir;
 

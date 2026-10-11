@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +8,7 @@ namespace MissionGame.UI
     public class ModeSelector : MonoBehaviour
     {
 
-        public UnityEvent<int> onOptionSelected;
+        public event Action<int> OnOptionSelected;
 
         public ModeSelectorOption[] AllOptions
         {
@@ -40,7 +41,7 @@ namespace MissionGame.UI
 
         public void SelectOption(int index)
         {
-            onOptionSelected.Invoke(index);
+            OnOptionSelected?.Invoke(index);
             foreach (ModeSelectorOption option in AllOptions)
             {
                 option.Deselect();

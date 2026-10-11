@@ -9,8 +9,10 @@ namespace MissionGame.UI
         [SerializeField] private CatalogListView cameraList;
         [SerializeField] private CatalogListView othersList;
 
-        new void Start()
+        protected override void Start()
         {
+            base.Start();
+
             var (cameraRows, otherRows) = MakeRows();
 
             cameraList.RowClicked += OnCameraClicked;

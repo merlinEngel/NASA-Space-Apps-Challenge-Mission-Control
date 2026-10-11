@@ -35,4 +35,5 @@ public static class CustomUiPrefabMenu
 
     [MenuItem(CustomUiPrefab.Menu + "My Slider", false, 10)]        private static void MySlider(MenuCommand c) => CustomUiPrefab.Create(c, "MySlider");
     [MenuItem(CustomUiPrefab.Menu + "Stepper", false, 10)]          private static void Stepper(MenuCommand c) => CustomUiPrefab.Create(c, "Stepper");
+    [MenuItem(CustomUiPrefab.Menu + "My Button", false, 10)]          private static void MyButton(MenuCommand c) => CustomUiPrefab.Create(c, "MyButton");
 }

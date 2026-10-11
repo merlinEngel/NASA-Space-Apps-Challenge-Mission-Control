@@ -26,7 +26,7 @@ public class DeltaChip : MonoBehaviour
     {
         ColorData colorData;
 
-        if (Math.Abs(metricDelta.Delta) < 1e-9)
+        if (CatalogManager.Instance.Formatter.RoundsToZero(metricDelta))
         {
             Content.SetActive(false);
             GetComponent<LayoutElement>().ignoreLayout = true;

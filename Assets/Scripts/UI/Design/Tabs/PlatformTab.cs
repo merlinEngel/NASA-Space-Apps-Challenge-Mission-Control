@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using MissionCore;
 using MissionGame;
 using UnityEngine;
@@ -8,7 +10,7 @@ public class PlatformTab : Tab
     [SerializeField] CatalogListView platformList;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    new void Start()
+    protected override void Start()
     {
         base.Start();
         
@@ -23,13 +25,13 @@ public class PlatformTab : Tab
         MissionDesignManager.Instance.ModifyDesign(d => d.PlatformId = id);
     }
 
-    new void OnDestroy()
+    protected override void OnDestroy()
     {
         base.OnDestroy();
         platformList.RowClicked -= OnPlatformClicked;
     }
 
-    public override void OnDesignChanged(DesignReport pr, DesignReport r, List<DesignChange> c)
+    public override void OnDesignChanged(DesignReport r, DesignReport pr, List<DesignChange> c)
     {
         List<CatalogRowData> rows = MakeRows();
 
@@ -42,6 +44,7 @@ public class PlatformTab : Tab
 
         Catalog catalog = CatalogManager.Instance.Catalog;
         MissionDesign design = MissionDesignManager.Instance.Design;
+        MissionTemplate mission = catalog.Missions[MissionDesignManager.Instance.Design.MissionId];
 
         foreach (PlatformSpec spec in catalog.Platforms.Values)
         {
@@ -58,10 +61,22 @@ public class PlatformTab : Tab
                     Formatter.Value(Metric.CostUsd, spec.priceUSD),
                 },
                 Selected = design.PlatformId == spec.id,
-                Disabled = false
+                Disabled = IsRowDisabled(spec, design, catalog, mission)
             });
         }
 
         return rows;
+    }
+
+    private bool IsRowDisabled(PlatformSpec spec, MissionDesign design, Catalog catalog, MissionTemplate mission)
+    {
+        bool lifetimeToShort = spec.lifetimeYears < mission.DurationYears;
+        bool isRideshare = !string.IsNullOrEmpty(design.LauncherId) && catalog.Launchers[design.LauncherId].IsRideshare;
+
+        LauncherSpec launcher = catalog.Launchers.Keys.Contains(design.LauncherId) ? catalog.Launchers[design.LauncherId] : null;
+
+        bool massToBig = isRideshare && spec.maxMassKg > launcher.maxPayloadPerCustomerKg;
+
+        return lifetimeToShort || massToBig;
     }
 }

@@ -52,5 +52,12 @@ namespace MissionCore
             if (!IsRideshare) return priceUSD;
             return Math.Max(payloadMassKg, minBillableMassKg) * pricePerKgUSD;
         }
+
+        public double PayloadKgFor(LaunchOrbit orbit) => IsRideshare ? maxPayloadPerCustomerKg : orbit switch
+        {
+            LaunchOrbit.Sso => ssoKg ?? leoKg,
+            LaunchOrbit.Gto => gtoKg ?? 0,
+            _ => leoKg
+        };
     }
 }

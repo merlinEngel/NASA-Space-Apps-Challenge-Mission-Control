@@ -1,7 +1,7 @@
 {
   "unit.per_day":                        { "de": "/Tag", "en": "/day" },
 
-  "mission.techdemo.description":        { "de": "Bringe einen kleinen Satelliten auf {0} bis {1} km Höhe. Budget: {2}.", "en": "Put a small satellite into an orbit between {0} and {1} km. Budget: {2}." },
+"mission.techdemo.description":          { "de": "Bringe einen kleinen Satelliten auf {altitude_min} bis {altitude_max} Höhe. Budget: {budget}.", "en": "Put a small satellite into an orbit between {altitude_min} and {altitude_max}. Budget: {budget}." },
   "mission.techdemo.title":              { "de": "Tech-Demo: Erster Flug", "en": "Tech Demo: First Flight" },
   "mission.techdemo.order":              { "de": "Bringe einen kleinen Satelliten auf {0} bis {1} km Höhe. Budget: {2}.", "en": "Put a small satellite into an orbit between {0} and {1} km. Budget: {2}." },
 
@@ -39,7 +39,7 @@
   "ui.data":                             { "de": "Daten", "en": "Data" },
   "ui.data_per_day":                     { "de": "Daten pro Tag", "en": "Data per day" },
   "ui.budgets":                          { "de": "Budgets", "en": "Budgets" },
-  "ui.budgets.legend":                   { "de": "Die helle Linie ist die Grenze. Der hellere Teil der Säule zeigt, was die letzte Änderung dazugebracht hat.", "en": "The light line is the limit. The lighter part of the bar shows what the last change added." },
+  "ui.budgets.legend":                   { "de": "Die helle Linie ist die Grenze. Der dunklere Teil der Säule zeigt, was die letzte Änderung dazugebracht hat.", "en": "The light line is the limit. The darker part of the bar shows what the last change added." },
   "ui.go_to_tab":                        { "de": "Zu {0}", "en": "Go to {0}" },
   "ui.this_tab":                         { "de": "Hier", "en": "Here" },
   "ui.language":                         { "de": "Sprache", "en": "Language" },
@@ -191,6 +191,7 @@
   "part.hall_thruster.desc":             { "de": "Elektrischer Antrieb: spart Treibstoff, braucht aber Kilowatt Strom.", "en": "Electric propulsion: saves propellant, but needs kilowatts of power." },
   "part.ion_thruster":                   { "de": "Ionentriebwerk", "en": "Ion thruster" },
   "part.ion_thruster.desc":              { "de": "Sehr sparsam, sehr sanfter Schub. Für lange Reisen.", "en": "Very efficient, very gentle thrust. For long journeys." },
+  "part.no_propulsion":                  { "de": "Kein Antrieb", "en": "No Propulsion" },
   "part.electron":                       { "de": "Electron (Rocket Lab)", "en": "Electron (Rocket Lab)" },
   "part.electron.desc":                  { "de": "Kleine eigene Rakete: du bestimmst Bahn und Termin.", "en": "A small dedicated rocket: you choose orbit and date." },
   "part.falcon9_reusable":               { "de": "Falcon 9 (wiederverwendbar)", "en": "Falcon 9 (reusable)" },
@@ -236,6 +237,7 @@
   "section.launcher.desc":               { "de": "Bringt den Satelliten ins All. Ein Mitflug ist billig, aber Bahn und Termin bestimmt die Hauptmission.", "en": "Takes the satellite to space. A rideshare is cheap, but the main mission decides orbit and date." },
   "section.propulsion":                  { "de": "Antrieb", "en": "Propulsion" },
   "section.propulsion.desc":             { "de": "Optional. Damit kann der Satellit seine Bahn ändern oder am Ende abbremsen.", "en": "Optional. Lets the satellite change its orbit or slow down at the end." },
+  "section.comms":                       { "de": "Kommunikation", "en": "Communication" },
 
   "orbit_preset.iss_like":               { "de": "ISS-ähnlich", "en": "ISS-like" },
   "orbit_preset.iss_like.desc":          { "de": "Niedrig, viele Bodenstationen in Reichweite", "en": "Low, many ground stations in range" },
@@ -254,5 +256,7 @@
   "mode.simple":                         { "de": "Einfach", "en": "Simple" },
   "mode.realistic":                      { "de": "Realistisch", "en": "Realistic" },
 
-  "newtext":                             { "de": "Neuer Text", "en": "New Text" }
+  "newtext":                             { "de": "Neuer Text", "en": "New Text" },
+
+  "empty":                               { "de": "\\", "en": "\\" }
 }

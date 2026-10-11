@@ -50,7 +50,12 @@ namespace MissionCore
             Metric.DataGeneratedBitsPerDay => DataResult.GeneratedBitsPerDay,
             Metric.DataDownlinkBitsPerDay => DataResult.DownlinkBitsPerDay,
             Metric.CostUsd => CostResult.TotalCostUSD,
-            _ => throw new System.NotImplementedException()
+            Metric.PowerStorage => PowerResult.BatteryUsableWh,
+            Metric.DataStorageBits => DataResult.StorageCapacityBits,
+            Metric.IspS => DeltaVResult.IspS,
+            // Not part of a report (design inputs or unitless): NaN, so DesignReportDiff skips them.
+            Metric.Area or Metric.Raw or Metric.AltitudeM or Metric.InclinationDeg => double.NaN,
+            _ => throw new System.ArgumentOutOfRangeException(nameof(m), m, null)
         };
 
         public string Format(bool richText)

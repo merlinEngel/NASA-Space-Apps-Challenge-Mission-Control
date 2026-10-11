@@ -239,9 +239,9 @@ namespace MissionCore.Tests
         // ---------- MetricDelta / StatusChange / HigherIsBetter ----------
 
         [Test]
-        public void HigherIsBetter_ExactlyForGenerationDeltaVDownlinkAndStorage()
+        public void HigherIsBetter_ExactlyForGenerationDeltaVDownlinkStorageAreaAndIsp()
         {
-            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay, Metric.DataStorageBits };
+            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay, Metric.DataStorageBits, Metric.PowerStorage, Metric.Area, Metric.IspS };
             foreach (Metric m in Enum.GetValues(typeof(Metric)))
                 Assert.That(m.HigherIsBetter(), Is.EqualTo(expected.Contains(m)), m.ToString());
         }

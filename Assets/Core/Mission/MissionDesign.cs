@@ -5,6 +5,7 @@ namespace MissionCore
 {
     public class MissionDesign
     {
+        public DisplayMode displayMode;
         [JsonProperty("mission_id")] public string MissionId { get; set; }
 
         [JsonProperty("name")] public string Name { get; set; }
@@ -24,5 +25,7 @@ namespace MissionCore
         [JsonProperty("propellant_mass_kg")] public double PropellantMassKg { get; set; }
         [JsonProperty("altitude_m")] public double AltitudeM { get; set; }
         [JsonProperty("inclination_deg")] public double InclinationDeg { get; set; }
+
+        public LaunchOrbit? LaunchOrbit => OrbitClassifier.Classify(AltitudeM, InclinationDeg);
     }
 }

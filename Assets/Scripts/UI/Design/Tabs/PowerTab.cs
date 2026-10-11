@@ -10,7 +10,7 @@ public class PowerTab : Tab
     [SerializeField] private MySlider solarAreaSlider;
     [SerializeField] private Stepper batteryCountStepper;
 
-    new void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -101,7 +101,7 @@ public class PowerTab : Tab
         MissionDesignManager.Instance.ModifyDesign(d => d.BatteryId = id);
     }
 
-    new private void OnDestroy()
+    protected override void OnDestroy()
     {
         base.OnDestroy();
 

@@ -32,7 +32,6 @@ namespace MissionGame.UI
                 i++;
             }
             SelectTab(0);
-            this.Refresh((RectTransform)transform);
         }
 
         TabListTab GetOption(int index)
