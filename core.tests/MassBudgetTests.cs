@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {
@@ -37,7 +40,7 @@ namespace MissionCore.Tests
             new List<GroundStationSpec>(),
             new List<SolarCellSpec> { new SolarCellSpec { id = "gaas", massPerAreaKgM2 = 2.0 } },
             new List<MissionTemplate>(),
-            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign ThreeU() => new MissionDesign
         {
@@ -73,7 +76,7 @@ namespace MissionCore.Tests
         [Test]
         public void ThreeU_MatchesHandCalculation()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), ThreeU());
+            var r = BudgetRunner.Mass(TestCatalog(), ThreeU());
 
             Assert.That(r.DryMassKg, Is.EqualTo(4.22).Within(Tol));
             Assert.That(r.MarginKg, Is.EqualTo(1.055).Within(Tol));
@@ -87,7 +90,7 @@ namespace MissionCore.Tests
         [Test]
         public void GetDryMass_MatchesEvaluate()
         {
-            Assert.That(MassBudget.GetDryMass(TestCatalog(), ThreeU()), Is.EqualTo(4.22).Within(Tol));
+            Assert.That(new MassBudget().GetDryMass(TestCatalog(), ThreeU()), Is.EqualTo(4.22).Within(Tol));
         }
 
         [Test]
@@ -95,7 +98,7 @@ namespace MissionCore.Tests
         {
             var d = ThreeU();
             d.BatteryCount = 5;   // 3 more batteries = +0.6 kg
-            Assert.That(MassBudget.GetDryMass(TestCatalog(), d), Is.EqualTo(4.82).Within(Tol));
+            Assert.That(new MassBudget().GetDryMass(TestCatalog(), d), Is.EqualTo(4.82).Within(Tol));
         }
 
         // ---------- Limits ----------
@@ -103,28 +106,28 @@ namespace MissionCore.Tests
         [Test]
         public void DedicatedLeo_UsesLeoKg()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), SmallSat("electron", 51.6));
+            var r = BudgetRunner.Mass(TestCatalog(), SmallSat("electron", 51.6));
             Assert.That(r.LimitKg, Is.EqualTo(300));
         }
 
         [Test]
         public void SsoInclination_UsesSsoKg()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), SmallSat("electron", 97.5));
+            var r = BudgetRunner.Mass(TestCatalog(), SmallSat("electron", 97.5));
             Assert.That(r.LimitKg, Is.EqualTo(200));
         }
 
         [Test]
         public void SsoInclination_WithoutSsoValue_FallsBackToLeoKg()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), SmallSat("no_sso", 97.5));
+            var r = BudgetRunner.Mass(TestCatalog(), SmallSat("no_sso", 97.5));
             Assert.That(r.LimitKg, Is.EqualTo(500));
         }
 
         [Test]
         public void Rideshare_UsesMaxPayloadPerCustomer()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), SmallSat("transporter", 97.5));
+            var r = BudgetRunner.Mass(TestCatalog(), SmallSat("transporter", 97.5));
             Assert.That(r.LimitKg, Is.EqualTo(150));
         }
 
@@ -132,16 +135,16 @@ namespace MissionCore.Tests
         public void Limit_IsSmallerOfLauncherAndPlatform()
         {
             // 3U platform max 6 kg < electron LEO 300 kg
-            Assert.That(MassBudget.Evaluate(TestCatalog(), ThreeU()).LimitKg, Is.EqualTo(6.0));
+            Assert.That(BudgetRunner.Mass(TestCatalog(), ThreeU()).LimitKg, Is.EqualTo(6.0));
             // smallsat max 1000 kg > electron LEO 300 kg
-            Assert.That(MassBudget.Evaluate(TestCatalog(), SmallSat("electron", 51.6)).LimitKg, Is.EqualTo(300));
+            Assert.That(BudgetRunner.Mass(TestCatalog(), SmallSat("electron", 51.6)).LimitKg, Is.EqualTo(300));
         }
 
         // Current behaviour: no launcher capacity is known above 2000 km, so only the platform limits.
         [Test]
         public void AltitudeAbove2000Km_FallsBackToPlatformLimit()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), SmallSat("electron", 51.6, altitudeM: 2000001));
+            var r = BudgetRunner.Mass(TestCatalog(), SmallSat("electron", 51.6, altitudeM: 2000001));
             Assert.That(r.LimitKg, Is.EqualTo(1000));
         }
 
@@ -154,7 +157,7 @@ namespace MissionCore.Tests
             d.PropulsionId = null;
             d.PropellantMassKg = 0;
             MassBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = MassBudget.Evaluate(TestCatalog(), d));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Mass(TestCatalog(), d));
             Assert.That(r.DryMassKg, Is.EqualTo(4.22 - 0.8).Within(Tol));
         }
 
@@ -163,7 +166,7 @@ namespace MissionCore.Tests
         {
             var d = new MissionDesign { LauncherId = "electron", AltitudeM = 500000 };
             MassBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = MassBudget.Evaluate(TestCatalog(), d));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Mass(TestCatalog(), d));
             Assert.That(r.DryMassKg, Is.EqualTo(0));
             Assert.That(r.LimitKg, Is.EqualTo(300));   // no platform, so only the launcher limits
         }
@@ -174,7 +177,7 @@ namespace MissionCore.Tests
         {
             var d = ThreeU();
             d.InstrumentIds.Add("warp_scanner");
-            Assert.That(MassBudget.GetDryMass(TestCatalog(), d), Is.EqualTo(4.22).Within(Tol));
+            Assert.That(new MassBudget().GetDryMass(TestCatalog(), d), Is.EqualTo(4.22).Within(Tol));
         }
 
         [Test]
@@ -182,7 +185,7 @@ namespace MissionCore.Tests
         {
             var d = ThreeU();
             d.LauncherId = "saturn_v";
-            Assert.That(MassBudget.Evaluate(TestCatalog(), d).LimitKg, Is.EqualTo(6.0));
+            Assert.That(BudgetRunner.Mass(TestCatalog(), d).LimitKg, Is.EqualTo(6.0));
         }
 
         [Test]
@@ -191,7 +194,7 @@ namespace MissionCore.Tests
             var d = ThreeU();
             d.LauncherId = null;
             MassBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = MassBudget.Evaluate(TestCatalog(), d));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Mass(TestCatalog(), d));
             Assert.That(r.LimitKg, Is.EqualTo(6.0));
         }
 
@@ -199,7 +202,7 @@ namespace MissionCore.Tests
         [Test]
         public void EmptyDesign_HasInfiniteLimit()
         {
-            var r = MassBudget.Evaluate(TestCatalog(), new MissionDesign());
+            var r = BudgetRunner.Mass(TestCatalog(), new MissionDesign());
             Assert.That(r.LimitKg, Is.EqualTo(double.PositiveInfinity));
             Assert.That(r.TotalMassKg, Is.EqualTo(0));
         }

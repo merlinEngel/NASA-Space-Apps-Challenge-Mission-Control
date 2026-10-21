@@ -1,0 +1,5 @@
+[
+  { "id": "iss_like", "name": "ISS-like",             "altitude_m": 400000, "inclination_deg": 51.6, "sun_synchronous": false, "source": "ISS: about 415 km, 51.64 deg (NASA); altitude rounded to 400 km" },
+  { "id": "sso",      "name": "Sun-synchronous",      "altitude_m": 500000, "inclination_deg": 97.4, "sun_synchronous": true,  "source": "SSO condition with J2: cos(i) = -(a / 12352 km)^3.5 for a circular orbit" },
+  { "id": "sso_high", "name": "Sun-synchronous high", "altitude_m": 600000, "inclination_deg": 97.8, "sun_synchronous": true,  "source": "SSO condition with J2: cos(i) = -(a / 12352 km)^3.5 for a circular orbit" }
+]

@@ -1,4 +1,4 @@
-namespace MissionCore
+namespace MissionCore.Mission
 {
     public enum GoalType
     {

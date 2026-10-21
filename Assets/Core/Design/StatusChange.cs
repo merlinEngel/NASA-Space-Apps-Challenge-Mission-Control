@@ -1,4 +1,6 @@
-namespace MissionCore
+using MissionCore.Budgets;
+using MissionCore.Rules;
+namespace MissionCore.Design
 {
     public readonly struct StatusChange
     {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {
@@ -19,7 +21,7 @@ namespace MissionCore.Tests
             new List<LauncherSpec> { new LauncherSpec { id = "electron", leoKg = 300 } },
             new List<CommsSpec>(), new List<BatterySpec>(), new List<PlatformSpec>(),
             new List<GroundStationSpec>(), new List<SolarCellSpec>(), new List<MissionTemplate>(),
-            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         [Test]
         public void LookupById_ReturnsMatchingEntry()
@@ -50,7 +52,7 @@ namespace MissionCore.Tests
             var ex = Assert.Throws<FormatException>(() => new Catalog(
                 dup, new List<InstrumentSpec>(), new List<LauncherSpec>(), new List<CommsSpec>(),
                 new List<BatterySpec>(), new List<PlatformSpec>(), new List<GroundStationSpec>(),
-                new List<SolarCellSpec>(), new List<MissionTemplate>(), new BalanceRules(), null, null, null));
+                new List<SolarCellSpec>(), new List<MissionTemplate>(), new BalanceRules(), null, null, null, new List<OrbitPresetSpec>()));
             Assert.That(ex.Message, Does.Contain("propulsion.json").And.Contain("'a'"));
         }
 
@@ -69,7 +71,7 @@ namespace MissionCore.Tests
             List<GroundStationSpec>("groundstations.json"), List<SolarCellSpec>("solar.json"),
             List<MissionTemplate>("missions.json"),
             CatalogLoader.LoadObject<BalanceRules>(ReadRules("balance_rules.json"), "balance_rules.json"),
-            null, null, null);
+            null, null, null, new List<OrbitPresetSpec>());
 
         [Test]
         public void RealFiles_AllLoad()

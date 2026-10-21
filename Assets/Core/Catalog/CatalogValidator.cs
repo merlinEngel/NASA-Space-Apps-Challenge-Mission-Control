@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Budgets;
+using MissionCore.Mission;
+using MissionCore.Rules;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
     // Sanity checks for loaded data files. Every problem throws a FormatException
     // "<file>: '<id>' <problem>" so a broken JSON value is found right at startup.
@@ -19,6 +23,15 @@ namespace MissionCore
                 if (p.ispS <= 0) Fail(fileName, p.id, "has isp_s <= 0");
                 if (p.thrustN <= 0) Fail(fileName, p.id, "has thrust_N <= 0");
                 if (p.powerW.HasValue && p.powerW <= 0) Fail(fileName, p.id, "has power_W <= 0");
+            }
+        }
+
+        public static void Validate(List<OrbitPresetSpec> list, string fileName)
+        {
+            ValidateIdsAndNames(list, o => o.id, o => o.name, fileName);
+            foreach (var o in list)
+            {
+                if (o.altitudeM <= 0) Fail(fileName, o.id, "has isp_s <= 0");
             }
         }
 

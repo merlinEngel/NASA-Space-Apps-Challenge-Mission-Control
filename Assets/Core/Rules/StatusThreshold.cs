@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace MissionCore
+namespace MissionCore.Rules
 {
     public class StatusThreshold
     {

@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Numerics;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {
@@ -35,7 +39,7 @@ namespace MissionCore.Tests
             },
             new List<SolarCellSpec>(),
             new List<MissionTemplate>(),
-            new BalanceRules(), null, null, null);
+            new BalanceRules(), null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign Design() => new MissionDesign
         {
@@ -53,7 +57,7 @@ namespace MissionCore.Tests
         [Test]
         public void GeneratedBitsPerDay_IsRateTimesDutyCycleTimesDay()
         {
-            Assert.That(DataBudget.GetGeneratedBitsPerDay(TestCatalog(), Design()), Is.EqualTo(3499200000).Within(Tol));
+            Assert.That(new DataBudget().GetGeneratedBitsPerDay(TestCatalog(), Design()), Is.EqualTo(3499200000).Within(Tol));
         }
 
         [Test]
@@ -68,7 +72,7 @@ namespace MissionCore.Tests
         [Test]
         public void Evaluate_UsesCommsRateAndContactsOfCompatibleStation()
         {
-            var r = DataBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Data(TestCatalog(), Design());
             Assert.That(r.DownlinkBitsPerS, Is.EqualTo(1000000));
             Assert.That(r.ContactsPerDay, Is.GreaterThan(10));
             Assert.That(r.DownlinkBitsPerDay, Is.EqualTo(r.DownlinkBitsPerS * r.ContactTimeSPerDay).Within(Tol));
@@ -79,7 +83,7 @@ namespace MissionCore.Tests
         {
             var d = Design();
             d.CommsId = "uhf";   // station "equator" has only S and X
-            var r = DataBudget.Evaluate(TestCatalog(), d);
+            var r = BudgetRunner.Data(TestCatalog(), d);
             Assert.That(r.ContactsPerDay, Is.EqualTo(0));
             Assert.That(r.DownlinkBitsPerDay, Is.EqualTo(0));
             Assert.That(r.ReserveBitsPerDay, Is.LessThan(0));
@@ -88,14 +92,14 @@ namespace MissionCore.Tests
         [Test]
         public void BandMatch_IgnoresCase()
         {
-            var stations = DataBudget.GetCompatibleStations(TestCatalog(), Design(), "s");
+            var stations = new DataBudget().GetCompatibleStations(TestCatalog(), Design(), "s");
             Assert.That(stations.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void StorageNeeded_IsGenerationDuringLongestGap()
         {
-            var r = DataBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Data(TestCatalog(), Design());
             Assert.That(r.StorageNeededBits, Is.EqualTo(3499200000 / Constants.SecondsPerDay * r.LongestGapS).Within(Tol));
             Assert.That(r.StorageCapacityBits, Is.EqualTo(64e9));
             Assert.That(r.StorageOk, Is.True);
@@ -106,7 +110,7 @@ namespace MissionCore.Tests
         {
             var d = Design();
             d.PlatformId = "tiny";
-            Assert.That(DataBudget.Evaluate(TestCatalog(), d).StorageOk, Is.False);
+            Assert.That(BudgetRunner.Data(TestCatalog(), d).StorageOk, Is.False);
         }
 
         [Test]
@@ -115,7 +119,7 @@ namespace MissionCore.Tests
             var d = Design();
             d.InstrumentIds.Add("warp_scanner");
             d.GroundStationIds.Add("moon_base");
-            var r = DataBudget.Evaluate(TestCatalog(), d);
+            var r = BudgetRunner.Data(TestCatalog(), d);
             Assert.That(r.GeneratedBitsPerDay, Is.EqualTo(3499200000).Within(Tol));
         }
 
@@ -123,7 +127,7 @@ namespace MissionCore.Tests
         public void EmptyDesign_DoesNotCrash()
         {
             DataBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = DataBudget.Evaluate(TestCatalog(), new MissionDesign()));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Data(TestCatalog(), new MissionDesign()));
             Assert.That(r.GeneratedBitsPerDay, Is.EqualTo(0));
             Assert.That(r.ContactsPerDay, Is.EqualTo(0));
             Assert.That(r.DownlinkBitsPerDay, Is.EqualTo(0));
@@ -142,7 +146,7 @@ namespace MissionCore.Tests
                 L<PlatformSpec>("platforms.json"), L<GroundStationSpec>("groundstations.json"), L<SolarCellSpec>("solar.json"),
                 L<MissionTemplate>("missions.json"),
                 TestHelpers.LoadRealBalanceRules(),
-                null, null, null);
+                null, null, null, new List<OrbitPresetSpec>());
         }
 
         // Tech demo: 6U, wide camera, S-band, SSO 500 km, Svalbard + Weilheim must close the data budget.
@@ -156,7 +160,7 @@ namespace MissionCore.Tests
                 GroundStationIds = new List<string> { "svalbard", "weilheim" },
                 AltitudeM = 500000, InclinationDeg = 97.5
             };
-            var r = DataBudget.Evaluate(RealCatalog(), d);
+            var r = BudgetRunner.Data(RealCatalog(), d);
             Assert.That(r.ReserveBitsPerDay, Is.GreaterThan(0));
             Assert.That(r.StorageOk, Is.True);
         }

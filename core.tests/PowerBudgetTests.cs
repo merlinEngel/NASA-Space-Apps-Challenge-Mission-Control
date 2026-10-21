@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Numerics;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {
@@ -22,7 +26,7 @@ namespace MissionCore.Tests
                 new SolarCellSpec { id = "gaas", efficiency = 0.30, packingFactor = 0.85, degradationPerYear = 0.01 },
             },
             new List<MissionTemplate> { new MissionTemplate { id = "techdemo", durationDays = 90 } },
-            new BalanceRules { PowerMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { PowerMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign Design(int batteryCount = 2, double solarAreaM2 = 0.06) => new MissionDesign
         {
@@ -41,21 +45,21 @@ namespace MissionCore.Tests
         [Test]
         public void OrbitPeriod_At500Km_IsAbout5677s()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), Design()).OrbitPeriodS, Is.EqualTo(5677).Within(1));
+            Assert.That(BudgetRunner.Power(TestCatalog(), Design()).OrbitPeriodS, Is.EqualTo(5677).Within(1));
         }
 
         // asin(6,378,137 / 6,878,137) / pi = 1.18669 / pi = 0.3777
         [Test]
         public void EclipseFraction_At500Km_IsAbout0378()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), Design()).EclipseFraction, Is.EqualTo(0.378).Within(0.001));
+            Assert.That(BudgetRunner.Power(TestCatalog(), Design()).EclipseFraction, Is.EqualTo(0.378).Within(0.001));
         }
 
         // consumption = bus 3 + camera 6 + uhf 2 = 11 W, margin = 11 x 0.25 = 2.75 W, required = 13.75 W
         [Test]
         public void Consumption_MarginAndRequired()
         {
-            var r = PowerBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Power(TestCatalog(), Design());
             Assert.That(r.ConsumptionW, Is.EqualTo(11).Within(Tol));
             Assert.That(r.MarginW, Is.EqualTo(2.75).Within(Tol));
             Assert.That(r.RequiredW, Is.EqualTo(13.75).Within(Tol));
@@ -65,7 +69,7 @@ namespace MissionCore.Tests
         [Test]
         public void SunGeneration_IsAreaTimesSolarConstantTimesEfficiencyTimesPacking()
         {
-            var r = PowerBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Power(TestCatalog(), Design());
             Assert.That(r.SunGenerationW, Is.EqualTo(0.06 * 1361 * 0.30 * 0.85).Within(0.1));
         }
 
@@ -73,7 +77,7 @@ namespace MissionCore.Tests
         [Test]
         public void SunGeneration_IncludesDegradationOverMission()
         {
-            var r = PowerBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Power(TestCatalog(), Design());
             Assert.That(r.SunGenerationW, Is.EqualTo(0.06 * 1361 * 0.30 * 0.85 * Math.Pow(0.99, 90 / Constants.DaysPerYear)).Within(Tol));
         }
 
@@ -81,7 +85,7 @@ namespace MissionCore.Tests
         [Test]
         public void AverageGenerationAndReserve()
         {
-            var r = PowerBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Power(TestCatalog(), Design());
             Assert.That(r.AverageGenerationW, Is.EqualTo(r.SunGenerationW * (1 - r.EclipseFraction)).Within(Tol));
             Assert.That(r.ReserveW, Is.EqualTo(r.AverageGenerationW - 13.75).Within(Tol));
         }
@@ -90,7 +94,7 @@ namespace MissionCore.Tests
         [Test]
         public void EclipseEnergyNeed_IsRequiredPowerOverEclipse()
         {
-            var r = PowerBudget.Evaluate(TestCatalog(), Design());
+            var r = BudgetRunner.Power(TestCatalog(), Design());
             Assert.That(r.EclipseEnergyNeedWh, Is.EqualTo(13.75 * r.EclipseFraction * r.OrbitPeriodS / 3600).Within(Tol));
             Assert.That(r.EclipseEnergyNeedWh, Is.EqualTo(8.19).Within(0.01));
         }
@@ -99,28 +103,28 @@ namespace MissionCore.Tests
         [Test]
         public void TwoBatteries_CoverEclipse()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), Design(batteryCount: 2)).BatteryOk, Is.True);
+            Assert.That(BudgetRunner.Power(TestCatalog(), Design(batteryCount: 2)).BatteryOk, Is.True);
         }
 
         // usable = energy x max depth of discharge x count = 20 x 0.3 x 2 = 12 Wh
         [Test]
         public void BatteryUsable_IsEnergyTimesDepthOfDischargeTimesCount()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), Design(batteryCount: 2)).BatteryUsableWh, Is.EqualTo(12).Within(Tol));
+            Assert.That(BudgetRunner.Power(TestCatalog(), Design(batteryCount: 2)).BatteryUsableWh, Is.EqualTo(12).Within(Tol));
         }
 
         // 1 x 20 Wh x 0.3 = 6 Wh usable < 8.19 Wh need
         [Test]
         public void OneBattery_DoesNotCoverEclipse()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), Design(batteryCount: 1)).BatteryOk, Is.False);
+            Assert.That(BudgetRunner.Power(TestCatalog(), Design(batteryCount: 1)).BatteryOk, Is.False);
         }
 
         [Test]
         public void EmptyDesign_DoesNotCrash()
         {
             PowerBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = PowerBudget.Evaluate(TestCatalog(), new MissionDesign()));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Power(TestCatalog(), new MissionDesign()));
             Assert.That(r.ConsumptionW, Is.EqualTo(0));
             Assert.That(r.SunGenerationW, Is.EqualTo(0));
             Assert.That(double.IsNaN(r.EclipseEnergyNeedWh), Is.False);
@@ -129,7 +133,7 @@ namespace MissionCore.Tests
         [Test]
         public void EmptyDesign_ReserveFractionIsNotNaN()
         {
-            Assert.That(PowerBudget.Evaluate(TestCatalog(), new MissionDesign()).ReserveFraction, Is.EqualTo(0));
+            Assert.That(BudgetRunner.Power(TestCatalog(), new MissionDesign()).ReserveFraction, Is.EqualTo(0));
         }
     }
 }

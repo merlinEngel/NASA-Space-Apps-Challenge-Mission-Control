@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Catalogs;
+using MissionCore.Numerics;
 
 namespace MissionCore.Tests
 {

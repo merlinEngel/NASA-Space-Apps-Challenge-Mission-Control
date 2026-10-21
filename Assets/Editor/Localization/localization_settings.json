@@ -1,0 +1,16 @@
+{
+    "textsPath": "Assets/StreamingAssets/Data/texts.json",
+    "languages": [
+        "de",
+        "en"
+    ],
+    "missingKeys": [
+        "ui.mission.altitude_range",
+        "part.camerea",
+        "cubesat_1u",
+        "cubesat_12u",
+        "smallsat_150",
+        "Masse",
+        "Von 20kg"
+    ]
+}

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json.Serialization;
 
-namespace MissionCore
+namespace MissionCore.Text
 {
     public static class EnumExtensions
     {

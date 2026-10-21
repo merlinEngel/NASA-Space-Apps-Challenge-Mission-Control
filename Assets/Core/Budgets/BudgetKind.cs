@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using MissionCore.Rules;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
     public enum BudgetKind
     {

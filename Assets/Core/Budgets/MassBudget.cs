@@ -1,11 +1,16 @@
 using System;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
 
-namespace MissionCore
+namespace MissionCore.Budgets
 {
-    public static class MassBudget
+    public class MassBudget : Budget<MassBudgetResult>
     {
-        public static MassBudgetResult Evaluate(Catalog catalog, MissionDesign design)
+        public override MassBudgetResult Evaluate(BudgetContext ctx)
         {
+            Catalog catalog = ctx.Catalog;
+            MissionDesign design = ctx.Design;
+
             double dryMassKg = GetDryMass(catalog, design);
             double marginKg = dryMassKg * catalog.Balance.MassMarginEarlyPhase;
             double propellantMassKg = design.PropellantMassKg;
@@ -38,7 +43,7 @@ namespace MissionCore
             );
         }
 
-        public static double GetDryMass(Catalog catalog, MissionDesign design)
+        public double GetDryMass(Catalog catalog, MissionDesign design)
         {
             double dryMass = 0;
             if (!string.IsNullOrEmpty(design.PlatformId) && catalog.Platforms.TryGetValue(design.PlatformId, out PlatformSpec platformSpec))

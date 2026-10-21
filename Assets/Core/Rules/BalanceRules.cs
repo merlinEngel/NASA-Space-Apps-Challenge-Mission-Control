@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MissionCore.Budgets;
 
-namespace MissionCore
+namespace MissionCore.Rules
 {
     public enum BudgetStatus { Green, Yellow, Red }
     

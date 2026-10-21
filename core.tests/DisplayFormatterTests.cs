@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Design;
+using MissionCore.Text;
 
 namespace MissionCore.Tests
 {
@@ -70,8 +71,8 @@ namespace MissionCore.Tests
         [Test]
         public void Mass_SwitchesToTonnes()
         {
-            Assert.That(En().Value(Metric.MassKg, 12.34), Is.EqualTo("12.3 kg"));
-            Assert.That(En().Value(Metric.MassKg, 1234), Is.EqualTo("1.23 t"));
+            Assert.That(En().Value(Metric.MassKg, 12.34), Is.EqualTo("12 kg"));
+            Assert.That(En().Value(Metric.MassKg, 1234), Is.EqualTo("1.2 t"));
         }
 
         [Test]
@@ -90,7 +91,7 @@ namespace MissionCore.Tests
             Assert.That(En(DisplayMode.Realistic).Value(Metric.PowerUseW, 1234), Is.EqualTo("1.23 kW"));
             Assert.That(En(DisplayMode.Simple).Value(Metric.PowerUseW, 50), Is.EqualTo("50 W"));
             Assert.That(En(DisplayMode.Realistic).Value(Metric.PowerUseW, 50), Is.EqualTo("50.00 W"));
-            Assert.That(En(DisplayMode.Realistic).Value(Metric.MassKg, 1234.6), Is.EqualTo("1.235 t"));
+            Assert.That(En(DisplayMode.Realistic).Value(Metric.MassKg, 1234.6), Is.EqualTo("1.23 t"));
         }
 
         [Test]
@@ -106,12 +107,12 @@ namespace MissionCore.Tests
         public void German_UsesDecimalComma()
         {
             Assert.That(De().Value(Metric.PowerUseW, 1500), Is.EqualTo("1,5 kW"));
-            Assert.That(De(DisplayMode.Realistic).Value(Metric.MassKg, 12.5), Is.EqualTo("12,50 kg"));
+            Assert.That(De(DisplayMode.Realistic).Value(Metric.MassKg, 12.5), Is.EqualTo("12,5 kg"));
         }
 
         [Test]
         public void English_UsesDecimalPoint() =>
-            Assert.That(En(DisplayMode.Realistic).Value(Metric.MassKg, 12.5), Is.EqualTo("12.50 kg"));
+            Assert.That(En(DisplayMode.Realistic).Value(Metric.MassKg, 12.5), Is.EqualTo("12.5 kg"));
 
         [Test]
         public void Culture_FollowsTextTableLanguage()
@@ -128,6 +129,13 @@ namespace MissionCore.Tests
             Assert.That(En().Value(Metric.DataDownlinkBitsPerDay, 8e9), Is.EqualTo("1.0 GB/d"));
             Assert.That(En().Value(Metric.DataGeneratedBitsPerDay, 8e9), Is.EqualTo("1.0 GB/d"));
             Assert.That(En(DisplayMode.Realistic).Value(Metric.DataDownlinkBitsPerDay, 8e9), Is.EqualTo("1.00 GB/d"));
+        }
+
+        [Test]
+        public void DataStorageMetric_UsesDataUnitsWithoutPerDaySuffix()
+        {
+            Assert.That(En().Value(Metric.DataStorageBits, 8e9), Is.EqualTo("1.0 GB"));
+            Assert.That(En().Delta(new MetricDelta(Metric.DataStorageBits, 0, 8e9)), Is.EqualTo("+1.0 GB"));
         }
 
         [Test]
@@ -176,12 +184,12 @@ namespace MissionCore.Tests
         public void Delta_Negative_HasMinusSign()
         {
             Assert.That(En().Delta(D(Metric.PowerUseW, -1500)), Is.EqualTo("-1.5 kW"));
-            Assert.That(En().Delta(D(Metric.MassKg, -12.34)), Is.EqualTo("-12.3 kg"));
+            Assert.That(En().Delta(D(Metric.MassKg, -12.34)), Is.EqualTo("-12 kg"));
         }
 
         [Test]
-        public void Delta_Zero_HasPlusSign() =>
-            Assert.That(En().Delta(D(Metric.PowerUseW, 0)), Is.EqualTo("+0 W"));
+        public void Delta_Zero_HasPlusMinusSign() =>
+            Assert.That(En().Delta(D(Metric.PowerUseW, 0)), Is.EqualTo("\u00B10 W"));
 
         [Test]
         public void Delta_UsesBeforeAndAfter() =>

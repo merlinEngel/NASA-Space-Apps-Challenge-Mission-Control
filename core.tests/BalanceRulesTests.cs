@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using NUnit.Framework;
-using MissionCore;
-using Status = MissionCore.BudgetStatus;
+using Status = MissionCore.Rules.BudgetStatus;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {

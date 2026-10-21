@@ -1,14 +1,20 @@
-namespace MissionCore
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+namespace MissionCore.Budgets
 {
-    public static class CostBudget
+    public class CostBudget : Budget<CostBudgetResult>
     {
-        public static CostBudgetResult Evaluate(Catalog catalog, MissionDesign design)
+        public override CostBudgetResult Evaluate(BudgetContext ctx)
         {
+            Catalog catalog = ctx.Catalog;
+            MissionDesign design = ctx.Design;
+            MassBudgetResult mass = ctx.Mass;
+
             double hardwareCost = GetHardwareCost(catalog, design);
             double launchCost = 0;
             if (!string.IsNullOrEmpty(design.LauncherId) && catalog.Launchers.TryGetValue(design.LauncherId, out LauncherSpec launcher))
             {
-                double totalMassKg = MassBudget.Evaluate(catalog, design).TotalMassKg;
+                double totalMassKg = mass.TotalMassKg;
                 launchCost = launcher.GetLaunchCost(totalMassKg);
             }
             double operationsCost = 0;
@@ -27,7 +33,7 @@ namespace MissionCore
             );
         }
 
-        public static double GetHardwareCost(Catalog catalog, MissionDesign design)
+        public double GetHardwareCost(Catalog catalog, MissionDesign design)
         {
             double hardwareCost = 0;
             if (!string.IsNullOrEmpty(design.PlatformId) && catalog.Platforms.TryGetValue(design.PlatformId, out PlatformSpec platformSpec))

@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using static MissionCore.Tests.TestHelpers;
+using MissionCore.Numerics;
 
 namespace MissionCore.Tests
 {

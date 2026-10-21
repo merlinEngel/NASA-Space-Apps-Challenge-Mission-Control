@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using MissionCore;
 using UnityEngine;
+using MissionCore.Time;
 
 namespace MissionGame
 {

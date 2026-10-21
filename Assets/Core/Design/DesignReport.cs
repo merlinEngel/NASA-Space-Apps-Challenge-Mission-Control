@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using NUnit.Framework.Interfaces;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Rules;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
     public class DesignReport
     {
@@ -32,8 +34,6 @@ namespace MissionCore
         public bool AnyRed => Statuses.Values.Contains(BudgetStatus.Red);
         public bool AllGreen => IsValid && Statuses.Values.All(s => s == BudgetStatus.Green);
 
-
-
         public BudgetStatus Status(Catalog catalog, BudgetKind k) => k switch
         {
             BudgetKind.Cost => catalog.Balance.StatusFor(BudgetKind.Cost, CostResult.ReserveFraction),
@@ -53,7 +53,12 @@ namespace MissionCore
             Metric.DataGeneratedBitsPerDay => DataResult.GeneratedBitsPerDay,
             Metric.DataDownlinkBitsPerDay => DataResult.DownlinkBitsPerDay,
             Metric.CostUsd => CostResult.TotalCostUSD,
-            _ => throw new System.NotImplementedException()
+            Metric.PowerStorage => PowerResult.BatteryUsableWh,
+            Metric.DataStorageBits => DataResult.StorageCapacityBits,
+            Metric.IspS => DeltaVResult.IspS,
+            // Not part of a report (design inputs or unitless): NaN, so DesignReportDiff skips them.
+            Metric.Area or Metric.Raw or Metric.AltitudeM or Metric.InclinationDeg => double.NaN,
+            _ => throw new System.ArgumentOutOfRangeException(nameof(m), m, null)
         };
 
         public string Format(bool richText)

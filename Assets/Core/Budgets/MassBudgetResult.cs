@@ -1,6 +1,7 @@
-namespace MissionCore
+using MissionCore.Design;
+namespace MissionCore.Budgets
 {
-    public class MassBudgetResult
+    public class MassBudgetResult : BudgetResult
     {
         public double DryMassKg { get; }
         public double PropellantMassKg { get; }
@@ -8,7 +9,10 @@ namespace MissionCore
         public double LimitKg { get; }
         public double TotalMassKg { get => DryMassKg + PropellantMassKg + MarginKg; }
         public double ReserveKg { get => LimitKg - TotalMassKg; }
-        public double ReserveFraction { get => ReserveKg/LimitKg; }
+        public override double ReserveFraction { get => ReserveKg/LimitKg; }
+
+        public override Metric TotalMetric => Metric.MassKg;
+        public override double Total => TotalMassKg;
 
         public MassBudgetResult(double dryMassKg, double propellantMassKg, double marginKg, double limitKg)
         {

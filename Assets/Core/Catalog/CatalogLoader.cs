@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
     public static class CatalogLoader
     {

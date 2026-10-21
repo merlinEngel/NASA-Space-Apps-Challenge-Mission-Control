@@ -1,6 +1,7 @@
 using System;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Bodies
 {
     public readonly struct OrbitInfo
     {

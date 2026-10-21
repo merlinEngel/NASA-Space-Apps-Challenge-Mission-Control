@@ -1,14 +1,16 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using MissionCore.Design;
+using MissionCore.Numerics;
 
-namespace MissionCore
+namespace MissionCore.Text
 {
     public enum DisplayMode { Simple, Realistic }
 
     public class DisplayFormatter
     {
-        public DisplayMode Mode { get; private set; }
+        public DisplayMode Mode { get; set; }
         public CultureInfo Culture => texts.Culture;
         private TextTable texts;
 
@@ -29,7 +31,7 @@ namespace MissionCore
 
         public string Delta(MetricDelta delta)
         {
-            return (delta.Delta > 0 ? "+" : "") + Value(delta.Metric, delta.Delta);
+            return (Math.Abs(delta.Delta) < 1e-09 ? "\u00B1" : (delta.Delta > 0 ? "+" : "")) + Value(delta.Metric, delta.Delta);
         }
 
         (Unit unit, int decimals) Pick(double v, Unit[] units)
@@ -48,10 +50,16 @@ namespace MissionCore
         static Unit[] UnitsFor(Metric m) => m switch
         {
             Metric.CostUsd => Unit.MoneyUnits,
-            Metric.DataDownlinkBitsPerDay or Metric.DataGeneratedBitsPerDay => Unit.DataStorageUnits,
+            Metric.DataDownlinkBitsPerDay or Metric.DataGeneratedBitsPerDay or Metric.DataStorageBits => Unit.DataStorageUnits,
             Metric.DeltaVMPerS => Unit.DeltaVMUnits,
             Metric.MassKg => Unit.MassUnits,
             Metric.PowerGenerationW or Metric.PowerUseW => Unit.PowerUnits,
+            Metric.AltitudeM => Unit.DistanceUnits,
+            Metric.InclinationDeg => Unit.AngleUnits,
+            Metric.Raw => new[] {new Unit("", 1, 2, 2)},
+            Metric.PowerStorage => Unit.PowerStorageUnits,
+            Metric.Area => Unit.AreaUnits,
+            Metric.IspS => Unit.IspUnits,
             _ => throw new ArgumentOutOfRangeException(nameof(m), m, null)
         };
 
@@ -64,7 +72,7 @@ namespace MissionCore
 
             double rounded = Math.Round(v / unit.Factor, decimals, MidpointRounding.AwayFromZero);
             if (rounded == 0) rounded = 0;
-            return rounded.ToString("F" + decimals, Culture) + " " + unit.Name;
+            return string.Format(Culture, rounded.ToString("N" + decimals, Culture) + " " + unit.Name);
         }
     }
 }

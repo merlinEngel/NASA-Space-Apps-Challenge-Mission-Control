@@ -1,4 +1,5 @@
-namespace MissionCore
+using MissionCore.Budgets;
+namespace MissionCore.Rules
 {
     // Values from scoring.json: how a finished mission is turned into points and stars.
     public class ScoringRules

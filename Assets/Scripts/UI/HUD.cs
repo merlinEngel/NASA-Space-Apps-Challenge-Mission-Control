@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using MissionCore;
 using TMPro;
 using UnityEngine;
+using MissionCore.Numerics;
 
-namespace MissionGame
+namespace MissionGame.UI
 {
     public class HUD : MonoBehaviour
     {

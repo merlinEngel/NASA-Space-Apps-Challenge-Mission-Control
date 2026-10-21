@@ -1,8 +1,8 @@
 using System.Linq;
 
-namespace MissionCore
+namespace MissionCore.Design
 {
-    public enum Metric { MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay }
+    public enum Metric { Area, PowerStorage, Raw, MassKg, CostUsd, PowerUseW, PowerGenerationW, DeltaVMPerS, DataGeneratedBitsPerDay, DataDownlinkBitsPerDay, AltitudeM, InclinationDeg, DataStorageBits, IspS }
 
     public static class MetricExtensions
     {
@@ -11,7 +11,11 @@ namespace MissionCore
             return new Metric[] {
                 Metric.PowerGenerationW,
                 Metric.DeltaVMPerS,
-                Metric.DataDownlinkBitsPerDay
+                Metric.DataDownlinkBitsPerDay,
+                Metric.DataStorageBits,
+                Metric.PowerStorage,
+                Metric.Area,
+                Metric.IspS
             }.Contains(self);
         }
     }
@@ -30,7 +34,5 @@ namespace MissionCore
         public double After { get; }
         public double Delta => After - Before;
         public bool IsBetter => Metric.HigherIsBetter() ? Delta > 0 : Delta < 0;
-
-
     }
 }

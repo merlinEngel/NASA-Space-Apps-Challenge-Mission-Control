@@ -1,6 +1,7 @@
-namespace MissionCore
+using MissionCore.Design;
+namespace MissionCore.Budgets
 {
-    public class PowerBudgetResult
+    public class PowerBudgetResult : BudgetResult
     {
         public PowerBudgetResult(double orbitPeriodS, double eclipseFraction, double sunGenerationW, double consumptionW, double marginW, double batteryUsableWh)
         {
@@ -23,7 +24,10 @@ namespace MissionCore
         public double AverageGenerationW { get => SunGenerationW * (1-EclipseFraction); }
         public double EclipseEnergyNeedWh { get => RequiredW * EclipseFraction * OrbitPeriodS / 3600; }
         public double ReserveW { get => AverageGenerationW - RequiredW; }
-        public double ReserveFraction { get => RequiredW > 0 ? ReserveW / RequiredW : 0; }
+        public override double ReserveFraction { get => RequiredW > 0 ? ReserveW / RequiredW : 0; }
         public bool BatteryOk { get => EclipseEnergyNeedWh <= BatteryUsableWh; }
+
+        public override Metric TotalMetric => Metric.PowerGenerationW;
+        public override double Total => AverageGenerationW;
     }
 }

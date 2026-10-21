@@ -1,4 +1,5 @@
-namespace MissionCore
+using MissionCore.Numerics;
+namespace MissionCore.Mission
 {
     public class FixedEvent
     {

@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MissionCore.Design;
+using MissionCore.Numerics;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Mission
 {
     public class MissionTemplate
     {
@@ -18,5 +21,16 @@ namespace MissionCore
         public double raanDeg;
         public List<FixedEvent> fixedEvents;
         public string source;
+
+        public double DurationYears => durationDays / Constants.DaysPerYear;
+
+        public Dictionary<string, string> TextValues(DisplayFormatter f) => new()
+        {
+            ["altitude_min"] = f.Value(Metric.AltitudeM, altitudeM.Min),
+            ["altitude_max"] = f.Value(Metric.AltitudeM, altitudeM.Max),
+            ["budget"] = f.Value(Metric.CostUsd, budgetUSD),
+            ["duration_days"] = durationDays.ToString("0", f.Culture),
+            ["min_instruments"] = minInstruments.ToString(f.Culture),
+        };
     }
 }

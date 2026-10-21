@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Text;
 
-namespace MissionCore
+namespace MissionCore.Mission
 {
     public class MissionDesign
     {
+        public DisplayMode displayMode;
         [JsonProperty("mission_id")] public string MissionId { get; set; }
 
         [JsonProperty("name")] public string Name { get; set; }
@@ -17,10 +21,14 @@ namespace MissionCore
         [JsonProperty("solar_cell_id")] public string SolarCellId { get; set; }
         [JsonProperty("ground_station_ids", NullValueHandling = NullValueHandling.Ignore)] public List<string> GroundStationIds { get; set; } = new();
 
+        [JsonProperty("orbit_preset", NullValueHandling = NullValueHandling.Include)] public string OrbitPreset { get; set; }
+
         [JsonProperty("battery_count")]  public int BatteryCount { get; set; } = 1;
         [JsonProperty("solar_area_m2")] public double SolarAreaM2 { get; set; }
         [JsonProperty("propellant_mass_kg")] public double PropellantMassKg { get; set; }
         [JsonProperty("altitude_m")] public double AltitudeM { get; set; }
         [JsonProperty("inclination_deg")] public double InclinationDeg { get; set; }
+
+        public LaunchOrbit? LaunchOrbit => OrbitClassifier.Classify(AltitudeM, InclinationDeg);
     }
 }

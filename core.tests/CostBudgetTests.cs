@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using MissionCore;
+using MissionCore.Budgets;
+using MissionCore.Catalogs;
+using MissionCore.Mission;
+using MissionCore.Rules;
 
 namespace MissionCore.Tests
 {
@@ -35,7 +38,7 @@ namespace MissionCore.Tests
             new List<GroundStationSpec>(),
             new List<SolarCellSpec> { new SolarCellSpec { id = "gaas", massPerAreaKgM2 = 3.5, pricePerAreaUSDM2 = 400000 } },
             new List<MissionTemplate> { new MissionTemplate { id = "techdemo", budgetUSD = 5000000 } },
-            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null);
+            new BalanceRules { MassMarginEarlyPhase = 0.25 }, null, null, null, new List<OrbitPresetSpec>());
 
         static MissionDesign SixU() => new MissionDesign
         {
@@ -59,7 +62,7 @@ namespace MissionCore.Tests
         [Test]
         public void HardwareCost_MatchesHandCalculation()
         {
-            Assert.That(CostBudget.GetHardwareCost(TestCatalog(), SixU()), Is.EqualTo(2820000).Within(Tol));
+            Assert.That(new CostBudget().GetHardwareCost(TestCatalog(), SixU()), Is.EqualTo(2820000).Within(Tol));
         }
 
         // dry = 5 + 3 + 1 + 0.8 + 0.3 + 0.65 x 2 + 0.2 x 3.5 = 12.1 kg, total = 12.1 x 1.25 = 15.125 kg
@@ -68,7 +71,7 @@ namespace MissionCore.Tests
         [Test]
         public void SixU_OnRideshare_MatchesHandCalculation()
         {
-            var r = CostBudget.Evaluate(TestCatalog(), SixU());
+            var r = BudgetRunner.Cost(TestCatalog(), SixU());
             Assert.That(r.HardwareCostUSD, Is.EqualTo(2820000).Within(Tol));
             Assert.That(r.LaunchCostUSD, Is.EqualTo(325000).Within(Tol));
             Assert.That(r.OperationsCostUSD, Is.EqualTo(0));
@@ -83,7 +86,7 @@ namespace MissionCore.Tests
         {
             var d = SixU();
             d.BatteryCount = 4;   // 2 more batteries = +30,000 USD
-            Assert.That(CostBudget.GetHardwareCost(TestCatalog(), d), Is.EqualTo(2850000).Within(Tol));
+            Assert.That(new CostBudget().GetHardwareCost(TestCatalog(), d), Is.EqualTo(2850000).Within(Tol));
         }
 
         [Test]
@@ -91,7 +94,7 @@ namespace MissionCore.Tests
         {
             var d = SixU();
             d.LauncherId = "electron";
-            Assert.That(CostBudget.Evaluate(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(7500000));
+            Assert.That(BudgetRunner.Cost(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(7500000));
         }
 
         // smallsat: dry = 80 + 3 + 1 + 0.8 + 0.3 + 1.3 + 0.7 = 87.1 kg, total = 108.875 kg
@@ -101,7 +104,7 @@ namespace MissionCore.Tests
         {
             var d = SixU();
             d.PlatformId = "smallsat";
-            Assert.That(CostBudget.Evaluate(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(707687.5).Within(Tol));
+            Assert.That(BudgetRunner.Cost(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(707687.5).Within(Tol));
         }
 
         [Test]
@@ -109,7 +112,7 @@ namespace MissionCore.Tests
         {
             var d = SixU();
             d.LauncherId = null;
-            Assert.That(CostBudget.Evaluate(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(0));
+            Assert.That(BudgetRunner.Cost(TestCatalog(), d).LaunchCostUSD, Is.EqualTo(0));
         }
 
         [Test]
@@ -117,7 +120,7 @@ namespace MissionCore.Tests
         {
             var d = SixU();
             d.MissionId = null;
-            var r = CostBudget.Evaluate(TestCatalog(), d);
+            var r = BudgetRunner.Cost(TestCatalog(), d);
             Assert.That(r.BudgetUSD, Is.EqualTo(0));
             Assert.That(r.ReserveUSD, Is.EqualTo(-3145000).Within(Tol));
             Assert.That(r.ReserveFraction, Is.EqualTo(0));
@@ -127,7 +130,7 @@ namespace MissionCore.Tests
         public void EmptyDesign_DoesNotCrashAndCostsNothing()
         {
             CostBudgetResult r = null;
-            Assert.DoesNotThrow(() => r = CostBudget.Evaluate(TestCatalog(), new MissionDesign()));
+            Assert.DoesNotThrow(() => r = BudgetRunner.Cost(TestCatalog(), new MissionDesign()));
             Assert.That(r.TotalCostUSD, Is.EqualTo(0));
             Assert.That(r.ReserveFraction, Is.EqualTo(0));
         }

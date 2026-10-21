@@ -1,11 +1,14 @@
 using Newtonsoft.Json;
 
-namespace MissionCore
+namespace MissionCore.Catalogs
 {
+    public enum InstrumentCategory { Camera, Radiometer, Magnetometer, ParticleDetector }
+
     public class InstrumentSpec
     {
         [JsonProperty("id")] public string id;
         [JsonProperty("name")] public string name;
+        [JsonProperty("category")] public InstrumentCategory category;
         [JsonProperty("source")] public string source;
         [JsonProperty("mass_kg")] public double massKg;
         [JsonProperty("power_W")] public double powerW;
