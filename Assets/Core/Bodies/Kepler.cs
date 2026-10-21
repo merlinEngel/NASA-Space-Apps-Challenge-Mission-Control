@@ -6,23 +6,30 @@ namespace MissionCore.Bodies
     public sealed class KeplerOrbit
     {
         // Orbital elements (SI, angles in rad)
-        public double A    { get; }   // semi-major axis [m]
-        public double Ecc  { get; }   // eccentricity [-], 0 <= Ecc < 1
-        public double Inc  { get; }   // inclination i
+        public double A { get; }   // semi-major axis [m]
+        public double Ecc { get; }   // eccentricity [-], 0 <= Ecc < 1
+        public double Inc { get; }   // inclination i
         public double Raan { get; }   // longitude of the ascending node Ω
         public double ArgPe { get; }  // argument of periapsis ω
-        public double M0   { get; }   // mean anomaly at epoch
+        public double M0 { get; }   // mean anomaly at epoch
         public double Epoch { get; }  // time at which M0 applies [s]
-        public double Mu   { get; }   // gravitational parameter of the central body [m³/s²]
+        public double Mu { get; }   // gravitational parameter of the central body [m³/s²]
 
         public double MeanMotion { get; }                  // n [rad/s]
         public double Period => 2 * Math.PI / MeanMotion;  // T [s]
 
         // rotation factors orbital plane -> space, computed once in the constructor
-        readonly double r11, r12, r21, r22, r31, r32;
+
+        public double RaanRate { get; }          // dΩ/dt [rad/s]
+        public double ArgPeRate { get; }         // dω/dt [rad/s]
+        public double MeanAnomalyRate { get; }   // extra dM/dt on top of MeanMotion [rad/s]
+
+        readonly double ci, si;
+
 
         public KeplerOrbit(double a, double ecc, double inc, double raan, double argPe,
-                           double m0, double epoch, double mu)
+                   double m0, double epoch, double mu,
+                   double raanRate = 0, double argPeRate = 0, double meanAnomalyRate = 0)
         {
             if (a <= 0) throw new ArgumentOutOfRangeException(nameof(a));
             if (ecc < 0 || ecc >= 1) throw new ArgumentOutOfRangeException(nameof(ecc), "only ellipses (0 <= e < 1)");
@@ -30,19 +37,21 @@ namespace MissionCore.Bodies
             A = a; Ecc = ecc; Inc = inc; Raan = raan; ArgPe = argPe; M0 = m0; Epoch = epoch; Mu = mu;
             MeanMotion = Math.Sqrt(mu / (a * a * a));
 
-            double cO = Math.Cos(raan), sO = Math.Sin(raan);
-            double cw = Math.Cos(argPe), sw = Math.Sin(argPe);
-            double ci = Math.Cos(inc), si = Math.Sin(inc);
+            ci = Math.Cos(Inc);
+            si = Math.Sin(Inc);
 
-            r11 = cO * cw - sO * sw * ci;   r12 = -(cO * sw + sO * cw * ci);
-            r21 = sO * cw + cO * sw * ci;   r22 = cO * cw * ci - sO * sw;
-            r31 = sw * si;                  r32 = cw * si;
+            RaanRate = raanRate;
+            ArgPeRate = argPeRate;
+            MeanAnomalyRate = meanAnomalyRate;
         }
+
+        public double RaanAt(double t) => Raan + RaanRate * (t - Epoch);
+        public double ArgPeAt(double t) => ArgPe + ArgPeRate * (t - Epoch);
 
         // Mean anomaly at time t, wrapped to 0 … 2π
         public double MeanAnomalyAt(double t)
         {
-            double m = (M0 + MeanMotion * (t - Epoch)) % (2 * Math.PI);
+            double m = (M0 + (MeanMotion + MeanAnomalyRate) * (t - Epoch)) % (2 * Math.PI);
             return m < 0 ? m + 2 * Math.PI : m;
         }
 
@@ -60,21 +69,20 @@ namespace MissionCore.Bodies
             return e;
         }
 
-        // Rotate a vector from the orbital plane (x to periapsis, y 90° ahead) into space
-        Vec3d ToInertial(double px, double py) =>
-            new(r11 * px + r12 * py, r21 * px + r22 * py, r31 * px + r32 * py);
-
         // Position and velocity together (solve Kepler's equation only once)
         public (Vec3d pos, Vec3d vel) StateAt(double t)
         {
+            double raan = RaanAt(t), argPe = ArgPeAt(t);
+
             double eAnom = SolveKepler(MeanAnomalyAt(t), Ecc);
             double cosE = Math.Cos(eAnom), sinE = Math.Sin(eAnom);
             double sq = Math.Sqrt(1 - Ecc * Ecc);
             double r = A * (1 - Ecc * cosE);
             double k = Math.Sqrt(Mu * A) / r;
 
-            Vec3d pos = ToInertial(A * (cosE - Ecc), A * sq * sinE);
-            Vec3d vel = ToInertial(-k * sinE, k * sq * cosE);
+            var rot = new PlaneRotation(raan, argPe, ci, si);
+            Vec3d pos = rot.ToInertial(A * (cosE - Ecc), A * sq * sinE);
+            Vec3d vel = rot.ToInertial(-k * sinE, k * sq * cosE);
             return (pos, vel);
         }
 
@@ -93,5 +101,25 @@ namespace MissionCore.Bodies
         public static KeplerOrbit Circular(double altitude, double inc, double raan,
                                            double planetRadius, double mu, double epoch = 0) =>
             new(planetRadius + altitude, 0, inc, raan, 0, 0, epoch, mu);
+
+
+        // Rotation orbital plane (x to periapsis, y 90° ahead) -> space for one point in time
+        readonly struct PlaneRotation
+        {
+            readonly double r11, r12, r21, r22, r31, r32;
+
+            public PlaneRotation(double raan, double argPe, double cosInc, double sinInc)
+            {
+                double cO = Math.Cos(raan), sO = Math.Sin(raan);
+                double cw = Math.Cos(argPe), sw = Math.Sin(argPe);
+
+                r11 = cO * cw - sO * sw * cosInc; r12 = -(cO * sw + sO * cw * cosInc);
+                r21 = sO * cw + cO * sw * cosInc; r22 = cO * cw * cosInc - sO * sw;
+                r31 = sw * sinInc; r32 = cw * sinInc;
+            }
+
+            public Vec3d ToInertial(double px, double py) =>
+                new(r11 * px + r12 * py, r21 * px + r22 * py, r31 * px + r32 * py);
+        }
     }
 }

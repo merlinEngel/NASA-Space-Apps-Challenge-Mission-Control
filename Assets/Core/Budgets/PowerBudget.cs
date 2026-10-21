@@ -1,5 +1,6 @@
 using System;
 using MissionCore.Catalogs;
+using MissionCore.Earth;
 using MissionCore.Mission;
 using MissionCore.Numerics;
 
@@ -16,12 +17,18 @@ namespace MissionCore.Budgets
             double mu = Constants.MuEarth;
             double orbitPeriodS = 2 * Math.PI * Math.Sqrt(r * r * r / mu);
 
-            double eclipseFraction = Math.Asin(Constants.RadiusEarth / r) / Math.PI;
+            MissionTemplate mission = null;
+            if (!string.IsNullOrEmpty(design.MissionId))
+                catalog.Missions.TryGetValue(design.MissionId, out mission);
+
+            double eclipseFraction = Shadow.EclipseFraction(design.AltitudeM, 0);
+            if (mission != null)
+                eclipseFraction = Shadow.WorstEclipseFraction(design.AltitudeM, design.InclinationDeg * Constants.DegToRad, mission.raanDeg*Constants.DegToRad, mission.EpochSeconds, mission.durationDays * Constants.SecondsPerDay);
 
             double sunGenerationW = 0;
             double missionDurationYears = 0;
-            if (!string.IsNullOrEmpty(design.MissionId) && catalog.Missions.TryGetValue(design.MissionId, out MissionTemplate missionTemplate))
-                missionDurationYears = missionTemplate.durationDays/Constants.DaysPerYear;
+            if (mission != null)
+                missionDurationYears = mission.durationDays/Constants.DaysPerYear;
             if (!string.IsNullOrEmpty(design.SolarCellId) && catalog.SolarCells.TryGetValue(design.SolarCellId, out SolarCellSpec solarCellSpec))
                 sunGenerationW =
                     Constants.SolarConstant *

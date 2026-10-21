@@ -75,6 +75,7 @@ namespace MissionGame.UI.Design
             [BudgetKind.Power] = new(after.PowerResult.TotalMetric, before.PowerResult.Total, after.PowerResult.Total),
             [BudgetKind.Cost] = new(after.CostResult.TotalMetric, before.CostResult.Total, after.CostResult.Total),
             [BudgetKind.DeltaV] = new(after.DeltaVResult.TotalMetric, before.DeltaVResult.Total, after.DeltaVResult.Total),
+            [BudgetKind.Lifetime] = new(after.LifetimeResult.TotalMetric, before.LifetimeResult.Total, after.LifetimeResult.Total)
         };
 
         void UpdateDeltaChips(Dictionary<BudgetKind, MetricDelta> deltas)

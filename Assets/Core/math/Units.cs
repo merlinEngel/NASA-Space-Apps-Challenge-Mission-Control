@@ -13,7 +13,7 @@ namespace MissionCore.Numerics
         public static Unit[] PowerStorageUnits { get; } = new Unit[] { ("Wh", 1, 2, 2), ("kWh", 1000, 2, 3), ("MWh", 1000000, 2, 4) };
         public static Unit[] AreaUnits { get; } = new Unit[] { ("cm²", 1e-4, 0, 0), ("m²",  1,    1, 2) };
         public static Unit[] IspUnits { get; } = new Unit[] { ("s", 1, 0, 0) };
-    
+        public static Unit[] DurationUnits { get; } = new Unit[] { ("s", 1, 0, 0), ("m", 60, 0, 0), ("h", 3600, 0, 0), ("d", Constants.SecondsPerDay, 0, 0), ("y", Constants.SecondsPerDay * Constants.DaysPerYear, 1, 1) };
 
         public Unit(string name, double factor, int simpleDecimalPlaces, int realisticDecimalPlaces)
         {

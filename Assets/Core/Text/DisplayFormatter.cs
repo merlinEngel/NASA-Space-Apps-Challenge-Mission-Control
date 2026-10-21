@@ -60,6 +60,7 @@ namespace MissionCore.Text
             Metric.PowerStorage => Unit.PowerStorageUnits,
             Metric.Area => Unit.AreaUnits,
             Metric.IspS => Unit.IspUnits,
+            Metric.LifetimeS => Unit.DurationUnits,
             _ => throw new ArgumentOutOfRangeException(nameof(m), m, null)
         };
 

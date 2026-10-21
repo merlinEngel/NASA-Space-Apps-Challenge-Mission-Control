@@ -9,6 +9,7 @@ namespace MissionCore.Tests
         [TestCase(Metric.DeltaVMPerS)]
         [TestCase(Metric.DataDownlinkBitsPerDay)]
         [TestCase(Metric.DataStorageBits)]
+        [TestCase(Metric.LifetimeS)]
         public void HigherIsBetter_True(Metric m) => Assert.That(m.HigherIsBetter(), Is.True);
 
         [TestCase(Metric.MassKg)]

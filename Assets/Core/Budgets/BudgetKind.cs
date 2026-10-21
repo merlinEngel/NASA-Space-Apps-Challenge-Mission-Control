@@ -10,7 +10,8 @@ namespace MissionCore.Budgets
         Power,
         Cost,
         DeltaV,
-        Mass
+        Mass,
+        Lifetime
     }
 
     public static class BudgetKindExtensions

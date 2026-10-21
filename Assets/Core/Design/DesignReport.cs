@@ -10,13 +10,14 @@ namespace MissionCore.Design
 {
     public class DesignReport
     {
-        public DesignReport(MassBudgetResult massResult, CostBudgetResult costResult, DeltaVBudgetResult deltaVResult, PowerBudgetResult powerResult, DataBudgetResult dataResult, IReadOnlyDictionary<BudgetKind, BudgetStatus> statuses, IReadOnlyList<DesignIssue> issues)
+        public DesignReport(MassBudgetResult massResult, CostBudgetResult costResult, DeltaVBudgetResult deltaVResult, PowerBudgetResult powerResult, DataBudgetResult dataResult, LifetimeBudgetResult lifetimeResult, IReadOnlyDictionary<BudgetKind, BudgetStatus> statuses, IReadOnlyList<DesignIssue> issues)
         {
             MassResult = massResult;
             CostResult = costResult;
             DeltaVResult = deltaVResult;
             PowerResult = powerResult;
             DataResult = dataResult;
+            LifetimeResult = lifetimeResult;
             Statuses = statuses;
             Issues = issues;
         }
@@ -26,6 +27,7 @@ namespace MissionCore.Design
         public DeltaVBudgetResult DeltaVResult { get; }
         public PowerBudgetResult PowerResult { get; }
         public DataBudgetResult DataResult { get; }
+        public LifetimeBudgetResult LifetimeResult { get; }
 
         public IReadOnlyDictionary<BudgetKind, BudgetStatus> Statuses { get; }
         public IReadOnlyList<DesignIssue> Issues { get; }
@@ -41,6 +43,7 @@ namespace MissionCore.Design
             BudgetKind.DeltaV => catalog.Balance.StatusFor(BudgetKind.DeltaV, DeltaVResult.ReserveFraction),
             BudgetKind.Mass => catalog.Balance.StatusFor(BudgetKind.Mass, MassResult.ReserveFraction),
             BudgetKind.Power => catalog.Balance.StatusFor(BudgetKind.Power, PowerResult.ReserveFraction),
+            BudgetKind.Lifetime => catalog.Balance.StatusFor(BudgetKind.Lifetime, LifetimeResult.ReserveFraction),
             _ => throw new System.NotImplementedException()
         };
 
@@ -56,6 +59,7 @@ namespace MissionCore.Design
             Metric.PowerStorage => PowerResult.BatteryUsableWh,
             Metric.DataStorageBits => DataResult.StorageCapacityBits,
             Metric.IspS => DeltaVResult.IspS,
+            Metric.LifetimeS => LifetimeResult.LifetimeS,
             // Not part of a report (design inputs or unitless): NaN, so DesignReportDiff skips them.
             Metric.Area or Metric.Raw or Metric.AltitudeM or Metric.InclinationDeg => double.NaN,
             _ => throw new System.ArgumentOutOfRangeException(nameof(m), m, null)

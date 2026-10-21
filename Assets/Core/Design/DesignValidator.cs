@@ -199,14 +199,16 @@ namespace MissionCore.Design
             DeltaVBudget deltaVBudget = new();
             PowerBudget powerBudget = new();
             DataBudget dataBudget = new();
+            LifetimeBudget lifetimeBudget = new();
 
-            var ctx = new BudgetContext(catalog, design);
+            var ctx = new BudgetContext(catalog, design );
             ctx.Mass  = massBudget.Evaluate(ctx);      // needs nothing
             var massResult  = ctx.Mass;
             var costResult  = costBudget.Evaluate(ctx);      // uses ctx.Mass.TotalMassKg for the launch price
             var deltaVResult    = deltaVBudget.Evaluate(ctx);    // uses ctx.Mass for m0 and m1
             var powerResult = powerBudget.Evaluate(ctx);
             var dataResult  = dataBudget.Evaluate(ctx);
+            var lifetimeResult = lifetimeBudget.Evaluate(ctx);
 
             Dictionary<BudgetKind, BudgetStatus> statuses = new()
             {
@@ -215,6 +217,7 @@ namespace MissionCore.Design
                 { BudgetKind.DeltaV, deltaVResult.RequiredDeltaVMPerS == 0 ? BudgetStatus.Green : catalog.Balance.StatusFor(BudgetKind.DeltaV, deltaVResult.ReserveFraction) },
                 { BudgetKind.Power, catalog.Balance.StatusFor(BudgetKind.Power, powerResult.ReserveFraction) },
                 { BudgetKind.Data, catalog.Balance.StatusFor(BudgetKind.Data, dataResult.ReserveFraction) },
+                { BudgetKind.Lifetime, catalog.Balance.StatusFor(BudgetKind.Lifetime, lifetimeResult.ReserveFraction )}
             };
 
             return new(
@@ -223,6 +226,7 @@ namespace MissionCore.Design
                 deltaVResult,
                 powerResult,
                 dataResult,
+                lifetimeResult,
                 statuses,
                 issues
             );

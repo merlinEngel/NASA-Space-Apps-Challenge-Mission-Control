@@ -29,7 +29,7 @@ namespace MissionCore.Design
                 double newValue = rNew.Value(metric);
                 double diff = Math.Abs(newValue - oldValue);
 
-                if (diff < MetricThreshold || !double.IsFinite(oldValue) || !double.IsFinite(newValue))
+                if (diff < MetricThreshold * Math.Max(1, Math.Max(Math.Abs(oldValue), Math.Abs(newValue))) || !double.IsFinite(oldValue) || !double.IsFinite(newValue))
                     continue;
                 
                 metricDeltas.Add(new(metric, oldValue, newValue));

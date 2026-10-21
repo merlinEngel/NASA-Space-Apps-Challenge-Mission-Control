@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using MissionCore.Design;
 using MissionCore.Numerics;
 using MissionCore.Text;
+using MissionCore.Time;
 
 namespace MissionCore.Mission
 {
@@ -23,6 +24,7 @@ namespace MissionCore.Mission
         public string source;
 
         public double DurationYears => durationDays / Constants.DaysPerYear;
+        public double EpochSeconds => SimTimeConverter.ToSeconds(epochUtc);
 
         public Dictionary<string, string> TextValues(DisplayFormatter f) => new()
         {

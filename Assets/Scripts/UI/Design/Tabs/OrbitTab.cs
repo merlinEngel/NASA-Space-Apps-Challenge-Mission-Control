@@ -15,6 +15,8 @@ namespace MissionGame.UI.Design
         [SerializeField] private MySlider altitudeSlider;
         [SerializeField] private MySlider inclinationSlider;
 
+        [SerializeField] private OrbitPreview orbitPreview;
+
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected override void Start()
@@ -46,6 +48,11 @@ namespace MissionGame.UI.Design
             orbitPresetList.Refresh(rows);
             altitudeSlider.SetValueWithoutNotify((float)design.AltitudeM);
             inclinationSlider.SetValueWithoutNotify((float)design.InclinationDeg);
+
+            MissionTemplate mission = null;
+            if (!string.IsNullOrEmpty(design.MissionId))
+                CatalogManager.Instance.Catalog.Missions.TryGetValue(design.MissionId, out mission);
+            orbitPreview.Show(design, mission);
         }
 
         private List<CatalogRowData> MakeRows()
@@ -53,7 +60,8 @@ namespace MissionGame.UI.Design
             Catalog catalog = CatalogManager.Instance.Catalog;
             List<CatalogRowData> rows = new();
             MissionDesign design = MissionDesignManager.Instance.Design;
-            MissionTemplate mission = CatalogManager.Instance.Catalog.Missions[MissionDesignManager.Instance.Design.MissionId];
+            MissionTemplate mission = null;
+            if (!string.IsNullOrEmpty(design.MissionId)) CatalogManager.Instance.Catalog.Missions.TryGetValue(MissionDesignManager.Instance.Design.MissionId, out mission);
 
             foreach (OrbitPresetSpec spec in catalog.OrbitPresets.Values)
             {
@@ -65,10 +73,10 @@ namespace MissionGame.UI.Design
                     Values = new[]
                     {
                         Formatter.Value(Metric.AltitudeM, spec.altitudeM),
-                        Formatter.Value(Metric.InclinationDeg, spec.inclinationDeg)
+                        Formatter.Value(Metric.InclinationDeg, spec.EffectiveInclinationDeg)
                     },
                     Selected = design.OrbitPreset == spec.id,
-                    Disabled = !mission.altitudeM.Contains(spec.altitudeM)
+                    Disabled = mission != null && !mission.altitudeM.Contains(spec.altitudeM)
                 });
             }
             return rows;
@@ -81,7 +89,7 @@ namespace MissionGame.UI.Design
                 OrbitPresetSpec preset = CatalogManager.Instance.Catalog.OrbitPresets[id];
                 d.OrbitPreset = id;
                 d.AltitudeM = preset.altitudeM;
-                d.InclinationDeg = preset.inclinationDeg;
+                d.InclinationDeg = preset.EffectiveInclinationDeg;
             });
         }
 

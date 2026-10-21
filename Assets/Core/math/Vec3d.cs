@@ -50,5 +50,15 @@ namespace MissionCore.Numerics
 
         public void Deconstruct(out double x, out double y, out double z) { x = this.x; y = this.y; z = this.z; }
         public override string ToString() => $"({x:G6}, {y:G6}, {z:G6})";
+
+        public static implicit operator (double, double, double)(Vec3d vec)
+        {
+            return (vec.x, vec.y, vec.z);
+        }
+
+        public static implicit operator Vec3d ((double x, double y, double z) value)
+        {
+            return new(value.x, value.y, value.z);
+        }
     }
 }
