@@ -15,7 +15,7 @@ namespace MissionCore.Tests
 
         static Dictionary<string, StatusThreshold> AllThresholds() => new Dictionary<string, StatusThreshold>
         {
-            ["mass"] = T(0.10), ["cost"] = T(0.10), ["power"] = T(0.10), ["delta_v"] = T(0.20), ["data"] = T(0.20),
+            ["mass"] = T(0.10), ["cost"] = T(0.10), ["power"] = T(0.10), ["delta_v"] = T(0.20), ["data"] = T(0.20), ["lifetime"] = T(1.0),
         };
 
         static BalanceRules Rules(Dictionary<string, StatusThreshold> thresholds) => new BalanceRules

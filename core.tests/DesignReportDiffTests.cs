@@ -138,8 +138,8 @@ namespace MissionCore.Tests
             return reverse ? new DesignReportDiff(better, bad) : new DesignReportDiff(bad, better);
         }
 
-        // With the current data low_power has a power reserve of about -74 %; doubling the area
-        // only lifts it to about -49 %, so the status stays Red. x4 reaches Yellow, x8 Green.
+        // With the real eclipse (P5 step 6, SSO: 16 % shadow) low_power has a power reserve of about -66 %;
+        // doubling the area only lifts it to about -31 %, so the status stays Red. x3 reaches Yellow, x4 Green.
         [Test]
         public void LowPower_DoubledSolarArea_StaysRedButGenerationIsBetter()
         {
@@ -149,8 +149,8 @@ namespace MissionCore.Tests
             Assert.That(SingleDelta(diff, Metric.PowerGenerationW).IsBetter, Is.True);
         }
 
-        [TestCase(4, BudgetStatus.Yellow)]
-        [TestCase(8, BudgetStatus.Green)]
+        [TestCase(3, BudgetStatus.Yellow)]
+        [TestCase(4, BudgetStatus.Green)]
         public void LowPower_LargerSolarArea_PowerStatusImproves(double areaFactor, BudgetStatus expected)
         {
             var diff = LowPowerDiff(areaFactor);
@@ -244,9 +244,9 @@ namespace MissionCore.Tests
         // ---------- MetricDelta / StatusChange / HigherIsBetter ----------
 
         [Test]
-        public void HigherIsBetter_ExactlyForGenerationDeltaVDownlinkStorageAreaAndIsp()
+        public void HigherIsBetter_ExactlyForGenerationDeltaVDownlinkStorageAreaIspAndLifetime()
         {
-            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay, Metric.DataStorageBits, Metric.PowerStorage, Metric.Area, Metric.IspS };
+            var expected = new[] { Metric.PowerGenerationW, Metric.DeltaVMPerS, Metric.DataDownlinkBitsPerDay, Metric.DataStorageBits, Metric.PowerStorage, Metric.Area, Metric.IspS, Metric.LifetimeS };
             foreach (Metric m in Enum.GetValues(typeof(Metric)))
                 Assert.That(m.HigherIsBetter(), Is.EqualTo(expected.Contains(m)), m.ToString());
         }

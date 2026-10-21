@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using MissionGame;
 using UnityEngine;
 using MissionGame.Design;
-using MissionCore.Budgets;
 using MissionCore.Design;
 
 namespace MissionGame.UI.Design
@@ -15,6 +13,7 @@ namespace MissionGame.UI.Design
         public Budget powerBudget;
         public Budget dataBudget;
         public Budget deltaVBudget;
+        public Budget lifetimeBudget;
 
         DesignReport lastReport, lastPrevious;
 
@@ -45,6 +44,7 @@ namespace MissionGame.UI.Design
             Show(powerBudget, report, previous, r => r.PowerResult.RequiredW, report.PowerResult.AverageGenerationW);
             Show(dataBudget, report, previous, r => r.DataResult.GeneratedBitsPerDay, report.DataResult.DownlinkBitsPerDay);
             Show(deltaVBudget, report, previous, r => r.DeltaVResult.RequiredDeltaVMPerS, report.DeltaVResult.AvailableDeltaVMPerS);
+            Show(lifetimeBudget, report, previous, r => r.LifetimeResult.MissionDurationS, report.LifetimeResult.LifetimeS);
         }
 
         static void Show(Budget budget, DesignReport report, DesignReport previous, Func<DesignReport, double> need, double limit)

@@ -1,7 +1,7 @@
 {
   "unit.per_day":                        { "de": "/Tag", "en": "/day" },
 
-"mission.techdemo.description":          { "de": "Bringe einen kleinen Satelliten auf {altitude_min} bis {altitude_max} Höhe. Budget: {budget}.", "en": "Put a small satellite into an orbit between {altitude_min} and {altitude_max}. Budget: {budget}." },
+  "mission.techdemo.description":        { "de": "Bringe einen kleinen Satelliten auf {altitude_min} bis {altitude_max} Höhe. Budget: {budget}.", "en": "Put a small satellite into an orbit between {altitude_min} and {altitude_max}. Budget: {budget}." },
   "mission.techdemo.title":              { "de": "Tech-Demo: Erster Flug", "en": "Tech Demo: First Flight" },
   "mission.techdemo.order":              { "de": "Bringe einen kleinen Satelliten auf {0} bis {1} km Höhe. Budget: {2}.", "en": "Put a small satellite into an orbit between {0} and {1} km. Budget: {2}." },
 
@@ -34,6 +34,7 @@
   "ui.mode.realistic":                   { "de": "Realistisch", "en": "Realistic" },
   "ui.col.model":                        { "de": "Modell", "en": "Model" },
   "ui.mass":                             { "de": "Masse", "en": "Mass" },
+  "ui.lifetime":                         { "de": "Lebensdauer", "en": "Lifetime" },
   "ui.power":                            { "de": "Energie", "en": "Power" },
   "ui.power_use":                        { "de": "Leistung", "en": "Power draw" },
   "ui.data":                             { "de": "Daten", "en": "Data" },
@@ -255,6 +256,8 @@
 
   "mode.simple":                         { "de": "Einfach", "en": "Simple" },
   "mode.realistic":                      { "de": "Realistisch", "en": "Realistic" },
+
+  "orbit.beta_angle":                    { "de": "Beta-Winkel: {0}", "en": "Beta angle: {0}" }, 
 
   "newtext":                             { "de": "Neuer Text", "en": "New Text" },
 

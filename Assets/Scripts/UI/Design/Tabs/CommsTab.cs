@@ -96,7 +96,7 @@ namespace MissionGame.UI.Design
                         Formatter.Value(Metric.CostUsd, spec.costPerContactUSD)
                     },
                     Selected = design.GroundStationIds.Contains(spec.id),
-                    Disabled = commsSpec != null && spec.bands.Contains(commsSpec.band)
+                    Disabled = commsSpec != null && !spec.bands.Contains(commsSpec.band)
                 });
             }
 

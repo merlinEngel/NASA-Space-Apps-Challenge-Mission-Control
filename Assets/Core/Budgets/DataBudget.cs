@@ -23,7 +23,11 @@ namespace MissionCore.Budgets
                 stations = GetCompatibleStations(catalog, design, commsSpec.band);
             }
 
-            ContactStats contacts = GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations);
+            MissionTemplate mission = null;
+            if (!string.IsNullOrEmpty(ctx.Design.MissionId)) ctx.Catalog.Missions.TryGetValue(ctx.Design.MissionId, out mission);
+            ContactStats contacts = mission == null
+                ? GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations)
+                : GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations, mission.EpochSeconds, mission.raanDeg * Constants.DegToRad);
 
             // Everything measured during the longest gap without contact has to wait on board.
             double storageNeededBits = generatedBitsPerDay / Constants.SecondsPerDay * contacts.LongestGapS;

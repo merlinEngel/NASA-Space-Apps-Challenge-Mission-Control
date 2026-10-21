@@ -27,14 +27,6 @@ namespace MissionCore.Tests
             Assert.That(GroundContact.ElevationDeg(satellite, 0, 0, 0), Is.LessThan(0));
         }
 
-        [Test]
-        public void SatellitePosition_KeepsRadiusAndReachesInclinationLatitude()
-        {
-            double r = Constants.RadiusEarth + 500000;
-            Vec3d top = GroundContact.SatellitePosition(r, 51.6 * System.Math.PI / 180, System.Math.PI / 2);
-            Assert.That(top.Length, Is.EqualTo(r).Within(1e-6));
-            Assert.That(System.Math.Asin(top.z / r) * 180 / System.Math.PI, Is.EqualTo(51.6).Within(1e-9));
-        }
 
         // Relative period to an equatorial station = 2π / (n - ωEarth) ≈ 101 min, so about 14 passes per day.
         [Test]
@@ -85,6 +77,64 @@ namespace MissionCore.Tests
             Assert.That(GroundContact.Scan(500000, 0, new List<GroundStationSpec>()).ContactsPerDay, Is.EqualTo(0));
             Assert.That(GroundContact.Scan(500000, 0, null).ContactsPerDay, Is.EqualTo(0));
             Assert.That(GroundContact.Scan(0, 0, new List<GroundStationSpec> { Station(0) }).ContactsPerDay, Is.EqualTo(0));
+        }
+
+        // ---------- P5 step 7: real Earth rotation (GMST) and J2-drifting orbit ----------
+
+        static readonly double TechDemoEpoch = (new System.DateTime(2027, 6, 1, 0, 0, 0, System.DateTimeKind.Utc) - Constants.J2000DateTime).TotalSeconds;
+        static GroundStationSpec Svalbard => Station(78.23, 15.40, 5);
+        static GroundStationSpec Weilheim => Station(47.88, 11.08, 5);
+
+        [Test]
+        public void ElevationDeg_UsesEarthRotationAngle()
+        {
+            // Station at 30° E on the equator, Earth turned by 100°: it faces inertial longitude 130°
+            double angle = 130 * System.Math.PI / 180;
+            var satellite = new Vec3d(System.Math.Cos(angle), System.Math.Sin(angle), 0) * (Constants.RadiusEarth + 500000);
+            Assert.That(GroundContact.ElevationDeg(satellite, 0, 30, 100 * System.Math.PI / 180), Is.EqualTo(90).Within(1e-4));
+            // 1e-4 instead of 1e-6: asin is very steep at 90°, so rounding in the last digit already moves the result by 1e-6°
+        }
+
+        // Reference values: Python, epoch 2027-06-01 00:00 UTC, raan 0, 3 days, 10 s steps, with GMST and J2
+        [Test]
+        public void Scan_TechDemoSso_ContactTimeMatchesReference()
+        {
+            var stats = GroundContact.Scan(500000, 97.5, new List<GroundStationSpec> { Svalbard, Weilheim }, TechDemoEpoch, 0);
+            Assert.That(stats.ContactTimeSPerDay, Is.EqualTo(7767).Within(5).Percent);
+            Assert.That(stats.ContactsPerDay, Is.EqualTo(18.0).Within(10).Percent);
+        }
+
+        [Test]
+        public void Scan_IssWeilheim_ContactTimeMatchesReference()
+        {
+            var stats = GroundContact.Scan(400000, 51.6, new List<GroundStationSpec> { Weilheim }, TechDemoEpoch, 0);
+            Assert.That(stats.ContactTimeSPerDay, Is.EqualTo(2420).Within(5).Percent);
+        }
+
+        [Test]
+        public void Scan_RealDate_StaysWithin5PercentOfOldModel()
+        {
+            // Old model (fixed Earth start, no J2): 7717 s per day for the tech demo
+            var stats = GroundContact.Scan(500000, 97.5, new List<GroundStationSpec> { Svalbard, Weilheim }, TechDemoEpoch, 0);
+            Assert.That(stats.ContactTimeSPerDay, Is.EqualTo(7717).Within(5).Percent);
+        }
+
+        [Test]
+        public void Scan_OtherRaan_SimilarContactTime()
+        {
+            var stations = new List<GroundStationSpec> { Weilheim };
+            var a = GroundContact.Scan(500000, 97.5, stations, TechDemoEpoch, 0);
+            var b = GroundContact.Scan(500000, 97.5, stations, TechDemoEpoch, System.Math.PI / 2);
+            Assert.That(b.ContactTimeSPerDay, Is.EqualTo(a.ContactTimeSPerDay).Within(10).Percent);
+        }
+
+        [Test]
+        public void Scan_DifferentStartTime_ChangesPassTimesButNotAverage()
+        {
+            var stations = new List<GroundStationSpec> { Station(0) };
+            var a = GroundContact.Scan(500000, 0, stations, TechDemoEpoch, 0);
+            var b = GroundContact.Scan(500000, 0, stations, TechDemoEpoch + 6 * 3600, 0);
+            Assert.That(b.ContactsPerDay, Is.EqualTo(a.ContactsPerDay).Within(1));
         }
     }
 }

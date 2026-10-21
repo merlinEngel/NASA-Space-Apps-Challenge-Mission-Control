@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using MissionCore.Bodies;
 using MissionCore.Catalogs;
+using MissionCore.Earth;
 using MissionCore.Numerics;
 
 namespace MissionCore.Budgets
@@ -29,7 +31,8 @@ namespace MissionCore.Budgets
         public const double DefaultStepS = 10;
 
         public static ContactStats Scan(double altitudeM, double inclinationDeg, IReadOnlyList<GroundStationSpec> stations,
-                                        int days = DefaultDays, double stepS = DefaultStepS)
+                                double epochS = 0, double raanRad = 0,
+                                int days = DefaultDays, double stepS = DefaultStepS)
         {
             double durationS = days * Constants.SecondsPerDay;
             if (stations == null || stations.Count == 0 || altitudeM <= 0)
@@ -44,16 +47,19 @@ namespace MissionCore.Budgets
             int passes = 0;
             double visibleS = 0, gapS = 0, longestGapS = 0;
 
+            KeplerOrbit orbit = J2Drift.ApplyTo(KeplerOrbit.Circular(altitudeM, inclinationRad, raanRad, Constants.RadiusEarth, Constants.MuEarth, epochS));
+
             for (int k = 0; k < steps; k++)
             {
-                double t = k * stepS;
-                Vec3d satellite = SatellitePosition(radiusM, inclinationRad, meanMotion * t);
+                double t = epochS + k * stepS;
+                Vec3d satellite = orbit.PositionAt(t);
+                double rotation = EarthRotation.Gmst(t);
 
                 bool anyVisible = false;
                 for (int s = 0; s < stations.Count; s++)
                 {
                     var station = stations[s];
-                    bool visible = ElevationDeg(satellite, station.latDeg, station.lonDeg, t) >= station.minElevationDeg;
+                    bool visible = ElevationDeg(satellite, station.latDeg, station.lonDeg, rotation) >= station.minElevationDeg;
                     if (visible && !wasVisible[s]) passes++;
                     wasVisible[s] = visible;
                     anyVisible |= visible;
@@ -74,20 +80,22 @@ namespace MissionCore.Budgets
             return new ContactStats(passes / (double)days, visibleS / days, longestGapS);
         }
 
-        // Inertial position on a circular orbit, argumentOfLatitude measured from the ascending node.
-        public static Vec3d SatellitePosition(double radiusM, double inclinationRad, double argumentOfLatitudeRad) =>
-            new Vec3d(Math.Cos(argumentOfLatitudeRad), Math.Sin(argumentOfLatitudeRad), 0)
-                .RotateX(inclinationRad) * radiusM;
-
         // Elevation of the satellite above the station's horizon at time t.
-        public static double ElevationDeg(Vec3d satellite, double latDeg, double lonDeg, double t)
+        public static double ElevationDeg(Vec3d satellite, double latDeg, double lonDeg, double earthRotationRad)
+        {
+            var position = StationPosition(latDeg, lonDeg, earthRotationRad);
+            Vec3d lineOfSight = satellite - position;
+            double sinElevation = lineOfSight.Dot(position / Constants.RadiusEarth) / lineOfSight.Length;
+            return Math.Asin(Math.Clamp(sinElevation, -1, 1)) * 180 / Math.PI;
+        }
+
+        // Position of a ground station in the Earth-centred inertial frame [m].
+        public static Vec3d StationPosition(double latDeg, double lonDeg, double earthRotationRad)
         {
             double lat = latDeg * Math.PI / 180;
-            double lon = lonDeg * Math.PI / 180 + Constants.EarthRotationRateRadPerS * t;
+            double lon = lonDeg * Math.PI / 180 + earthRotationRad;
             var up = new Vec3d(Math.Cos(lat) * Math.Cos(lon), Math.Cos(lat) * Math.Sin(lon), Math.Sin(lat));
-            Vec3d lineOfSight = satellite - up * Constants.RadiusEarth;
-            double sinElevation = lineOfSight.Dot(up) / lineOfSight.Length;
-            return Math.Asin(Math.Clamp(sinElevation, -1, 1)) * 180 / Math.PI;
+            return up * Constants.RadiusEarth;
         }
     }
 }

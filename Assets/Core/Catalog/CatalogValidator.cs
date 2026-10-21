@@ -104,6 +104,7 @@ namespace MissionCore.Catalogs
                 if (p.lifetimeYears <= 0) Fail(fileName, p.id, "has lifetime_years <= 0");
                 if (p.priceUSD < 0) Fail(fileName, p.id, "has price_USD < 0");
                 if (p.storageBits <= 0) Fail(fileName, p.id, "has storage_bits <= 0");
+                if (p.dragAreaM2 <= 0) Fail(fileName, p.id, "has drag_area_m2 <= 0");
             }
         }
 
@@ -173,6 +174,9 @@ namespace MissionCore.Catalogs
                 if (m.altitudeM == null) Fail(fileName, m.id, "has no altitude_m");
                 if (m.altitudeM.Min <= 0) Fail(fileName, m.id, "has altitude_m.min <= 0");
                 if (m.altitudeM.Min > m.altitudeM.Max) Fail(fileName, m.id, "has altitude_m.min > altitude_m.max");
+
+                if (m.epochUtc.Year < 2000 || m.epochUtc.Year > 2300) Fail(fileName, m.id, "has epochutc outside of max date range");
+                if (m.raanDeg < 0 || m.raanDeg > 360) Fail(fileName, m.id, "has raan >360 or <0");
 
                 if (m.requiredGoals == null || m.requiredGoals.Count == 0) Fail(fileName, m.id, "has no required_goals");
                 ValidateGoals(m.requiredGoals, m.id, "required_goals", fileName);

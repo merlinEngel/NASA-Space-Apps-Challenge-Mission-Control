@@ -14,7 +14,9 @@ namespace MissionCore.Catalogs
         [JsonProperty("max_solar_area_m2")] public double maxSolarAreaM2;
         [JsonProperty("lifetime_years")] public double lifetimeYears;
         [JsonProperty("price_USD")] public double priceUSD;
+        
         // On-board data storage of the bus computer.
         [JsonProperty("storage_bits")] public double storageBits;
+        [JsonProperty("drag_area_m2")] public double dragAreaM2;
     }
 }
