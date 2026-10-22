@@ -30,6 +30,14 @@ namespace MissionCore.Simulation
 
         private MissionSimulation() { }
 
+        // Runs a whole mission without graphics, tick by tick until it ends.
+        public static MissionSimulation Simulate(Catalog catalog, MissionDesign design, int seed)
+        {
+            MissionSimulation sim = Start(catalog, design, seed);
+            while (!sim.State.Ended) sim.Tick();
+            return sim;
+        }
+
         public static MissionSimulation Start(Catalog catalog, MissionDesign design, int seed)
         {
             SimParameters parameters = SimParameters.From(catalog, design);
