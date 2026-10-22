@@ -1,0 +1,367 @@
+"filename", "language", "C#", "JSON", "Markdown", "UnityShader", "comment", "blank", "total"
+"/Users/merlinengel/Mission Control/.claude/settings.local.json", "JSON", 0, 9, 0, 0, 0, 1, 10
+"/Users/merlinengel/Mission Control/Assets/Core/Bodies/ICelestialBody.cs", "C#", 9, 0, 0, 0, 5, 0, 14
+"/Users/merlinengel/Mission Control/Assets/Core/Bodies/Kepler.cs", "C#", 93, 0, 0, 0, 8, 25, 126
+"/Users/merlinengel/Mission Control/Assets/Core/Bodies/OrbitInfo.cs", "C#", 76, 0, 0, 0, 12, 23, 111
+"/Users/merlinengel/Mission Control/Assets/Core/Bodies/SpacecraftState.cs", "C#", 18, 0, 0, 0, 0, 1, 19
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/BudgetBase.cs", "C#", 27, 0, 0, 0, 1, 3, 31
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/BudgetKind.cs", "C#", 20, 0, 0, 0, 0, 2, 22
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/CostBudget.cs", "C#", 54, 0, 0, 0, 0, 4, 58
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/CostBudgetResult.cs", "C#", 23, 0, 0, 0, 0, 3, 26
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/DataBudget.cs", "C#", 64, 0, 0, 0, 2, 10, 76
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/DataBudgetResult.cs", "C#", 32, 0, 0, 0, 1, 4, 37
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/DeltaVBudget.cs", "C#", 26, 0, 0, 0, 0, 3, 29
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/DeltaVBudgetResult.cs", "C#", 26, 0, 0, 0, 0, 4, 30
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/GroundContact.cs", "C#", 82, 0, 0, 0, 6, 14, 102
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/LifetimeBudget.cs", "C#", 33, 0, 0, 0, 2, 9, 44
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/LifetimeBudgetResult.cs", "C#", 19, 0, 0, 0, 0, 2, 21
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/MassBudget.cs", "C#", 63, 0, 0, 0, 0, 5, 68
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/MassBudgetResult.cs", "C#", 23, 0, 0, 0, 0, 2, 25
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/OrbitClassifier.cs", "C#", 19, 0, 0, 0, 0, 0, 19
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/PowerBudget.cs", "C#", 64, 0, 0, 0, 0, 12, 76
+"/Users/merlinengel/Mission Control/Assets/Core/Budgets/PowerBudgetResult.cs", "C#", 30, 0, 0, 0, 0, 3, 33
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/BatterySpec.cs", "C#", 14, 0, 0, 0, 0, 1, 15
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/Catalog.cs", "C#", 115, 0, 0, 0, 5, 16, 136
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/CatalogLoader.cs", "C#", 33, 0, 0, 0, 1, 3, 37
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/CatalogValidator.cs", "C#", 280, 0, 0, 0, 11, 34, 325
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/CommsSpec.cs", "C#", 16, 0, 0, 0, 0, 1, 17
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/GroundStationSpec.cs", "C#", 15, 0, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/InstrumentSpec.cs", "C#", 18, 0, 0, 0, 2, 2, 22
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/LauncherSpec.cs", "C#", 47, 0, 0, 0, 9, 9, 65
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/OrbitPresetSpec.cs", "C#", 15, 0, 0, 0, 0, 2, 17
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/PlatformSpec.cs", "C#", 19, 0, 0, 0, 1, 2, 22
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/PropulsionSpec.cs", "C#", 15, 0, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/Assets/Core/Catalog/SolarSpec.cs", "C#", 15, 0, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/Assets/Core/Design/DesignChange.cs", "C#", 128, 0, 0, 0, 1, 10, 139
+"/Users/merlinengel/Mission Control/Assets/Core/Design/DesignDifference.cs", "C#", 55, 0, 0, 0, 0, 11, 66
+"/Users/merlinengel/Mission Control/Assets/Core/Design/DesignIssue.cs", "C#", 37, 0, 0, 0, 7, 8, 52
+"/Users/merlinengel/Mission Control/Assets/Core/Design/DesignReport.cs", "C#", 99, 0, 0, 0, 2, 14, 115
+"/Users/merlinengel/Mission Control/Assets/Core/Design/DesignValidator.cs", "C#", 194, 0, 0, 0, 0, 41, 235
+"/Users/merlinengel/Mission Control/Assets/Core/Design/MetricDelta.cs", "C#", 35, 0, 0, 0, 0, 4, 39
+"/Users/merlinengel/Mission Control/Assets/Core/Design/ReportDiff.cs", "C#", 41, 0, 0, 0, 0, 10, 51
+"/Users/merlinengel/Mission Control/Assets/Core/Design/StatusChange.cs", "C#", 18, 0, 0, 0, 0, 1, 19
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/Atmosphere.cs", "C#", 70, 0, 0, 0, 6, 13, 89
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/EarthRotation.cs", "C#", 11, 0, 0, 0, 2, 1, 14
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/J2Drift.cs", "C#", 58, 0, 0, 0, 3, 17, 78
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/OrbitDecay.cs", "C#", 35, 0, 0, 0, 2, 7, 44
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/OrbitTrack.cs", "C#", 38, 0, 0, 0, 2, 10, 50
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/Shadow.cs", "C#", 40, 0, 0, 0, 4, 9, 53
+"/Users/merlinengel/Mission Control/Assets/Core/Earth/Sun.cs", "C#", 21, 0, 0, 0, 5, 6, 32
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/EventType.cs", "C#", 7, 0, 0, 0, 0, 0, 7
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/FixedEvent.cs", "C#", 9, 0, 0, 0, 0, 0, 9
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/Goal.cs", "C#", 9, 0, 0, 0, 0, 0, 9
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/GoalType.cs", "C#", 9, 0, 0, 0, 0, 0, 9
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/MissionDesign.cs", "C#", 29, 0, 0, 0, 0, 5, 34
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/MissionTemplate.cs", "C#", 35, 0, 0, 0, 0, 3, 38
+"/Users/merlinengel/Mission Control/Assets/Core/Mission/SolarActivity.cs", "C#", 9, 0, 0, 0, 0, 0, 9
+"/Users/merlinengel/Mission Control/Assets/Core/MissionCore.asmdef", "JSON", 0, 14, 0, 0, 0, 0, 14
+"/Users/merlinengel/Mission Control/Assets/Core/Rules/BalanceRules.cs", "C#", 35, 0, 0, 0, 2, 6, 43
+"/Users/merlinengel/Mission Control/Assets/Core/Rules/ScoringRules.cs", "C#", 26, 0, 0, 0, 4, 7, 37
+"/Users/merlinengel/Mission Control/Assets/Core/Rules/SimRules.cs", "C#", 23, 0, 0, 0, 5, 9, 37
+"/Users/merlinengel/Mission Control/Assets/Core/Rules/StatusThreshold.cs", "C#", 11, 0, 0, 0, 0, 2, 13
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/Forces.cs", "C#", 43, 0, 0, 0, 1, 8, 52
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/Integrator.cs", "C#", 21, 0, 0, 0, 0, 5, 26
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/Maneuvers.cs", "C#", 43, 0, 0, 0, 4, 16, 63
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/MissionSimulation.cs", "C#", 102, 0, 0, 0, 2, 20, 124
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimEnums.cs", "C#", 6, 0, 0, 0, 1, 2, 9
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimLog.cs", "C#", 31, 0, 0, 0, 3, 6, 40
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimLogEntry.cs", "C#", 19, 0, 0, 0, 1, 1, 21
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimParameters.cs", "C#", 80, 0, 0, 0, 0, 16, 96
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimSample.cs", "C#", 14, 0, 0, 0, 1, 1, 16
+"/Users/merlinengel/Mission Control/Assets/Core/Simulation/SimState.cs", "C#", 42, 0, 0, 0, 0, 6, 48
+"/Users/merlinengel/Mission Control/Assets/Core/Text/DisplayFormatter.cs", "C#", 66, 0, 0, 0, 0, 13, 79
+"/Users/merlinengel/Mission Control/Assets/Core/Text/EnumExtensions.cs", "C#", 11, 0, 0, 0, 0, 2, 13
+"/Users/merlinengel/Mission Control/Assets/Core/Text/TextTable.cs", "C#", 61, 0, 0, 0, 0, 7, 68
+"/Users/merlinengel/Mission Control/Assets/Core/Text/TextTableLoader.cs", "C#", 25, 0, 0, 0, 0, 2, 27
+"/Users/merlinengel/Mission Control/Assets/Core/Time/SimClock.cs", "C#", 35, 0, 0, 0, 6, 12, 53
+"/Users/merlinengel/Mission Control/Assets/Core/Time/SimTimeConverter.cs", "C#", 12, 0, 0, 0, 0, 1, 13
+"/Users/merlinengel/Mission Control/Assets/Core/math/Constants.cs", "C#", 25, 0, 0, 0, 0, 6, 31
+"/Users/merlinengel/Mission Control/Assets/Core/math/Units.cs", "C#", 33, 0, 0, 0, 0, 3, 36
+"/Users/merlinengel/Mission Control/Assets/Core/math/ValueRange.cs", "C#", 17, 0, 0, 0, 0, 3, 20
+"/Users/merlinengel/Mission Control/Assets/Core/math/Vec3d.cs", "C#", 43, 0, 0, 0, 8, 13, 64
+"/Users/merlinengel/Mission Control/Assets/Data/StartDesigns/tech_demo.json", "JSON", 0, 15, 0, 0, 0, 0, 15
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/LocalizationFile.cs", "C#", 87, 0, 0, 0, 6, 19, 112
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/LocalizationSettings.cs", "C#", 25, 0, 0, 0, 2, 5, 32
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/LocalizationWindow.cs", "C#", 658, 0, 0, 0, 24, 99, 781
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/MissingTextRecorder.cs", "C#", 34, 0, 0, 0, 2, 6, 42
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/MyButtonEditor.cs", "C#", 24, 0, 0, 0, 0, 4, 28
+"/Users/merlinengel/Mission Control/Assets/Editor/Localization/localization_settings.json", "JSON", 0, 16, 0, 0, 0, 0, 16
+"/Users/merlinengel/Mission Control/Assets/Editor/ThemeBinderInspectors.cs", "C#", 29, 0, 0, 0, 3, 3, 35
+"/Users/merlinengel/Mission Control/Assets/Editor/UI/CustomUiPrefab.cs", "C#", 33, 0, 0, 0, 1, 9, 43
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/AllowNestingAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/AnimatorParamAttribute.cs", "C#", 21, 0, 0, 0, 0, 4, 25
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/CurveRangeAttribute.cs", "C#", 26, 0, 0, 0, 0, 5, 31
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/DrawerAttribute.cs", "C#", 7, 0, 0, 0, 3, 2, 12
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/DropdownAttribute.cs", "C#", 47, 0, 0, 0, 0, 11, 58
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/EnumFlagsAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/Expandable.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/FilePathAttribute.cs", "C#", 21, 0, 0, 0, 0, 3, 24
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/FolderPathAttribute.cs", "C#", 17, 0, 0, 0, 0, 3, 20
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/HorizontalLineAttribute.cs", "C#", 17, 0, 0, 0, 0, 4, 21
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/InfoBoxAttribute.cs", "C#", 21, 0, 0, 0, 0, 4, 25
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/InputAxisAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/LayerAttribute.cs", "C#", 8, 0, 0, 0, 0, 1, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/MinMaxSliderAttribute.cs", "C#", 15, 0, 0, 0, 0, 3, 18
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/ProgressBarAttribute.cs", "C#", 32, 0, 0, 0, 0, 6, 38
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/ResizableTextAreaAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/SceneAttribute.cs", "C#", 8, 0, 0, 0, 0, 1, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/ShowAssetPreviewAttribute.cs", "C#", 17, 0, 0, 0, 0, 4, 21
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/SortingLayerAttribute.cs", "C#", 8, 0, 0, 0, 0, 1, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes/TagAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes_SpecialCase/ButtonAttribute.cs", "C#", 21, 0, 0, 0, 9, 4, 34
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes_SpecialCase/ReorderableListAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes_SpecialCase/ShowNativePropertyAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes_SpecialCase/ShowNonSerializedFieldAttribute.cs", "C#", 8, 0, 0, 0, 0, 2, 10
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/DrawerAttributes_SpecialCase/SpecialCaseDrawerAttribute.cs", "C#", 7, 0, 0, 0, 0, 2, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/INaughtyAttribute.cs", "C#", 6, 0, 0, 0, 0, 1, 7
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/BoxGroupAttribute.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/DisableIfAttribute.cs", "C#", 23, 0, 0, 0, 0, 4, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/EnableIfAttribute.cs", "C#", 23, 0, 0, 0, 0, 4, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/EnableIfAttributeBase.cs", "C#", 30, 0, 0, 0, 3, 7, 40
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/FoldoutAttribute.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/HideIfAttribute.cs", "C#", 23, 0, 0, 0, 0, 4, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/IGroupAttribute.cs", "C#", 6, 0, 0, 0, 0, 1, 7
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/LabelAttribute.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/MetaAttribute.cs", "C#", 7, 0, 0, 0, 0, 2, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/OnValueChangedAttribute.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/ReadOnlyAttribute.cs", "C#", 8, 0, 0, 0, 0, 3, 11
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/ShowIfAttribute.cs", "C#", 23, 0, 0, 0, 0, 4, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/MetaAttributes/ShowIfAttributeBase.cs", "C#", 30, 0, 0, 0, 3, 7, 40
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/NaughtyAttributes.Core.asmdef", "JSON", 0, 12, 0, 0, 0, 0, 12
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/Utility/EColor.cs", "C#", 54, 0, 0, 0, 0, 3, 57
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/Utility/EConditionOperator.cs", "C#", 8, 0, 0, 0, 0, 1, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/MaxValueAttribute.cs", "C#", 22, 0, 0, 0, 0, 5, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/MinValueAttribute.cs", "C#", 22, 0, 0, 0, 0, 5, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/RequiredAttribute.cs", "C#", 13, 0, 0, 0, 0, 3, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/RequiredTypeAttribute.cs", "C#", 19, 0, 0, 0, 0, 5, 24
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/ValidateInputAttribute.cs", "C#", 15, 0, 0, 0, 0, 3, 18
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Core/ValidatorAttributes/ValidatorAttribute.cs", "C#", 7, 0, 0, 0, 0, 2, 9
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/DecoratorDrawers/HorizontalLineDecoratorDrawer.cs", "C#", 21, 0, 0, 0, 0, 3, 24
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/DecoratorDrawers/InfoBoxDecoratorDrawer.cs", "C#", 49, 0, 0, 0, 0, 11, 60
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/NaughtyAttributes.Editor.asmdef", "JSON", 0, 16, 0, 0, 0, 0, 16
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/NaughtyInspector.cs", "C#", 193, 0, 0, 0, 3, 30, 226
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/AllowNestingPropertyDrawer.cs", "C#", 15, 0, 0, 0, 0, 2, 17
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/AnimatorParamPropertyDrawer.cs", "C#", 142, 0, 0, 0, 2, 32, 176
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/CurveRangePropertyDrawer.cs", "C#", 39, 0, 0, 0, 1, 8, 48
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/DropdownPropertyDrawer.cs", "C#", 142, 0, 0, 0, 5, 30, 177
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/EnumFlagsPropertyDrawer.cs", "C#", 33, 0, 0, 0, 0, 6, 39
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/ExpandablePropertyDrawer.cs", "C#", 171, 0, 0, 0, 3, 27, 201
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/FilePathPropertyDrawer.cs", "C#", 113, 0, 0, 0, 2, 25, 140
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/FolderPathPropertyDrawer.cs", "C#", 88, 0, 0, 0, 2, 20, 110
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/InputAxisPropertyDrawer.cs", "C#", 61, 0, 0, 0, 4, 13, 78
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/LayerPropertyDrawer.cs", "C#", 75, 0, 0, 0, 0, 14, 89
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/MinMaxSliderPropertyDrawer.cs", "C#", 86, 0, 0, 0, 2, 20, 108
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/ProgressBarPropertyDrawer.cs", "C#", 158, 0, 0, 0, 7, 33, 198
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/PropertyDrawerBase.cs", "C#", 74, 0, 0, 0, 4, 17, 95
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/ResizableTextAreaPropertyDrawer.cs", "C#", 69, 0, 0, 0, 0, 12, 81
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/ScenePropertyDrawer.cs", "C#", 85, 0, 0, 0, 0, 15, 100
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/ShowAssetPreviewPropertyDrawer.cs", "C#", 85, 0, 0, 0, 0, 12, 97
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/SortingLayerPropertyDrawer.cs", "C#", 78, 0, 0, 0, 0, 14, 92
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/TagPropertyDrawer.cs", "C#", 49, 0, 0, 0, 5, 9, 63
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers_SpecialCase/ReorderableListPropertyDrawer.cs", "C#", 176, 0, 0, 0, 1, 33, 210
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers_SpecialCase/SpecialCasePropertyDrawerBase.cs", "C#", 60, 0, 0, 0, 4, 11, 75
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/MaxValuePropertyValidator.cs", "C#", 63, 0, 0, 0, 0, 3, 66
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/MinValuePropertyValidator.cs", "C#", 63, 0, 0, 0, 0, 3, 66
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/PropertyValidatorBase.cs", "C#", 35, 0, 0, 0, 0, 5, 40
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/RequiredPropertyValidator.cs", "C#", 28, 0, 0, 0, 0, 4, 32
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/RequiredTypePropertyValidator.cs", "C#", 85, 0, 0, 0, 0, 15, 100
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/PropertyValidators/ValidateInputPropertyValidator.cs", "C#", 70, 0, 0, 0, 0, 7, 77
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/ButtonUtility.cs", "C#", 49, 0, 0, 0, 0, 7, 56
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/NaughtyEditorGUI.cs", "C#", 345, 0, 0, 0, 20, 48, 413
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/NaughtyPathUtility.cs", "C#", 39, 0, 0, 0, 0, 8, 47
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/PropertyUtility.cs", "C#", 366, 0, 0, 0, 20, 63, 449
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/ReflectionUtility.cs", "C#", 103, 0, 0, 0, 6, 20, 129
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Editor/Utility/SavedBool.cs", "C#", 30, 0, 0, 0, 0, 4, 34
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/AnimatorParamTest.cs", "C#", 41, 0, 0, 0, 0, 13, 54
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/BoxGroupTest.cs", "C#", 27, 0, 0, 0, 0, 6, 33
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ButtonTest.cs", "C#", 34, 0, 0, 0, 0, 6, 40
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/CurveRangeTest.cs", "C#", 29, 0, 0, 0, 0, 9, 38
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/DisableIfTest.cs", "C#", 98, 0, 0, 0, 0, 23, 121
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/DropdownTest.cs", "C#", 37, 0, 0, 0, 0, 9, 46
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/EnableIfTest.cs", "C#", 98, 0, 0, 0, 0, 23, 121
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/EnumFlagsTest.cs", "C#", 33, 0, 0, 0, 0, 7, 40
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ExpandableTest.cs", "C#", 24, 0, 0, 0, 1, 7, 32
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/FilePathTest.cs", "C#", 33, 0, 0, 0, 0, 11, 44
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/FolderPathTest.cs", "C#", 25, 0, 0, 0, 0, 7, 32
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/FoldoutTest.cs", "C#", 27, 0, 0, 0, 0, 6, 33
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/HideIfTest.cs", "C#", 97, 0, 0, 0, 0, 23, 120
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/HorizontalLineTest.cs", "C#", 46, 0, 0, 0, 0, 6, 52
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/InfoBoxTest.cs", "C#", 23, 0, 0, 0, 0, 6, 29
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/InputAxisTest.cs", "C#", 28, 0, 0, 0, 0, 7, 35
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/LabelTest.cs", "C#", 25, 0, 0, 0, 0, 6, 31
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/LayerTest.cs", "C#", 37, 0, 0, 0, 0, 10, 47
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/MinMaxSliderTest.cs", "C#", 23, 0, 0, 0, 0, 6, 29
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/MinMaxValueTest.cs", "C#", 102, 0, 0, 0, 3, 28, 133
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/NaughtyAttributes.Test.asmdef", "JSON", 0, 14, 0, 0, 0, 0, 14
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/OnValueChangedTest.cs", "C#", 42, 0, 0, 0, 0, 10, 52
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ProgressBarTest.cs", "C#", 29, 0, 0, 0, 0, 7, 36
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ReadOnlyTest.cs", "C#", 25, 0, 0, 0, 0, 6, 31
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ReorderableListTest.cs", "C#", 27, 0, 0, 0, 0, 8, 35
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/RequiredTest.cs", "C#", 25, 0, 0, 0, 0, 6, 31
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/RequiredTypeTest.cs", "C#", 27, 0, 0, 0, 0, 9, 36
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/RequiredTypeTestTestObject.cs", "C#", 7, 0, 0, 0, 0, 1, 8
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/RequiredTypeTestTestObject2InheritsAll.cs", "C#", 6, 0, 0, 0, 0, 0, 6
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ResizableTextAreaTest.cs", "C#", 23, 0, 0, 0, 0, 6, 29
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/SceneTest.cs", "C#", 23, 0, 0, 0, 0, 6, 29
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ShowAssetPreviewTest.cs", "C#", 29, 0, 0, 0, 0, 9, 38
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ShowIfTest.cs", "C#", 97, 0, 0, 0, 0, 23, 120
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ShowNativePropertyTest.cs", "C#", 71, 0, 0, 0, 0, 9, 80
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ShowNonSerializedFieldTest.cs", "C#", 25, 0, 0, 0, 0, 9, 34
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/SortingLayerTest.cs", "C#", 37, 0, 0, 0, 0, 10, 47
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/TagTest.cs", "C#", 28, 0, 0, 0, 0, 7, 35
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/ValidateInputTest.cs", "C#", 42, 0, 0, 0, 0, 11, 53
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/_NaughtyComponent.cs", "C#", 15, 0, 0, 0, 0, 4, 19
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/_NaughtyScriptableObject.cs", "C#", 21, 0, 0, 0, 1, 5, 27
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/_TestScriptableObjectA.cs", "C#", 10, 0, 0, 0, 1, 1, 12
+"/Users/merlinengel/Mission Control/Assets/NaughtyAttributes/Scripts/Test/_TestScriptableObjectB.cs", "C#", 9, 0, 0, 0, 1, 1, 11
+"/Users/merlinengel/Mission Control/Assets/Resources/Unity-Theme-Database.json", "JSON", 0, 135, 0, 0, 0, 0, 135
+"/Users/merlinengel/Mission Control/Assets/Scriptable Objects/Planet.cs", "C#", 56, 0, 0, 0, 3, 12, 71
+"/Users/merlinengel/Mission Control/Assets/Scriptable Objects/UiSoundLibrary.cs", "C#", 22, 0, 0, 0, 0, 4, 26
+"/Users/merlinengel/Mission Control/Assets/Scripts/Audio/Editor/UiSoundEntryDrawer.cs", "C#", 100, 0, 0, 0, 6, 27, 133
+"/Users/merlinengel/Mission Control/Assets/Scripts/Audio/UiAudio.cs", "C#", 48, 0, 0, 0, 4, 7, 59
+"/Users/merlinengel/Mission Control/Assets/Scripts/Audio/UiInputSounds.cs", "C#", 45, 0, 0, 0, 4, 12, 61
+"/Users/merlinengel/Mission Control/Assets/Scripts/Audio/UiSoundEntry.cs", "C#", 38, 0, 0, 0, 3, 6, 47
+"/Users/merlinengel/Mission Control/Assets/Scripts/Audio/UiSoundOverride.cs", "C#", 8, 0, 0, 0, 0, 0, 8
+"/Users/merlinengel/Mission Control/Assets/Scripts/CameraOrbit.cs", "C#", 36, 0, 0, 0, 4, 7, 47
+"/Users/merlinengel/Mission Control/Assets/Scripts/CatalogManager.cs", "C#", 101, 0, 0, 0, 3, 20, 124
+"/Users/merlinengel/Mission Control/Assets/Scripts/Design/MissionDesignManager.cs", "C#", 40, 0, 0, 0, 4, 11, 55
+"/Users/merlinengel/Mission Control/Assets/Scripts/ISimulated.cs", "C#", 8, 0, 0, 0, 0, 0, 8
+"/Users/merlinengel/Mission Control/Assets/Scripts/IsExternalInit.cs", "C#", 4, 0, 0, 0, 0, 0, 4
+"/Users/merlinengel/Mission Control/Assets/Scripts/PlanetManager.cs", "C#", 110, 0, 0, 0, 2, 22, 134
+"/Users/merlinengel/Mission Control/Assets/Scripts/RenderScale.cs", "C#", 8, 0, 0, 0, 0, 0, 8
+"/Users/merlinengel/Mission Control/Assets/Scripts/SerializableVec3d.cs", "C#", 10, 0, 0, 0, 0, 3, 13
+"/Users/merlinengel/Mission Control/Assets/Scripts/Singleton.cs", "C#", 22, 0, 0, 0, 2, 3, 27
+"/Users/merlinengel/Mission Control/Assets/Scripts/SpaceCraft.cs", "C#", 129, 0, 0, 0, 1, 26, 156
+"/Users/merlinengel/Mission Control/Assets/Scripts/Theme/SliderColorBinder.cs", "C#", 50, 0, 0, 0, 4, 10, 64
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Catalog List/CatalogColumn.cs", "C#", 76, 0, 0, 0, 21, 14, 111
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Catalog List/CatalogListView.cs", "C#", 152, 0, 0, 0, 20, 31, 203
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Catalog List/CatalogRowData.cs", "C#", 12, 0, 0, 0, 11, 6, 29
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Catalog List/CatalogRowView.cs", "C#", 98, 0, 0, 0, 18, 25, 141
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Color Binders/GraphicsColorBinder.cs", "C#", 53, 0, 0, 0, 6, 9, 68
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Color Binders/MultiTargetColorBinder.cs", "C#", 37, 0, 0, 0, 4, 6, 47
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/CommandConsole.cs", "C#", 200, 0, 0, 0, 9, 47, 256
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Budget.cs", "C#", 72, 0, 0, 0, 4, 18, 94
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Budgets.cs", "C#", 49, 0, 0, 0, 0, 9, 58
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/DeltaChip.cs", "C#", 43, 0, 0, 0, 0, 7, 50
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/DesignUiManager.cs", "C#", 48, 0, 0, 0, 1, 8, 57
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/OrbitPreview.cs", "C#", 123, 0, 0, 0, 5, 25, 153
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/CommsTab.cs", "C#", 92, 0, 0, 0, 0, 15, 107
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/InstrumentsTab.cs", "C#", 83, 0, 0, 0, 2, 15, 100
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/LaunchTab.cs", "C#", 124, 0, 0, 0, 7, 29, 160
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/OrbitTab.cs", "C#", 88, 0, 0, 0, 1, 17, 106
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/PlatformTab.cs", "C#", 71, 0, 0, 0, 1, 17, 89
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/PowerTab.cs", "C#", 101, 0, 0, 0, 0, 17, 118
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/Tabs/Tab.cs", "C#", 32, 0, 0, 0, 0, 6, 38
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Design/TradeOffBar.cs", "C#", 91, 0, 0, 0, 5, 18, 114
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/HUD.cs", "C#", 80, 0, 0, 0, 0, 14, 94
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Mode Selector/ModeSelector.cs", "C#", 45, 0, 0, 0, 1, 6, 52
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Mode Selector/ModeSelectorOption.cs", "C#", 25, 0, 0, 0, 0, 5, 30
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/MyButton.cs", "C#", 31, 0, 0, 0, 2, 5, 38
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/MySlider.cs", "C#", 67, 0, 0, 0, 10, 14, 91
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Stepper.cs", "C#", 50, 0, 0, 0, 1, 9, 60
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Tab List/TabList.cs", "C#", 48, 0, 0, 0, 1, 7, 56
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Tab List/TabListTab.cs", "C#", 24, 0, 0, 0, 0, 5, 29
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/Tab List/TabManager.cs", "C#", 25, 0, 0, 0, 0, 5, 30
+"/Users/merlinengel/Mission Control/Assets/Scripts/UI/TextLocalizer.cs", "C#", 41, 0, 0, 0, 0, 9, 50
+"/Users/merlinengel/Mission Control/Assets/Scripts/UiRaycastDebug.cs", "C#", 20, 0, 0, 0, 1, 4, 25
+"/Users/merlinengel/Mission Control/Assets/Scripts/Utils/SerializableDictionary.cs", "C#", 44, 0, 0, 0, 3, 6, 53
+"/Users/merlinengel/Mission Control/Assets/Scripts/Vec3dUnityExtensions.cs", "C#", 12, 0, 0, 0, 2, 3, 17
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/Rules/balance_rules.json", "JSON", 0, 18, 0, 0, 0, 0, 18
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/Rules/scoring.json", "JSON", 0, 9, 0, 0, 0, 0, 9
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/Rules/sim_rules.json", "JSON", 0, 12, 0, 0, 0, 0, 12
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/TestDesigns/tech_demo_good.json", "JSON", 0, 15, 0, 0, 0, 0, 15
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/TestDesigns/tech_demo_invalid.json", "JSON", 0, 15, 0, 0, 0, 0, 15
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/TestDesigns/tech_demo_low_power.json", "JSON", 0, 15, 0, 0, 0, 0, 15
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/UI/design_ui.json", "JSON", 0, 49, 0, 0, 0, 4, 53
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/batteries.json", "JSON", 0, 5, 0, 0, 0, 0, 5
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/comms.json", "JSON", 0, 5, 0, 0, 0, 0, 5
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/groundstations.json", "JSON", 0, 6, 0, 0, 0, 0, 6
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/instruments.json", "JSON", 0, 10, 0, 0, 0, 1, 11
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/launchers.json", "JSON", 0, 9, 0, 0, 0, 1, 10
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/missions.json", "JSON", 0, 31, 0, 0, 0, 1, 32
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/orbit_presets.json", "JSON", 0, 5, 0, 0, 0, 0, 5
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/platforms.json", "JSON", 0, 8, 0, 0, 0, 0, 8
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/propulsion.json", "JSON", 0, 7, 0, 0, 0, 0, 7
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/solar.json", "JSON", 0, 4, 0, 0, 0, 0, 4
+"/Users/merlinengel/Mission Control/Assets/StreamingAssets/Data/texts.json", "JSON", 0, 244, 0, 0, 0, 22, 266
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl", "UnityShader", 0, 0, 0, 130, 18, 31, 179
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader", "UnityShader", 0, 0, 0, 113, 2, 31, 146
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader", "UnityShader", 0, 0, 0, 123, 3, 30, 156
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader", "UnityShader", 0, 0, 0, 113, 2, 31, 146
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader", "UnityShader", 0, 0, 0, 253, 4, 70, 327
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader", "UnityShader", 0, 0, 0, 253, 4, 65, 322
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader", "UnityShader", 0, 0, 0, 198, 10, 51, 259
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader", "UnityShader", 0, 0, 0, 193, 8, 52, 253
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader", "UnityShader", 0, 0, 0, 82, 4, 21, 107
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader", "UnityShader", 0, 0, 0, 290, 15, 85, 390
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader", "UnityShader", 0, 0, 0, 192, 8, 51, 251
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader", "UnityShader", 0, 0, 0, 104, 8, 28, 140
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader", "UnityShader", 0, 0, 0, 123, 4, 33, 160
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_SDF.shader", "UnityShader", 0, 0, 0, 253, 4, 70, 327
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader", "UnityShader", 0, 0, 0, 111, 0, 21, 132
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMPro.cginc", "UnityShader", 0, 0, 0, 63, 2, 20, 85
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc", "UnityShader", 0, 0, 0, 129, 2, 35, 166
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc", "UnityShader", 0, 0, 0, 62, 6, 13, 81
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc", "UnityShader", 0, 0, 0, 75, 7, 18, 100
+"/Users/merlinengel/Mission Control/Assets/TextMesh Pro/Sprites/EmojiOne.json", "JSON", 0, 155, 0, 0, 0, 2, 157
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Installer.Manifest.cs", "C#", 99, 0, 0, 0, 16, 12, 127
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Installer.cs", "C#", 17, 0, 0, 0, 9, 2, 28
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/PackageExporter.cs", "C#", 22, 0, 0, 0, 2, 4, 28
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/SimpleJSON.cs", "C#", 1236, 0, 0, 0, 43, 156, 1435
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/Correct/correct_manifest.json", "JSON", 0, 33, 0, 0, 0, 0, 33
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopedregistries_empty_1.json", "JSON", 0, 20, 0, 0, 0, 0, 20
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopedregistries_empty_2.json", "JSON", 0, 20, 0, 0, 0, 0, 20
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopedregistries_gone.json", "JSON", 0, 19, 0, 0, 0, 0, 19
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_empty.json", "JSON", 0, 26, 0, 0, 0, 0, 26
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_gone.json", "JSON", 0, 25, 0, 0, 0, 0, 25
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_partial_1.json", "JSON", 0, 32, 0, 0, 0, 0, 32
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_partial_2.json", "JSON", 0, 31, 0, 0, 0, 0, 31
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_partial_3.json", "JSON", 0, 30, 0, 0, 0, 0, 30
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_partial_4.json", "JSON", 0, 29, 0, 0, 0, 0, 29
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/Files/scopes_partial_5.json", "JSON", 0, 28, 0, 0, 0, 0, 28
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/ManifestInstallerTests.cs", "C#", 45, 0, 0, 0, 16, 11, 72
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/Tests/com.IvanMurzak.Unity.Theme.Installer.Tests.asmdef", "JSON", 0, 22, 0, 0, 0, 0, 22
+"/Users/merlinengel/Mission Control/Assets/com.IvanMurzak/Unity Theme Installer/com.IvanMurzak.Unity.Theme.Installer.asmdef", "JSON", 0, 16, 0, 0, 0, 0, 16
+"/Users/merlinengel/Mission Control/Packages/manifest.json", "JSON", 0, 61, 0, 0, 0, 1, 62
+"/Users/merlinengel/Mission Control/Packages/packages-lock.json", "JSON", 0, 560, 0, 0, 0, 1, 561
+"/Users/merlinengel/Mission Control/core.tests/AtmosphereTests.cs", "C#", 84, 0, 0, 0, 3, 10, 97
+"/Users/merlinengel/Mission Control/core.tests/BalanceRulesTests.cs", "C#", 111, 0, 0, 0, 5, 19, 135
+"/Users/merlinengel/Mission Control/core.tests/BudgetRunner.cs", "C#", 20, 0, 0, 0, 2, 2, 24
+"/Users/merlinengel/Mission Control/core.tests/CatalogLoaderTests.cs", "C#", 203, 0, 0, 0, 4, 30, 237
+"/Users/merlinengel/Mission Control/core.tests/CatalogTests.cs", "C#", 162, 0, 0, 0, 2, 19, 183
+"/Users/merlinengel/Mission Control/core.tests/CostBudgetTests.cs", "C#", 119, 0, 0, 0, 8, 12, 139
+"/Users/merlinengel/Mission Control/core.tests/Data/designs/invalid.json", "JSON", 0, 15, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/core.tests/Data/designs/low_power.json", "JSON", 0, 15, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/core.tests/Data/designs/over_budget.json", "JSON", 0, 15, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/core.tests/Data/designs/slow_downlink.json", "JSON", 0, 15, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/core.tests/Data/designs/techdemo_good.json", "JSON", 0, 15, 0, 0, 0, 1, 16
+"/Users/merlinengel/Mission Control/core.tests/DataBudgetTests.cs", "C#", 148, 0, 0, 0, 5, 16, 169
+"/Users/merlinengel/Mission Control/core.tests/DeltaVBudgetTests.cs", "C#", 79, 0, 0, 0, 5, 12, 96
+"/Users/merlinengel/Mission Control/core.tests/DesignReportDiffTests.cs", "C#", 218, 0, 0, 0, 8, 49, 275
+"/Users/merlinengel/Mission Control/core.tests/DesignValidatorTests.cs", "C#", 407, 0, 0, 0, 15, 53, 475
+"/Users/merlinengel/Mission Control/core.tests/DisplayFormatterTests.cs", "C#", 218, 0, 0, 0, 17, 53, 288
+"/Users/merlinengel/Mission Control/core.tests/EarthForcesTests.cs", "C#", 151, 0, 0, 0, 8, 25, 184
+"/Users/merlinengel/Mission Control/core.tests/EarthRotationTests.cs", "C#", 51, 0, 0, 0, 1, 8, 60
+"/Users/merlinengel/Mission Control/core.tests/ForcesTests.cs", "C#", 51, 0, 0, 0, 1, 7, 59
+"/Users/merlinengel/Mission Control/core.tests/GroundContactTests.cs", "C#", 116, 0, 0, 0, 6, 19, 141
+"/Users/merlinengel/Mission Control/core.tests/J2DriftTests.cs", "C#", 179, 0, 0, 0, 8, 29, 216
+"/Users/merlinengel/Mission Control/core.tests/KeplerOrbitTests.cs", "C#", 27, 0, 0, 0, 0, 5, 32
+"/Users/merlinengel/Mission Control/core.tests/LauncherSpecTests.cs", "C#", 140, 0, 0, 0, 3, 24, 167
+"/Users/merlinengel/Mission Control/core.tests/LifetimeBudgetTests.cs", "C#", 113, 0, 0, 0, 4, 14, 131
+"/Users/merlinengel/Mission Control/core.tests/MassBudgetTests.cs", "C#", 170, 0, 0, 0, 17, 24, 211
+"/Users/merlinengel/Mission Control/core.tests/MetricDeltaTests.cs", "C#", 34, 0, 0, 0, 0, 7, 41
+"/Users/merlinengel/Mission Control/core.tests/MissionDesignTests.cs", "C#", 132, 0, 0, 0, 2, 16, 150
+"/Users/merlinengel/Mission Control/core.tests/MissionSimulationStartTests.cs", "C#", 199, 0, 0, 0, 6, 36, 241
+"/Users/merlinengel/Mission Control/core.tests/OrbitDecayTests.cs", "C#", 94, 0, 0, 0, 5, 13, 112
+"/Users/merlinengel/Mission Control/core.tests/OrbitTrackTests.cs", "C#", 102, 0, 0, 0, 9, 20, 131
+"/Users/merlinengel/Mission Control/core.tests/PowerBudgetTests.cs", "C#", 114, 0, 0, 0, 10, 16, 140
+"/Users/merlinengel/Mission Control/core.tests/ShadowTests.cs", "C#", 143, 0, 0, 0, 8, 26, 177
+"/Users/merlinengel/Mission Control/core.tests/SimClockTests.cs", "C#", 89, 0, 0, 0, 2, 10, 101
+"/Users/merlinengel/Mission Control/core.tests/SimLogTests.cs", "C#", 86, 0, 0, 0, 3, 16, 105
+"/Users/merlinengel/Mission Control/core.tests/SimTimeConverterTests.cs", "C#", 66, 0, 0, 0, 2, 10, 78
+"/Users/merlinengel/Mission Control/core.tests/SunTests.cs", "C#", 55, 0, 0, 0, 2, 9, 66
+"/Users/merlinengel/Mission Control/core.tests/TestBody.cs", "C#", 110, 0, 0, 0, 5, 16, 131
+"/Users/merlinengel/Mission Control/core.tests/TestHelpers.cs", "C#", 34, 0, 0, 0, 2, 6, 42
+"/Users/merlinengel/Mission Control/core.tests/Vec3dTests.cs", "C#", 107, 0, 0, 0, 3, 13, 123
+"/Users/merlinengel/Mission Control/docs/Manoever.md", "Markdown", 0, 0, 95, 0, 0, 36, 131
+"Total", "-", 18251, 1880, 95, 2860, 846, 4049, 27981

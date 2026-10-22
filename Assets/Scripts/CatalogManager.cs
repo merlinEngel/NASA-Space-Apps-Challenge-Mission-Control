@@ -36,25 +36,7 @@ namespace MissionGame
 
             dir = Path.Combine(Application.streamingAssetsPath, "Data");
 
-            var propulsion = LoadList<PropulsionSpec>("propulsion.json", CatalogValidator.Validate);
-            var instruments = LoadList<InstrumentSpec>("instruments.json", CatalogValidator.Validate);
-            var launchers = LoadList<LauncherSpec>("launchers.json", CatalogValidator.Validate);
-            var comms = LoadList<CommsSpec>("comms.json", CatalogValidator.Validate);
-            var batteries = LoadList<BatterySpec>("batteries.json", CatalogValidator.Validate);
-            var platforms = LoadList<PlatformSpec>("platforms.json", CatalogValidator.Validate);
-            var groundStations = LoadList<GroundStationSpec>("groundstations.json", CatalogValidator.Validate);
-            var solar = LoadList<SolarCellSpec>("solar.json", CatalogValidator.Validate);
-            var missions = LoadList<MissionTemplate>("missions.json", CatalogValidator.Validate);
-            var orbitPresets = LoadList<OrbitPresetSpec>("orbit_presets.json", CatalogValidator.Validate);
-
-            var balance = LoadObject<BalanceRules>("Rules/balance_rules.json", CatalogValidator.Validate);
-            // Not written yet: load them as soon as the files exist, stay null until then.
-            var scoring = LoadOptionalObject<ScoringRules>("Rules/scoring.json", CatalogValidator.Validate);
-            var sim = LoadOptionalObject<SimRules>("Rules/sim_rules.json", CatalogValidator.Validate);
-            var texts = LoadOptionalTexts("texts.json");
-
-            Catalog = new Catalog(propulsion, instruments, launchers, comms, batteries, platforms,
-                                  groundStations, solar, missions, balance, scoring, sim, texts, orbitPresets);
+            Catalog = CatalogLoader.LoadAll(file => Exists(file) ? Read(file) : null);
 
             Formatter = new DisplayFormatter(DisplayMode.Simple, Texts);
 
@@ -79,13 +61,6 @@ namespace MissionGame
                 localizer.UpdateRequested += UpdateUiText;
                 localizer.RequestUpdate();
             }
-        }
-
-        List<T> LoadList<T>(string file, Action<List<T>, string> validate)
-        {
-            var list = CatalogLoader.LoadList<T>(Read(file), file);
-            validate(list, file);
-            return list;
         }
 
         public void UpdateUiText(TextLocalizer localizer, object[] args)

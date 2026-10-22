@@ -109,6 +109,8 @@ InitTestScene*.unity*
 # .NET test project build output
 core.tests/[Bb]in/
 core.tests/[Oo]bj/
+tools/simrun/[Bb]in/
+tools/simrun/[Oo]bj/
 
 # macOS
 .DS_Store
