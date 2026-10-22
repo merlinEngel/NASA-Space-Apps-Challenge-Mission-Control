@@ -132,7 +132,7 @@ namespace MissionCore.Tests
             Assert.That(orbit.ArgPeRate, Is.EqualTo(J2Drift.ApsidalRate(plain.A, 0, plain.Inc)));
             Assert.That(orbit.MeanAnomalyRate, Is.EqualTo(J2Drift.MeanAnomalyRate(plain.A, 0, plain.Inc)));
             Assert.That(orbit.A, Is.EqualTo(plain.A));
-            Assert.That(orbit.Raan, Is.EqualTo(plain.Raan));
+            Assert.That(orbit.RaanRad, Is.EqualTo(plain.RaanRad));
             Assert.That(plain.RaanRate, Is.EqualTo(0));   // original stays unchanged
         }
 
@@ -148,9 +148,9 @@ namespace MissionCore.Tests
         {
             double epoch = 865_080_000;
             var orbit = Sso550(epoch);
-            double deltaDeg = (orbit.RaanAt(epoch + 86400) - orbit.Raan) * 180 / Math.PI;
+            double deltaDeg = (orbit.RaanAt(epoch + 86400) - orbit.RaanRad) * 180 / Math.PI;
             Assert.That(deltaDeg, Is.EqualTo(0.9866).Within(0.001));
-            Assert.That(orbit.RaanAt(epoch), Is.EqualTo(orbit.Raan));
+            Assert.That(orbit.RaanAt(epoch), Is.EqualTo(orbit.RaanRad));
         }
 
         [Test]

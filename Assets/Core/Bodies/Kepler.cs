@@ -9,7 +9,7 @@ namespace MissionCore.Bodies
         public double A { get; }   // semi-major axis [m]
         public double Ecc { get; }   // eccentricity [-], 0 <= Ecc < 1
         public double Inc { get; }   // inclination i
-        public double Raan { get; }   // longitude of the ascending node Ω
+        public double RaanRad { get; }   // longitude of the ascending node Ω
         public double ArgPe { get; }  // argument of periapsis ω
         public double M0 { get; }   // mean anomaly at epoch
         public double Epoch { get; }  // time at which M0 applies [s]
@@ -34,7 +34,7 @@ namespace MissionCore.Bodies
             if (a <= 0) throw new ArgumentOutOfRangeException(nameof(a));
             if (ecc < 0 || ecc >= 1) throw new ArgumentOutOfRangeException(nameof(ecc), "only ellipses (0 <= e < 1)");
 
-            A = a; Ecc = ecc; Inc = inc; Raan = raan; ArgPe = argPe; M0 = m0; Epoch = epoch; Mu = mu;
+            A = a; Ecc = ecc; Inc = inc; RaanRad = raan; ArgPe = argPe; M0 = m0; Epoch = epoch; Mu = mu;
             MeanMotion = Math.Sqrt(mu / (a * a * a));
 
             ci = Math.Cos(Inc);
@@ -45,7 +45,7 @@ namespace MissionCore.Bodies
             MeanAnomalyRate = meanAnomalyRate;
         }
 
-        public double RaanAt(double t) => Raan + RaanRate * (t - Epoch);
+        public double RaanAt(double t) => RaanRad + RaanRate * (t - Epoch);
         public double ArgPeAt(double t) => ArgPe + ArgPeRate * (t - Epoch);
 
         // Mean anomaly at time t, wrapped to 0 … 2π

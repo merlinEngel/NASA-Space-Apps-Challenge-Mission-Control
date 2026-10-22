@@ -7,6 +7,8 @@ namespace MissionCore.Rules
     // Values from sim_rules.json: fixed rules of the simulation loop.
     public class SimRules
     {
+        public double SafeModeBusPowerFactor { get; set; }
+
         // Length of one simulation tick in seconds
         public double TickS { get; set; }
 
@@ -19,6 +21,8 @@ namespace MissionCore.Rules
         public Dictionary<string, double> SolarActivityDensityFactor { get; set; }
 
         public string Source { get; set; }
+
+        public double MaxBatteryEmptyS { get; set; }
 
         public double DensityFactor(SolarActivity activity) =>
             SolarActivityDensityFactor[activity.ToSnakeCase()];

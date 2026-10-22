@@ -62,7 +62,7 @@ namespace MissionCore.Earth
             double nr = NodalRate(orbit.A, orbit.Ecc, orbit.Inc);
             double ar = ApsidalRate(orbit.A, orbit.Ecc, orbit.Inc);
 
-            return new( orbit.A, orbit.Ecc, orbit.Inc, orbit.Raan, orbit.ArgPe, orbit.M0, orbit.Epoch, orbit.Mu,
+            return new( orbit.A, orbit.Ecc, orbit.Inc, orbit.RaanRad, orbit.ArgPe, orbit.M0, orbit.Epoch, orbit.Mu,
                         raanRate: nr, argPeRate: ar, meanAnomalyRate: mar);
         }
 

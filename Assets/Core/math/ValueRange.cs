@@ -15,6 +15,8 @@ namespace MissionCore.Numerics
         public double Max {get; set;}
 
         public bool Contains(double value) => Min <= value && value <= Max;
-        public double RandomInsideRange => new Random().NextDouble() * Max - Min + Min;
+
+        // Uniform random value in [Min, Max) from the given generator (reproducible with a seed).
+        public double Sample(Random random) => Min + random.NextDouble() * (Max - Min);
     }
 }

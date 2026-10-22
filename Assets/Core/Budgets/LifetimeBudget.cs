@@ -30,7 +30,7 @@ namespace MissionCore.Budgets
             double lifetimeS = OrbitDecay.MaxLifetimeS;
             if (platform != null && massKg > 0)
             {
-                double dragAreaM2 = platform.dragAreaM2 + design.SolarAreaM2 * SolarPanelDragFactor;
+                double dragAreaM2 = DragAreaM2(platform, design);
                 lifetimeS = OrbitDecay.LifetimeS(design.AltitudeM, massKg, dragAreaM2, solarActivityFactor);
             }
 
@@ -38,5 +38,7 @@ namespace MissionCore.Budgets
 
             return new(lifetimeS, missionDurationS);
         }
+
+        public static double DragAreaM2(PlatformSpec platform, MissionDesign design) => platform.dragAreaM2 + design.SolarAreaM2 * SolarPanelDragFactor;
     }
 }

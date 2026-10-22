@@ -268,7 +268,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
-    - _Color: {r: 0.75471693, g: 0.75471693, b: 0.75471693, a: 1}
+    - _Color: {r: 0.23584905, g: 0.23584905, b: 0.23584905, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -282,7 +282,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _UnlitColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+    - _UnlitColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8026361043814484117
