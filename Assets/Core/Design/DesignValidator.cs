@@ -76,7 +76,7 @@ namespace MissionCore.Design
             if (!IdIsSet(design.MissionId) || !catalog.Missions.TryGetValue(design.MissionId, out MissionTemplate mission))
                 return issues;
 
-            if (platform.lifetimeYears < mission.durationDays/Constants.DaysPerYear) issues.Add(new(DesignIssueCode.MissionLongerThanLifetime, FormattableString.Invariant($"{mission.durationDays:0} d (max {platform.lifetimeYears * Constants.DaysPerYear:0} d)")));
+            if (platform.lifetimeYears < mission.durationDays/CoreConstants.DaysPerYear) issues.Add(new(DesignIssueCode.MissionLongerThanLifetime, FormattableString.Invariant($"{mission.durationDays:0} d (max {platform.lifetimeYears * CoreConstants.DaysPerYear:0} d)")));
 
             return issues;
         }
@@ -205,16 +205,17 @@ namespace MissionCore.Design
             ctx.Mass  = massBudget.Evaluate(ctx);      // needs nothing
             var massResult  = ctx.Mass;
             var costResult  = costBudget.Evaluate(ctx);      // uses ctx.Mass.TotalMassKg for the launch price
-            var deltaVResult    = deltaVBudget.Evaluate(ctx);    // uses ctx.Mass for m0 and m1
             var powerResult = powerBudget.Evaluate(ctx);
             var dataResult  = dataBudget.Evaluate(ctx);
             var lifetimeResult = lifetimeBudget.Evaluate(ctx);
+            ctx.Lifetime = lifetimeResult;
+            var deltaVResult    = deltaVBudget.Evaluate(ctx);    // uses ctx.Mass for m0 and m1
 
             Dictionary<BudgetKind, BudgetStatus> statuses = new()
             {
                 { BudgetKind.Mass, catalog.Balance.StatusFor(BudgetKind.Mass, massResult.ReserveFraction) },
                 { BudgetKind.Cost, catalog.Balance.StatusFor(BudgetKind.Cost, costResult.ReserveFraction) },
-                { BudgetKind.DeltaV, deltaVResult.RequiredDeltaVMPerS == 0 ? BudgetStatus.Green : catalog.Balance.StatusFor(BudgetKind.DeltaV, deltaVResult.ReserveFraction) },
+                { BudgetKind.DeltaV, deltaVResult.RequiredDeltaVMPerS == 0 ? BudgetStatus.Green : catalog.Balance.StatusFor(BudgetKind.DeltaV, deltaVResult.ReserveFraction, false) },
                 { BudgetKind.Power, catalog.Balance.StatusFor(BudgetKind.Power, powerResult.ReserveFraction) },
                 { BudgetKind.Data, catalog.Balance.StatusFor(BudgetKind.Data, dataResult.ReserveFraction) },
                 { BudgetKind.Lifetime, catalog.Balance.StatusFor(BudgetKind.Lifetime, lifetimeResult.ReserveFraction )}

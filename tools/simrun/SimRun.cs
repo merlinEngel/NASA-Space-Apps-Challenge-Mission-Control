@@ -75,7 +75,7 @@ public static class SimRun
 
         var parts = new List<string>();
         foreach (ScheduledEvent e in sim.EventSchedule)
-            parts.Add(string.Format(CultureInfo.InvariantCulture, "{0} on day {1:0.00}", e.Type, e.TimeS / Constants.SecondsPerDay));
+            parts.Add(string.Format(CultureInfo.InvariantCulture, "{0} on day {1:0.00}", e.Type, e.TimeS / CoreConstants.SecondsPerDay));
 
         string eventsText = parts.Count > 0 ? string.Join(", ", parts) : "none";
 

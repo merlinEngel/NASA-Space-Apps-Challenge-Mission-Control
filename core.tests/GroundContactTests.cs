@@ -16,14 +16,14 @@ namespace MissionCore.Tests
         [Test]
         public void ElevationDeg_SatelliteStraightAbove_Is90()
         {
-            var satellite = new Vec3d(Constants.RadiusEarth + 500000, 0, 0);
+            var satellite = new Vec3d(CoreConstants.RadiusEarth + 500000, 0, 0);
             Assert.That(GroundContact.ElevationDeg(satellite, 0, 0, 0), Is.EqualTo(90).Within(1e-9));
         }
 
         [Test]
         public void ElevationDeg_SatelliteOnOtherSide_IsNegative()
         {
-            var satellite = new Vec3d(-(Constants.RadiusEarth + 500000), 0, 0);
+            var satellite = new Vec3d(-(CoreConstants.RadiusEarth + 500000), 0, 0);
             Assert.That(GroundContact.ElevationDeg(satellite, 0, 0, 0), Is.LessThan(0));
         }
 
@@ -44,7 +44,7 @@ namespace MissionCore.Tests
             var stats = GroundContact.Scan(500000, 0, new List<GroundStationSpec> { Station(80) });
             Assert.That(stats.ContactsPerDay, Is.EqualTo(0));
             Assert.That(stats.ContactTimeSPerDay, Is.EqualTo(0));
-            Assert.That(stats.LongestGapS, Is.EqualTo(GroundContact.DefaultDays * Constants.SecondsPerDay).Within(GroundContact.DefaultStepS));
+            Assert.That(stats.LongestGapS, Is.EqualTo(GroundContact.DefaultDays * CoreConstants.SecondsPerDay).Within(GroundContact.DefaultStepS));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace MissionCore.Tests
 
         // ---------- P5 step 7: real Earth rotation (GMST) and J2-drifting orbit ----------
 
-        static readonly double TechDemoEpoch = (new System.DateTime(2027, 6, 1, 0, 0, 0, System.DateTimeKind.Utc) - Constants.J2000DateTime).TotalSeconds;
+        static readonly double TechDemoEpoch = (new System.DateTime(2027, 6, 1, 0, 0, 0, System.DateTimeKind.Utc) - CoreConstants.J2000DateTime).TotalSeconds;
         static GroundStationSpec Svalbard => Station(78.23, 15.40, 5);
         static GroundStationSpec Weilheim => Station(47.88, 11.08, 5);
 
@@ -90,7 +90,7 @@ namespace MissionCore.Tests
         {
             // Station at 30° E on the equator, Earth turned by 100°: it faces inertial longitude 130°
             double angle = 130 * System.Math.PI / 180;
-            var satellite = new Vec3d(System.Math.Cos(angle), System.Math.Sin(angle), 0) * (Constants.RadiusEarth + 500000);
+            var satellite = new Vec3d(System.Math.Cos(angle), System.Math.Sin(angle), 0) * (CoreConstants.RadiusEarth + 500000);
             Assert.That(GroundContact.ElevationDeg(satellite, 0, 30, 100 * System.Math.PI / 180), Is.EqualTo(90).Within(1e-4));
             // 1e-4 instead of 1e-6: asin is very steep at 90°, so rounding in the last digit already moves the result by 1e-6°
         }

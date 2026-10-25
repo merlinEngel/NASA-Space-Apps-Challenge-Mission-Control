@@ -28,15 +28,16 @@ namespace MissionCore.Budgets
             double solarActivityFactor = mission == null ? 1 : catalog.Sim?.DensityFactor(mission.solarActivity) ?? 1;
 
             double lifetimeS = OrbitDecay.MaxLifetimeS;
+            double dragAreaM2 = 0;
             if (platform != null && massKg > 0)
             {
-                double dragAreaM2 = DragAreaM2(platform, design);
+                dragAreaM2 = DragAreaM2(platform, design);
                 lifetimeS = OrbitDecay.LifetimeS(design.AltitudeM, massKg, dragAreaM2, solarActivityFactor);
             }
 
-            double missionDurationS = mission == null ? 0 : mission.durationDays * Constants.SecondsPerDay;
+            double missionDurationS = mission == null ? 0 : mission.durationDays * CoreConstants.SecondsPerDay;
 
-            return new(lifetimeS, missionDurationS);
+            return new(lifetimeS, missionDurationS, dragAreaM2);
         }
 
         public static double DragAreaM2(PlatformSpec platform, MissionDesign design) => platform.dragAreaM2 + design.SolarAreaM2 * SolarPanelDragFactor;

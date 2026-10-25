@@ -5,10 +5,11 @@ namespace MissionCore.Budgets
 {
     public class LifetimeBudgetResult : BudgetResult
     {
-        public LifetimeBudgetResult(double lifetimeS, double missionDurationS)
+        public LifetimeBudgetResult(double lifetimeS, double missionDurationS, double dragAreaM2)
         {
             LifetimeS = lifetimeS;
             MissionDurationS = missionDurationS;
+            DragAreaM2 = dragAreaM2;
         }
 
         public double LifetimeS { get; }          // orbital lifetime from OrbitDecay
@@ -17,5 +18,6 @@ namespace MissionCore.Budgets
         public override double ReserveFraction => MissionDurationS > 0 ? (LifetimeS - MissionDurationS) / MissionDurationS : 1;
         public override Metric TotalMetric => Metric.LifetimeS;
         public override double Total => LifetimeS;
+        public double DragAreaM2 { get; }
     }
 }

@@ -7,6 +7,13 @@ using MissionCore.Numerics;
 namespace MissionCore.Text
 {
     public enum DisplayMode { Simple, Realistic }
+    public static class DisplayModeExtensions
+    {
+        public static string TextKey(this DisplayMode mode)
+        {
+            return mode == DisplayMode.Simple ? "ui.mode.simple" : "ui.mode.realistic";
+        }
+    }
 
     public class DisplayFormatter
     {

@@ -77,9 +77,9 @@ namespace MissionCore.Earth
         {
             if (dragAreaM2 <= 0 || massKg <= 0) return Vec3d.Zero;
 
-            double h = positionM.Length - Constants.RadiusEarth;
+            double h = positionM.Length - CoreConstants.RadiusEarth;
 
-            Vec3d airVelocity = new(-Constants.OmegaEarth * positionM.y, Constants.OmegaEarth * positionM.x, 0);
+            Vec3d airVelocity = new(-CoreConstants.OmegaEarth * positionM.y, CoreConstants.OmegaEarth * positionM.x, 0);
 
             Vec3d relVelocity = velocityMps - airVelocity;
 

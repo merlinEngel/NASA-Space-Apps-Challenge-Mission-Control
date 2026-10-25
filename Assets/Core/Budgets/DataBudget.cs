@@ -27,10 +27,10 @@ namespace MissionCore.Budgets
             if (!string.IsNullOrEmpty(ctx.Design.MissionId)) ctx.Catalog.Missions.TryGetValue(ctx.Design.MissionId, out mission);
             ContactStats contacts = mission == null
                 ? GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations)
-                : GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations, mission.EpochSeconds, mission.raanDeg * Constants.DegToRad);
+                : GroundContact.Scan(design.AltitudeM, design.InclinationDeg, stations, mission.EpochSeconds, mission.raanDeg * CoreConstants.DegToRad);
 
             // Everything measured during the longest gap without contact has to wait on board.
-            double storageNeededBits = generatedBitsPerDay / Constants.SecondsPerDay * contacts.LongestGapS;
+            double storageNeededBits = generatedBitsPerDay / CoreConstants.SecondsPerDay * contacts.LongestGapS;
 
             double storageCapacityBits = 0;
             if (!string.IsNullOrEmpty(design.PlatformId) && catalog.Platforms.TryGetValue(design.PlatformId, out PlatformSpec platformSpec))
@@ -53,7 +53,7 @@ namespace MissionCore.Budgets
             foreach (string instrumentId in design.InstrumentIds)
             {
                 if (!string.IsNullOrEmpty(instrumentId) && catalog.Instruments.TryGetValue(instrumentId, out InstrumentSpec instrumentSpec))
-                    bitsPerDay += instrumentSpec.dataRateBpS * instrumentSpec.dutyCycle * Constants.SecondsPerDay;
+                    bitsPerDay += instrumentSpec.dataRateBpS * instrumentSpec.dutyCycle * CoreConstants.SecondsPerDay;
             }
             return bitsPerDay;
         }

@@ -9,11 +9,13 @@ namespace MissionGame.Editor
     public class MyButtonEditor : ButtonEditor
     {
         SerializedProperty text;
+        SerializedProperty border;
 
         protected override void OnEnable()
         {
             base.OnEnable();
             text = serializedObject.FindProperty("text");
+            border = serializedObject.FindProperty("border");
         }
 
         public override void OnInspectorGUI()
@@ -21,6 +23,7 @@ namespace MissionGame.Editor
             base.OnInspectorGUI();          // draws all Button fields
             serializedObject.Update();
             EditorGUILayout.PropertyField(text);
+            EditorGUILayout.PropertyField(border);
             serializedObject.ApplyModifiedProperties();
         }
     }

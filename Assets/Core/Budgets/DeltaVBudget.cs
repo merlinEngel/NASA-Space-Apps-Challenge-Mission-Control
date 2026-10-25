@@ -1,5 +1,8 @@
 using MissionCore.Catalogs;
+using MissionCore.Earth;
 using MissionCore.Mission;
+using MissionCore.Numerics;
+using MissionCore.Simulation;
 namespace MissionCore.Budgets
 {
     public class DeltaVBudget : Budget<DeltaVBudgetResult>
@@ -16,13 +19,25 @@ namespace MissionCore.Budgets
 
             double wetMassKg = mass.TotalMassKg;
             double propellantMassKg = mass.PropellantMassKg;
-            double requiredDeltaVMPerS = 0;
+
+            double missionDurationY = ctx.Lifetime.MissionDurationS / (CoreConstants.DaysPerYear * CoreConstants.SecondsPerDay);
+            double avoidanceMPerS = catalog.Balance.Review.AvoidanceDeltaVPerYearMPerS * missionDurationY;
+            double dragMakeupMPerS = 0;
+            if (ctx.Lifetime.LifetimeS < ctx.Lifetime.MissionDurationS)
+                dragMakeupMPerS = OrbitDecay.DragCoefficient * ctx.Lifetime.DragAreaM2 / ctx.Mass.TotalMassKg;
+            
+            double restYears = (ctx.Lifetime.LifetimeS - ctx.Lifetime.MissionDurationS) / (CoreConstants.DaysPerYear * CoreConstants.SecondsPerDay);
+            double disposalMPerS = 0;
+            if (restYears > catalog.Scoring.DisposalMaxYears)
+                disposalMPerS = Maneuvers.PeriapsisLoweringDeltaV(CoreConstants.RadiusEarth + design.AltitudeM, CoreConstants.RadiusEarth + catalog.Balance.Review.DisposalPerigeeM, CoreConstants.MuEarth);
 
             return new(
                 ispS,
                 wetMassKg,
                 propellantMassKg,
-                requiredDeltaVMPerS
+                dragMakeupMPerS,
+                avoidanceMPerS,
+                disposalMPerS
             );
         }
     }

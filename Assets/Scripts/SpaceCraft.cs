@@ -132,7 +132,7 @@ namespace MissionGame
         {
             string when = executeAt < 0
                 ? "Now"
-                : Constants.J2000DateTime.AddSeconds(executeAt).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+                : CoreConstants.J2000DateTime.AddSeconds(executeAt).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
             return $"{when}  {DeltaVText()}";
         }
 

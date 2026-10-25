@@ -49,13 +49,13 @@ namespace MissionGame.UI.Design
             }
 
             double epochS = mission.EpochSeconds;
-            double raanRad = mission.raanDeg * Constants.DegToRad;
+            double raanRad = mission.raanDeg * CoreConstants.DegToRad;
             KeplerOrbit orbit = KeplerOrbit.Circular(
                 design.AltitudeM,
-                design.InclinationDeg * Constants.DegToRad,
+                design.InclinationDeg * CoreConstants.DegToRad,
                 raanRad,
-                Constants.RadiusEarth,
-                Constants.MuEarth,
+                CoreConstants.RadiusEarth,
+                CoreConstants.MuEarth,
                 epochS);
 
             Vec3d sun = Sun.Direction(epochS);
@@ -134,7 +134,7 @@ namespace MissionGame.UI.Design
             betaAngleLabel.gameObject.SetActive(realistic);
             if (!realistic) return;
 
-            double betaDeg = Shadow.BetaAngle(design.InclinationDeg * Constants.DegToRad, raanRad, sun) * Constants.RadToDeg;
+            double betaDeg = Shadow.BetaAngle(design.InclinationDeg * CoreConstants.DegToRad, raanRad, sun) * CoreConstants.RadToDeg;
             betaAngleLabel.text = CatalogManager.Instance.Texts.Get("orbit.beta_angle", formatter.Value(Metric.InclinationDeg, betaDeg));
         }
 

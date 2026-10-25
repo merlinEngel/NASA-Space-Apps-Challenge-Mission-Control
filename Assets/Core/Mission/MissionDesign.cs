@@ -30,5 +30,7 @@ namespace MissionCore.Mission
         [JsonProperty("inclination_deg")] public double InclinationDeg { get; set; }
 
         public LaunchOrbit? LaunchOrbit => OrbitClassifier.Classify(AltitudeM, InclinationDeg);
+
+        public MissionDesign DeepCopy() => JsonConvert.DeserializeObject<MissionDesign>(JsonConvert.SerializeObject(this));
     }
 }

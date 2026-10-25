@@ -15,8 +15,8 @@ namespace MissionCore.Tests
     public class ShadowTests
     {
         const double Deg = Math.PI / 180;
-        const double R = Constants.RadiusEarth;
-        static readonly double TechDemoEpoch = (new DateTime(2027, 6, 1, 0, 0, 0, DateTimeKind.Utc) - Constants.J2000DateTime).TotalSeconds;
+        const double R = CoreConstants.RadiusEarth;
+        static readonly double TechDemoEpoch = (new DateTime(2027, 6, 1, 0, 0, 0, DateTimeKind.Utc) - CoreConstants.J2000DateTime).TotalSeconds;
 
         // ---------- IsInShadow ----------
 
@@ -55,7 +55,7 @@ namespace MissionCore.Tests
         {
             // The orbit normal used for beta must point where r x v points
             double inc = 51.6 * Deg, raan = 123 * Deg;
-            var orbit = KeplerOrbit.Circular(400e3, inc, raan, R, Constants.MuEarth, 0);
+            var orbit = KeplerOrbit.Circular(400e3, inc, raan, R, CoreConstants.MuEarth, 0);
             var (r, v) = orbit.StateAt(1234);
             Vec3d h = r.Cross(v).Normalized;
             foreach (Vec3d sun in new[] { Vec3d.UnitX, Vec3d.UnitY, Vec3d.UnitZ, new Vec3d(1, -2, 0.5).Normalized })

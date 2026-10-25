@@ -60,7 +60,7 @@ namespace MissionGame.UI
                     text.text = burn.ToString(PlanetManager.Instance.Clock.RenderTime);
                 }
             }
-            simDateTimeText.text = Constants.J2000DateTime.AddSeconds(PlanetManager.Instance.Clock.SimTime).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
+            simDateTimeText.text = CoreConstants.J2000DateTime.AddSeconds(PlanetManager.Instance.Clock.SimTime).ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture);
         }
 
         void Start()

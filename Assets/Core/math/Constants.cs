@@ -2,7 +2,7 @@ using System;
 
 namespace MissionCore.Numerics
 {
-    public static class Constants
+    public static class CoreConstants
     {
         public static readonly DateTime J2000DateTime = new(2000, 1, 1, 12, 0, 0, DateTimeKind.Utc);
         public const double G0Earth = 9.80665;

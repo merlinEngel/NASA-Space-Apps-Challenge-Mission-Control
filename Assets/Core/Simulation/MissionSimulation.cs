@@ -42,7 +42,7 @@ namespace MissionCore.Simulation
         {
             SimParameters parameters = SimParameters.From(catalog, design);
 
-            KeplerOrbit orbit = J2Drift.ApplyTo(KeplerOrbit.Circular(design.AltitudeM, design.InclinationDeg * Constants.DegToRad, parameters.RaanRad, Constants.RadiusEarth, Constants.MuEarth, parameters.EpochS));
+            KeplerOrbit orbit = J2Drift.ApplyTo(KeplerOrbit.Circular(design.AltitudeM, design.InclinationDeg * CoreConstants.DegToRad, parameters.RaanRad, CoreConstants.RadiusEarth, CoreConstants.MuEarth, parameters.EpochS));
 
             SimClock clock = new(parameters.TickS, parameters.EpochS);
 
@@ -88,7 +88,7 @@ namespace MissionCore.Simulation
             foreach (FixedEvent fixedEvent in parameters.FixedEvents)
             {
                 double day = fixedEvent.day.Sample(random);
-                double timeS = Math.Floor(day * Constants.SecondsPerDay / parameters.TickS) * parameters.TickS;
+                double timeS = Math.Floor(day * CoreConstants.SecondsPerDay / parameters.TickS) * parameters.TickS;
                 schedule.Add(new ScheduledEvent(fixedEvent.type, timeS));
             }
             schedule.Sort((a, b) => a.TimeS.CompareTo(b.TimeS));
@@ -218,7 +218,7 @@ namespace MissionCore.Simulation
             consumptionW += safeMode ? Parameters.SafeModeBusPowerW : Parameters.BusPowerW;
             consumptionW += State.InContact ? Parameters.CommsPowerW : 0;
 
-            double productionW = State.InShadow ? 0 : Parameters.SolarPowerW * Math.Pow(1 - Parameters.SolarDegradationPerYear, startS / (Constants.DaysPerYear * Constants.SecondsPerDay));
+            double productionW = State.InShadow ? 0 : Parameters.SolarPowerW * Math.Pow(1 - Parameters.SolarDegradationPerYear, startS / (CoreConstants.DaysPerYear * CoreConstants.SecondsPerDay));
 
             double total = (productionW - consumptionW) * Parameters.TickS / 3600; //Total [W] * 60 -> Energy for tick in Ws /3600 -> Energy for tick in Wh
             State.BatteryWh = Math.Min(total + State.BatteryWh, State.BatteryCapacityWh);
@@ -257,7 +257,7 @@ namespace MissionCore.Simulation
         private void UpdateOrbit(double t)
         {
             Vec3d direction = orbit.PositionAt(t).Normalized;
-            State.PositionM = direction * (Constants.RadiusEarth + State.AltitudeM);
+            State.PositionM = direction * (CoreConstants.RadiusEarth + State.AltitudeM);
         }
     }
 }

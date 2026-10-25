@@ -100,7 +100,7 @@ namespace MissionCore.Tests
         public void StorageNeeded_IsGenerationDuringLongestGap()
         {
             var r = BudgetRunner.Data(TestCatalog(), Design());
-            Assert.That(r.StorageNeededBits, Is.EqualTo(3499200000 / Constants.SecondsPerDay * r.LongestGapS).Within(Tol));
+            Assert.That(r.StorageNeededBits, Is.EqualTo(3499200000 / CoreConstants.SecondsPerDay * r.LongestGapS).Within(Tol));
             Assert.That(r.StorageCapacityBits, Is.EqualTo(64e9));
             Assert.That(r.StorageOk, Is.True);
         }

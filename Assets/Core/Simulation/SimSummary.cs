@@ -19,7 +19,7 @@ namespace MissionCore.Simulation
         {
             return new SimSummary
             {
-                DurationDays = sim.State.MissionTimeS / Constants.SecondsPerDay,
+                DurationDays = sim.State.MissionTimeS / CoreConstants.SecondsPerDay,
                 EndReason = sim.State.EndReason,
                 DeliveredBytes = sim.State.DeliveredBits/8,
                 LostBytes = sim.State.LostBits/8,

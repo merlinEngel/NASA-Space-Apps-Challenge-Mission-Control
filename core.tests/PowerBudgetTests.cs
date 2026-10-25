@@ -78,7 +78,7 @@ namespace MissionCore.Tests
         public void SunGeneration_IncludesDegradationOverMission()
         {
             var r = BudgetRunner.Power(TestCatalog(), Design());
-            Assert.That(r.SunGenerationW, Is.EqualTo(0.06 * 1361 * 0.30 * 0.85 * Math.Pow(0.99, 90 / Constants.DaysPerYear)).Within(Tol));
+            Assert.That(r.SunGenerationW, Is.EqualTo(0.06 * 1361 * 0.30 * 0.85 * Math.Pow(0.99, 90 / CoreConstants.DaysPerYear)).Within(Tol));
         }
 
         // average = sun x (1 - eclipse); reserve = average - required

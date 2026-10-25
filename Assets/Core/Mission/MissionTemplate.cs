@@ -23,7 +23,7 @@ namespace MissionCore.Mission
         public List<FixedEvent> fixedEvents;
         public string source;
 
-        public double DurationYears => durationDays / Constants.DaysPerYear;
+        public double DurationYears => durationDays / CoreConstants.DaysPerYear;
         public double EpochSeconds => SimTimeConverter.ToSeconds(epochUtc);
 
         public Dictionary<string, string> TextValues(DisplayFormatter f) => new()

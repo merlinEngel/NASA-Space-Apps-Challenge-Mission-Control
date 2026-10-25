@@ -1,5 +1,5 @@
 using System;
-using static MissionCore.Numerics.Constants;
+using static MissionCore.Numerics.CoreConstants;
 
 namespace MissionCore.Earth
 {

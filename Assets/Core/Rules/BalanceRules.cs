@@ -15,15 +15,17 @@ namespace MissionCore.Rules
         public double MassMarginEarlyPhase { get; set; }    // 0.25 = +25 %
         public double PowerMarginEarlyPhase { get; set; }
         [JsonProperty("status_thresholds")] public Dictionary<string, StatusThreshold> StatusThresholds { get; set; }
+        [JsonProperty("review")] public ReviewRules Review { get; set; }
         public string Source { get; set; }
 
-        public BudgetStatus StatusFor(BudgetKind kind, double reserveFraction)
+        public BudgetStatus StatusFor(BudgetKind kind, double reserveFraction, bool allowRed = true)
         {
             StatusThreshold threshold = kind.Threshold(StatusThresholds);
 
             if (reserveFraction >= threshold.GreenMinReserve) return BudgetStatus.Green;
             else if (reserveFraction >= threshold.YellowMinReserve) return BudgetStatus.Yellow;
-            else return BudgetStatus.Red;
+            else if (allowRed) return BudgetStatus.Red;
+            else return BudgetStatus.Yellow;
         }
     }
 

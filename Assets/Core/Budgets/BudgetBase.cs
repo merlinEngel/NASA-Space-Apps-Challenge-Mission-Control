@@ -25,7 +25,7 @@ namespace MissionCore.Budgets
 
         public Catalog Catalog { get; }
         public MissionDesign Design { get; }
-        public MassBudgetResult Mass { get; set; }   // filled after the mass budget ran
-                                                     // ... later results if another budget needs them
+        public MassBudgetResult Mass { get; set; }
+        public LifetimeBudgetResult Lifetime { get; set; }
     }
 }

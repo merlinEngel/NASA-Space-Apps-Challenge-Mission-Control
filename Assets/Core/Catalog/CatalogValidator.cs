@@ -236,6 +236,13 @@ namespace MissionCore.Catalogs
             if (rules.MassMarginEarlyPhase < 0) Fail(fileName, "has mass_margin_early_phase < 0");
             if (rules.PowerMarginEarlyPhase < 0) Fail(fileName, "has power_margin_early_phase < 0");
 
+            if (rules.Review != null)
+            {
+                if (rules.Review.MinPowerReserve <= 0 || rules.Review.MinPowerReserve >= 1) Fail(fileName, "has review.min_power_reserve outside (0, 1)");
+                if (rules.Review.AvoidanceDeltaVPerYearMPerS <= 0) Fail(fileName, "has review.avoidance_delta_v_per_year_m_s <= 0");
+                if (rules.Review.DisposalPerigeeM <= 0) Fail(fileName, "has review.disposal_perigee_m <= 0");
+            }
+
             // Every budget needs a threshold, so StatusFor() never gets null.
             if (rules.StatusThresholds == null) Fail(fileName, "has no status_thresholds");
             var budgetKeys = new HashSet<string>();

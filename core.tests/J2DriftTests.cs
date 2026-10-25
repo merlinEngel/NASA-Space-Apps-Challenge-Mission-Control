@@ -102,7 +102,7 @@ namespace MissionCore.Tests
         {
             double inc = J2Drift.SunSynchronousInclinationDeg(600e3).Value * Deg;
             double rate = J2Drift.NodalRate(A(600e3), 0, inc);
-            Assert.That(rate, Is.EqualTo(2 * Math.PI / (Constants.TropicalYearDays * Constants.SecondsPerDay)).Within(1e-15));
+            Assert.That(rate, Is.EqualTo(2 * Math.PI / (CoreConstants.TropicalYearDays * CoreConstants.SecondsPerDay)).Within(1e-15));
         }
 
         [Test]

@@ -11,6 +11,11 @@
         "cubesat_12u",
         "smallsat_150",
         "Masse",
-        "Von 20kg"
+        "Von 20kg",
+        "review.no_groundstation.title",
+        "review.no_groundstation.green",
+        "review.code.yellow",
+        "review.no_disposal_propellant.no_propellant",
+        "part.spacex_transporter.title"
     ]
 }

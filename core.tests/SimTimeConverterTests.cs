@@ -17,7 +17,7 @@ namespace MissionCore.Tests
         [Test]
         public void ToSeconds_J2000IsZero()
         {
-            Assert.That(SimTimeConverter.ToSeconds(Constants.J2000DateTime), Is.EqualTo(0));
+            Assert.That(SimTimeConverter.ToSeconds(CoreConstants.J2000DateTime), Is.EqualTo(0));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace MissionCore.Tests
         public void ToSeconds_UsesTotalSeconds_NotSecondsComponent()
         {
             // One day and 30 s after J2000: TimeSpan.Seconds would be 30, TotalSeconds is 86430
-            var t = Constants.J2000DateTime.AddDays(1).AddSeconds(30);
+            var t = CoreConstants.J2000DateTime.AddDays(1).AddSeconds(30);
             Assert.That(SimTimeConverter.ToSeconds(t), Is.EqualTo(86_430).Within(1e-9));
         }
 
@@ -60,7 +60,7 @@ namespace MissionCore.Tests
         [Test]
         public void JulianCenturies_OneCenturyAfterJ2000()
         {
-            Assert.That(SimTimeConverter.JulianCenturies(36525 * Constants.SecondsPerDay), Is.EqualTo(1.0).Within(1e-12));
+            Assert.That(SimTimeConverter.JulianCenturies(36525 * CoreConstants.SecondsPerDay), Is.EqualTo(1.0).Within(1e-12));
             Assert.That(SimTimeConverter.JulianCenturies(0), Is.EqualTo(0));
         }
 

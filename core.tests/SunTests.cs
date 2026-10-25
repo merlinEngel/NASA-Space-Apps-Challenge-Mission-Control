@@ -11,7 +11,7 @@ namespace MissionCore.Tests
     {
         const double Deg = Math.PI / 180;
         static double Secs(int y, int mo, int d, int h = 0) =>
-            (new DateTime(y, mo, d, h, 0, 0, DateTimeKind.Utc) - Constants.J2000DateTime).TotalSeconds;
+            (new DateTime(y, mo, d, h, 0, 0, DateTimeKind.Utc) - CoreConstants.J2000DateTime).TotalSeconds;
 
         static double RightAscensionDeg(Vec3d v) => (Math.Atan2(v.y, v.x) / Deg + 360) % 360;
         static double DeclinationDeg(Vec3d v) => Math.Asin(v.z) / Deg;

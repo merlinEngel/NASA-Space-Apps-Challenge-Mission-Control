@@ -11,7 +11,7 @@ namespace MissionCore.Tests
         const double Deg = Math.PI / 180;
         const double SiderealDayS = 86164.0905;
         static double Secs(int y, int mo, int d, int h = 0) =>
-            (new DateTime(y, mo, d, h, 0, 0, DateTimeKind.Utc) - Constants.J2000DateTime).TotalSeconds;
+            (new DateTime(y, mo, d, h, 0, 0, DateTimeKind.Utc) - CoreConstants.J2000DateTime).TotalSeconds;
 
         [Test]
         public void Gmst_AtJ2000() =>

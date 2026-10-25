@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MissionGame;
-using MissionGame.UI;
 using TMPro;
 using UnityEngine;
 using MissionGame.Design;
@@ -23,13 +21,15 @@ namespace MissionGame.UI.Design
         {
             MissionDesignManager.Instance.DesignChanged += OnDesignChanged;
             difficultySelector.OnOptionSelected += OnDifficultySelected;
-            OnDesignChanged(null, null, null);
+            toLaunchButton.onClick.AddListener(() => MissionSession.Instance.BeginReview(MissionDesignManager.Instance.Design));
+            OnDesignChanged(MissionDesignManager.Instance.Report, null, null);
         }
 
         void OnDestroy()
         {
             if (MissionDesignManager.Instance != null) MissionDesignManager.Instance.DesignChanged -= OnDesignChanged;
             difficultySelector.OnOptionSelected -= OnDifficultySelected;
+            toLaunchButton.onClick.RemoveAllListeners();
         }
 
         private void OnDifficultySelected(int index)

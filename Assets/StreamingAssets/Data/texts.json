@@ -124,6 +124,55 @@
   "why.data.storage":                    { "de": "Zwischen zwei Kontakten fallen {0} an, der Speicher fasst nur {1}.", "en": "Between two contacts {0} pile up, but the storage only holds {1}." },
   "why.delta_v.red":                     { "de": "Der Antrieb schafft {0}, gebraucht werden {1}.", "en": "The propulsion provides {0}, but {1} is needed." },
 
+  "review.title":                                   { "de": "Startprüfung (Flight Readiness Review)", "en": "Flight Readiness Review" },
+  "review.confirm":                                 { "de": "Risiko bestätigen", "en": "Accept risk" },
+  "review.launch":                                  { "de": "Starten", "en": "Launch" },
+  "review.back":                                    { "de": "Zurück zum Entwurf", "en": "Back to design" },
+  
+  "review.launch_mass_too_high.title":              { "de": "Startmasse", "en": "Launch mass" },
+  "review.launch_mass_too_high.green":              { "de": "{0} von höchstens {1}", "en": "{0} of at most {1}" },
+  "review.launch_mass_too_high.red":                { "de": "{0} ist zu schwer, erlaubt sind {1}", "en": "{0} is too heavy, the limit is {1}" },
+  
+  "review.budget_exceeded.title":                   { "de": "Budget", "en": "Budget" },
+  "review.budget_exceeded.green":                   { "de": "{0} von {1}", "en": "{0} of {1}" },
+  "review.budget_exceeded.red":                     { "de": "{0} kostet mehr als das Budget von {1}", "en": "{0} is more than the budget of {1}" },
+  
+  "review.required_instrument_missing.title":       { "de": "Pflichtinstrumente", "en": "Required instruments" },
+  "review.required_instrument_missing.green":       { "de": "{0} von {1} an Bord", "en": "{0} of {1} on board" },
+  "review.required_instrument_missing.red":         { "de": "Nur {0} von {1} an Bord", "en": "Only {0} of {1} on board" },
+  
+  "review.no_ground_station.title":                 { "de": "Bodenstationen", "en": "Ground stations" },
+  "review.no_ground_station.green":                 { "de": "{0} Stationen, {2}-Band passt", "en": "{0} stations, {2} band matches" },
+  "review.no_ground_station.red":                   { "de": "Keine Station empfängt das {2}-Band", "en": "No station receives the {2} band" },
+  
+  "review.low_power_reserve.title":                 { "de": "Energiereserve", "en": "Power reserve" },
+  "review.low_power_reserve.green":                 { "de": "{0} Reserve (mindestens {1})", "en": "{0} reserve (at least {1})" },
+  "review.low_power_reserve.yellow":                { "de": "Nur {0} Reserve, empfohlen sind {1}. Im Schatten gehen Daten verloren.", "en": "Only {0} reserve, {1} recommended. Data will be lost in eclipse." },
+  "review.low_power_reserve.battery":               { "de": "Die Batterie hält den Erdschatten nicht durch. Im Schatten gehen Daten verloren.", "en": "The battery does not last through eclipse. Data will be lost in eclipse." },
+  
+  "review.storage_fills_up.title":                  { "de": "Datenspeicher", "en": "Data storage" },
+  "review.storage_fills_up.green":                  { "de": "Speicher reicht für die ganze Mission", "en": "Storage lasts for the whole mission" },
+  "review.storage_fills_up.yellow":                 { "de": "Speicher ist nach {0} voll, die Mission dauert {1}", "en": "Storage is full after {0}, the mission lasts {1}" },
+  
+  "review.no_avoidance_propellant.title":           { "de": "Treibstoff zum Ausweichen", "en": "Collision avoidance propellant" },
+  "review.no_avoidance_propellant.green":           { "de": "{0} übrig, {1} reichen", "en": "{0} left, {1} is enough" },
+  "review.no_avoidance_propellant.yellow":          { "de": "Nur {0} übrig, zum Ausweichen braucht man {1}", "en": "Only {0} left, avoiding debris needs {1}" },
+  "review.no_avoidance_propellant.no_propulsion":   { "de": "Kein Antrieb: Der Satellit kann Weltraumschrott nicht ausweichen", "en": "No propulsion: the satellite cannot dodge space debris" },
+  
+  "review.no_disposal_propellant.title":            { "de": "Entsorgung am Missionsende", "en": "End-of-mission disposal" },
+  "review.no_disposal_propellant.green":            { "de": "{0} übrig, zum Absenken braucht man {1}", "en": "{0} left, lowering the orbit needs {1}" },
+  "review.no_disposal_propellant.not_needed":       { "de": "Die Bahn zerfällt {2} Jahre nach Missionsende von selbst", "en": "The orbit decays on its own {2} years after the mission" },
+  "review.no_disposal_propellant.yellow":           { "de": "Die Bahn bleibt noch {2} Jahre oben. Zum Absenken fehlen Treibstoff: {0} übrig, {1} nötig", "en": "The orbit stays up for {2} more years. Not enough propellant to lower it: {0} left, {1} needed" },
+  
+  "review.lifetime_shorter_than_mission.title":     { "de": "Bahnlebensdauer", "en": "Orbital lifetime" },
+  "review.lifetime_shorter_than_mission.green":     { "de": "Die Bahn hält {0}, die Mission dauert {1}", "en": "The orbit lasts {0}, the mission lasts {1}" },
+  "review.lifetime_shorter_than_mission.yellow":    { "de": "Der Satellit verglüht nach {0}, vor dem Missionsende ({1})", "en": "The satellite re-enters after {0}, before the mission ends ({1})" },
+  
+  "launch.countdown":                               { "de": "Start in {0}", "en": "Launch in {0}" },
+  "launch.success":                                 { "de": "Start geglückt! Der Satellit ist im Orbit.", "en": "Launch successful! The satellite is in orbit." },
+  "launch.failure":                                 { "de": "Fehlstart. Die {0} hat versagt.", "en": "Launch failure. The {0} failed." },
+  "launch.result_screen":                           { "de": "Mission verloren", "en": "Mission lost" },
+
   "fix.mass.bigger_platform":            { "de": "Größere Plattform wählen", "en": "Choose a bigger platform" },
   "fix.mass.lighter_parts":              { "de": "Leichtere Instrumente wählen", "en": "Choose lighter instruments" },
   "fix.cost.cheaper_launch":             { "de": "Mitflug statt eigener Rakete", "en": "Rideshare instead of a dedicated rocket" },
@@ -261,5 +310,30 @@
 
   "newtext":                             { "de": "Neuer Text", "en": "New Text" },
 
-  "empty":                               { "de": "\\", "en": "\\" }
+  "empty":                               { "de": "\\", "en": "\\" },
+
+  "review.subtitle":                    { "de": "{0} · {1} · {2} {3}, {4}", "en": "{0} · {1} · {2} {3}, {4}" },
+  "review.mode":                        { "de": "Modus: {0}", "en": "Mode: {0}" },
+  "review.section.blockers":            { "de": "Startsperren", "en": "Launch blockers" },
+  "review.section.blockers.desc":       { "de": "Ist hier etwas rot, kann die Rakete nicht fliegen. Das behebst du im Entwurf.", "en": "If anything here is red, the rocket cannot fly. Fix it in the design." },
+  "review.section.risks":               { "de": "Risiken", "en": "Risks" },
+  "review.section.risks.desc":          { "de": "Gelbe Punkte blockieren den Start nicht. Du musst sie aber bewusst bestätigen.", "en": "Yellow items do not block the launch, but you have to accept them deliberately." },
+  "review.summary.title":               { "de": "Zusammenfassung", "en": "Summary" },
+  "review.count.green":                 { "de": "grün", "en": "green" },
+  "review.count.yellow":                { "de": "gelb", "en": "yellow" },
+  "review.count.red":                   { "de": "rot", "en": "red" },
+  "review.summary.risks.hint":          { "de": "Hake jeden gelben Punkt ab, dann wird „Starten“ frei.", "en": "Tick every yellow item to unlock “Launch”." },
+  "review.launcher":                    { "de": "Rakete", "en": "Rocket" },
+  "review.launcher.reliability_simple": { "de": "Zuverlässigkeit {0}. Im Modus „Einfach“ klappt jeder Start.", "en": "Reliability {0}. In “Simple” mode every launch succeeds." },
+  "review.launcher.reliability":        { "de": "Zuverlässigkeit {0}. Ein Fehlstart ist möglich.", "en": "Reliability {0}. A launch failure is possible." },
+  "review.launch_locked_risks":         { "de": "Gesperrt, bis alle Risiken bestätigt sind", "en": "Locked until all risks are accepted" },
+  "review.summary.blocked.title":        { "de": "Start gesperrt: {0} Punkt(e) rot", "en": "Launch blocked: {0} red item(s)" },
+  "review.summary.blocked.hint":         { "de": "Rote Punkte behebst du nur im Entwurf. Gelbe kannst du danach hier bestätigen.", "en": "Red items can only be fixed in the design. You can accept yellow ones here afterwards." },
+  "review.launch_locked_red":            { "de": "Gesperrt, solange ein Punkt rot ist", "en": "Locked while any item is red" },
+  "review.status.ok":                    { "de": "OK", "en": "OK" },
+  "review.status.risk":                  { "de": "Risiko", "en": "Risk" },
+  "review.status.blocked":               { "de": "Sperre", "en": "Blocker" },
+  "orbit.leo":                           { "de": "LEO", "en": "LEO" },
+  "orbit.sso":                           { "de": "SSO", "en": "SSO" },
+  "orbit.gto":                           { "de": "GTO", "en": "GTO" }
 }

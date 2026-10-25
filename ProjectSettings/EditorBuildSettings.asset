@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/OutdoorsScene.unity
-    guid: 8124e5870f4fd4c779e7a5f994e84ad1
+    path: Assets/Scenes/Design Scene.unity
+    guid: ba4d254f7493d47cbb3538530cd6c089
+  - enabled: 1
+    path: Assets/Scenes/Launch Scene.unity
+    guid: c68a2d8383b2d46f2982fd3e2d24f434
+  - enabled: 1
+    path: Assets/Scenes/FRR Scene.unity
+    guid: 4680e8e46279d4076b0064710149e2b6
+  - enabled: 1
+    path: Assets/Scenes/Operations Scene.unity
+    guid: 0d785d01ec08e48c788ddd7db675258a
+  - enabled: 1
+    path: Assets/Scenes/Result Scene.unity
+    guid: 572027527367346e2b9428d0ee57c3f8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -1,7 +1,7 @@
 using MissionCore.Bodies;
 using MissionCore.Numerics;
 using System;
-using static MissionCore.Numerics.Constants;
+using static MissionCore.Numerics.CoreConstants;
 using static System.Math;
 
 namespace MissionCore.Earth

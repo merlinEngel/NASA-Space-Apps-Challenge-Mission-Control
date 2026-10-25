@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MissionGame;
-using Newtonsoft.Json;
 using UnityEngine;
 using MissionCore.Catalogs;
 using MissionCore.Design;
@@ -26,7 +24,7 @@ namespace MissionGame.Design
         public void ModifyDesign(Action<MissionDesign> change)
         {
             PreviousReport = Report;
-            MissionDesign designBefore = JsonConvert.DeserializeObject<MissionDesign>(JsonConvert.SerializeObject(Design));
+            MissionDesign designBefore = Design.DeepCopy();
             change(Design);
 
             Report = DesignValidator.Evaluate(CatalogManager.Instance.Catalog, Design);
@@ -38,17 +36,13 @@ namespace MissionGame.Design
             base.Awake();                  // sets Instance
             if (Instance != this) return;  // duplicate manager, already being destroyed
 
-            Design = startDesign != null
+            MissionSession session = MissionSession.Instance;
+            if (session != null && session.Design != null) Design = session.Design.DeepCopy();
+            else Design = startDesign != null
                 ? CatalogLoader.LoadObject<MissionDesign>(startDesign.text, startDesign.name)
                 : new MissionDesign();
 
             Report = DesignValidator.Evaluate(CatalogManager.Instance.Catalog, Design);
-        }
-
-        void Start()
-        {
-            // DesignChanged += (r, pr) => Debug.Log(r.Format(false));
-            // Debug.Log(Report.Format(false));
         }
     }
 }

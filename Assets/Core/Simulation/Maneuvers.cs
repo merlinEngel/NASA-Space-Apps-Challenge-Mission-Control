@@ -21,14 +21,14 @@ namespace MissionCore.Simulation
         // transferTime [s] is half the transfer ellipse: burn 2 happens this long after burn 1.
         public static (double dv1, double dv2, double transferTime) HohmannDeltaVs(double r1, double r2, double mu)
         {
-            double a_t = (r1 + r2)/2;
+            double a_t = (r1 + r2) / 2;
 
-            double v1 = Math.Sqrt(mu/r1);
-            double v_p = Math.Sqrt(mu*(2/r1 - 1/a_t));
+            double v1 = Math.Sqrt(mu / r1);
+            double v_p = Math.Sqrt(mu * (2 / r1 - 1 / a_t));
             double dv1 = v_p - v1;
 
-            double v2 = Math.Sqrt(mu/r2);
-            double v_a = Math.Sqrt(mu*(2/r2 - 1/a_t));
+            double v2 = Math.Sqrt(mu / r2);
+            double v_a = Math.Sqrt(mu * (2 / r2 - 1 / a_t));
             double dv2 = v2 - v_a;
 
             double transferTime = Math.PI * Math.Sqrt(a_t * a_t * a_t / mu);
@@ -38,7 +38,7 @@ namespace MissionCore.Simulation
 
         // Δv [m/s] the remaining fuel can still provide (rocket equation)
         public static double AvailableDeltaV(SpacecraftState state, double isp) =>
-            isp * Constants.G0Earth * Math.Log(state.mass / state.dryMass);
+            isp * CoreConstants.G0Earth * Math.Log(state.mass / state.dryMass);
 
         public static bool TryApplyImpulse(SpacecraftState state, double dvPrograde, double dvNormal, double dvRadial, double isp, out SpacecraftState newState)
         {
@@ -48,9 +48,9 @@ namespace MissionCore.Simulation
 
             (Vec3d prograde, Vec3d normal, Vec3d radial) = LocalFrame(state.relPos, state.velocity);
 
-            Vec3d dvVec = dvPrograde*prograde + dvNormal*normal + dvRadial*radial;
+            Vec3d dvVec = dvPrograde * prograde + dvNormal * normal + dvRadial * radial;
 
-            double newMass = state.mass * Math.Exp(-dvVec.Length / (isp * Constants.G0Earth));
+            double newMass = state.mass * Math.Exp(-dvVec.Length / (isp * CoreConstants.G0Earth));
             if (newMass < state.dryMass)
                 return false;
 
@@ -58,6 +58,17 @@ namespace MissionCore.Simulation
 
             newState = new(state.relPos, newVelocity, newMass, state.dryMass);
             return true;
+        }
+
+        // One retrograde burn on a circular orbit with radius r [m]: the burn point stays as apoapsis,
+        // the opposite side drops to rp. Δv [m/s, positive] = circular speed minus apoapsis speed of the new ellipse (vis-viva).
+        public static double PeriapsisLoweringDeltaV(double r, double rp, double mu)
+        {
+            if (rp >= r) return 0;
+
+            double vCircular = Math.Sqrt(mu / r);
+            double vApoapsis = Math.Sqrt(mu * (2 / r - 2 / (r + rp)));
+            return vCircular - vApoapsis;
         }
     }
 }

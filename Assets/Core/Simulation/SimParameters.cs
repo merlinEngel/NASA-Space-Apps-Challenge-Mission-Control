@@ -72,9 +72,9 @@ namespace MissionCore.Simulation
             {
                 TickS = catalog.Sim.TickS,
                 EpochS = mission.EpochSeconds,
-                DurationS = mission.durationDays * Constants.SecondsPerDay,
+                DurationS = mission.durationDays * CoreConstants.SecondsPerDay,
                 SolarPowerW = solarCellSpec == null ? 0 :
-                    Constants.SolarConstant *
+                    CoreConstants.SolarConstant *
                     design.SolarAreaM2 *
                     solarCellSpec.packingFactor *
                     solarCellSpec.efficiency,
@@ -83,7 +83,7 @@ namespace MissionCore.Simulation
                 SafeModeBusPowerW = platformSpec.busPowerW * catalog.Sim.SafeModeBusPowerFactor,
                 InstrumentPowerW = instrumentSpecs.Sum(i => i.powerW),
                 CommsPowerW = commsSpec?.powerW ?? 0,
-                InstrumentDataBps = new DataBudget().GetGeneratedBitsPerDay(catalog, design) / Constants.SecondsPerDay,
+                InstrumentDataBps = new DataBudget().GetGeneratedBitsPerDay(catalog, design) / CoreConstants.SecondsPerDay,
                 DownlinkBps = commsSpec?.dataRateBpS ?? 0,
                 Stations = new DataBudget().GetCompatibleStations(catalog, design, commsSpec?.band),
                 BatteryCapacityWh = batterySpec == null ? 0 : batterySpec.energyWh * design.BatteryCount,
@@ -91,7 +91,7 @@ namespace MissionCore.Simulation
                 BallisticCoefficient = OrbitDecay.DragCoefficient * LifetimeBudget.DragAreaM2(platformSpec, design) / massKg,
                 DensityFactor = catalog.Sim.DensityFactor(mission.solarActivity),
                 LoadShedding = catalog.Sim.LoadShedding,
-                RaanRad = mission.raanDeg * Constants.DegToRad,
+                RaanRad = mission.raanDeg * CoreConstants.DegToRad,
                 MaxBatteryEmptyS = catalog.Sim.MaxBatteryEmptyS,
                 FixedEvents = mission.fixedEvents ?? new List<FixedEvent>()
             };

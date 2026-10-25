@@ -13,8 +13,8 @@ namespace MissionCore.Budgets
             Catalog catalog = ctx.Catalog;
             MissionDesign design = ctx.Design;
 
-            double r = Constants.RadiusEarth + design.AltitudeM;
-            double mu = Constants.MuEarth;
+            double r = CoreConstants.RadiusEarth + design.AltitudeM;
+            double mu = CoreConstants.MuEarth;
             double orbitPeriodS = 2 * Math.PI * Math.Sqrt(r * r * r / mu);
 
             MissionTemplate mission = null;
@@ -23,15 +23,15 @@ namespace MissionCore.Budgets
 
             double eclipseFraction = Shadow.EclipseFraction(design.AltitudeM, 0);
             if (mission != null)
-                eclipseFraction = Shadow.WorstEclipseFraction(design.AltitudeM, design.InclinationDeg * Constants.DegToRad, mission.raanDeg*Constants.DegToRad, mission.EpochSeconds, mission.durationDays * Constants.SecondsPerDay);
+                eclipseFraction = Shadow.WorstEclipseFraction(design.AltitudeM, design.InclinationDeg * CoreConstants.DegToRad, mission.raanDeg*CoreConstants.DegToRad, mission.EpochSeconds, mission.durationDays * CoreConstants.SecondsPerDay);
 
             double sunGenerationW = 0;
             double missionDurationYears = 0;
             if (mission != null)
-                missionDurationYears = mission.durationDays/Constants.DaysPerYear;
+                missionDurationYears = mission.durationDays/CoreConstants.DaysPerYear;
             if (!string.IsNullOrEmpty(design.SolarCellId) && catalog.SolarCells.TryGetValue(design.SolarCellId, out SolarCellSpec solarCellSpec))
                 sunGenerationW =
-                    Constants.SolarConstant *
+                    CoreConstants.SolarConstant *
                     design.SolarAreaM2 *
                     solarCellSpec.packingFactor *
                     solarCellSpec.efficiency *

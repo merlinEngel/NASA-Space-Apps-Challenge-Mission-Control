@@ -1,18 +1,29 @@
 {
   "dry_mass_fractions_earth_orbit_with_propulsion": {
-    "payload": 0.25, "structure": 0.25, "thermal": 0.03, "power": 0.20,
-    "communications": 0.04, "attitude_control": 0.07, "computer": 0.04,
-    "propulsion": 0.10, "other": 0.02
+    "payload": 0.25,
+    "structure": 0.25,
+    "thermal": 0.03,
+    "power": 0.2,
+    "communications": 0.04,
+    "attitude_control": 0.07,
+    "computer": 0.04,
+    "propulsion": 0.1,
+    "other": 0.02
   },
   "mass_margin_early_phase": 0.25,
   "power_margin_early_phase": 0.25,
   "status_thresholds": {
-    "mass":    { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
-    "cost":    { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
-    "power":   { "green_min_reserve": 0.10, "yellow_min_reserve": 0.0 },
-    "delta_v": { "green_min_reserve": 0.20, "yellow_min_reserve": 0.0 },
-    "data":    { "green_min_reserve": 0.20, "yellow_min_reserve": 0.0 },
-    "lifetime":{ "green_min_reserve": 1.0,  "yellow_min_reserve": 0.0 }
+    "mass": { "green_min_reserve": 0.1, "yellow_min_reserve": 0.0 },
+    "cost": { "green_min_reserve": 0.1, "yellow_min_reserve": 0.0 },
+    "power": { "green_min_reserve": 0.1, "yellow_min_reserve": 0.0 },
+    "delta_v": { "green_min_reserve": 0.2, "yellow_min_reserve": 0.0 },
+    "data": { "green_min_reserve": 0.2, "yellow_min_reserve": 0.0 },
+    "lifetime": { "green_min_reserve": 1.0, "yellow_min_reserve": 0.0 }
+  },
+  "review": {
+    "min_power_reserve": 0.1,
+    "avoidance_delta_v_per_year_m_s": 2.0,
+    "disposal_perigee_m": 300000
   },
   "source": "subsysteme-massenanteile.md (SMAD) for fractions and margins; status thresholds are game design choices"
 }

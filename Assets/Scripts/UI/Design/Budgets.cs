@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MissionGame.Design;
 using MissionCore.Design;
+using MissionCore.Budgets;
 
 namespace MissionGame.UI.Design
 {
@@ -39,19 +40,19 @@ namespace MissionGame.UI.Design
             lastReport = report;
             lastPrevious = previous;
 
-            Show(massBudget, report, previous, r => r.MassResult.TotalMassKg, report.MassResult.LimitKg);
-            Show(costBudget, report, previous, r => r.CostResult.TotalCostUSD, report.CostResult.BudgetUSD);
-            Show(powerBudget, report, previous, r => r.PowerResult.RequiredW, report.PowerResult.AverageGenerationW);
-            Show(dataBudget, report, previous, r => r.DataResult.GeneratedBitsPerDay, report.DataResult.DownlinkBitsPerDay);
-            Show(deltaVBudget, report, previous, r => r.DeltaVResult.RequiredDeltaVMPerS, report.DeltaVResult.AvailableDeltaVMPerS);
-            Show(lifetimeBudget, report, previous, r => r.LifetimeResult.MissionDurationS, report.LifetimeResult.LifetimeS);
+            Show(costBudget, report, BudgetKind.Cost, previous, r => r.CostResult.TotalCostUSD, report.CostResult.BudgetUSD);
+            Show(massBudget, report, BudgetKind.Mass, previous, r => r.MassResult.TotalMassKg, report.MassResult.LimitKg);
+            Show(powerBudget, report, BudgetKind.Power, previous, r => r.PowerResult.RequiredW, report.PowerResult.AverageGenerationW);
+            Show(dataBudget, report, BudgetKind.Data, previous, r => r.DataResult.GeneratedBitsPerDay, report.DataResult.DownlinkBitsPerDay);
+            Show(deltaVBudget, report, BudgetKind.DeltaV, previous, r => r.DeltaVResult.RequiredDeltaVMPerS, report.DeltaVResult.AvailableDeltaVMPerS);
+            Show(lifetimeBudget, report, BudgetKind.Lifetime, previous, r => r.LifetimeResult.MissionDurationS, report.LifetimeResult.LifetimeS);
         }
 
-        static void Show(Budget budget, DesignReport report, DesignReport previous, Func<DesignReport, double> need, double limit)
+        static void Show(Budget budget, DesignReport report, BudgetKind kind, DesignReport previous, Func<DesignReport, double> need, double limit)
         {
             double value = need(report);
             double delta = previous == null ? 0 : value - need(previous);
-            budget.UpdateValue(limit, value, delta);
+            budget.UpdateValue(limit, value, delta, report.Statuses[kind]);
         }
     }
 }

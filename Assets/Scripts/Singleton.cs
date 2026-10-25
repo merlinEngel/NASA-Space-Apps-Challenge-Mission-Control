@@ -12,7 +12,8 @@ namespace MissionGame
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogError($"Second {typeof(T).Name} found on '{name}', destroying it.", this);
+                if (Instance.gameObject.scene.name != "DontDestroyOnLoad")
+                    Debug.LogError($"Second {typeof(T).Name} found on '{name}', destroying it.", this);
                 Destroy(gameObject);
                 return;
             }

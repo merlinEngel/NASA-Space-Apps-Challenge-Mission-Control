@@ -34,12 +34,12 @@ namespace MissionCore.Budgets
                                 double epochS = 0, double raanRad = 0,
                                 int days = DefaultDays, double stepS = DefaultStepS)
         {
-            double durationS = days * Constants.SecondsPerDay;
+            double durationS = days * CoreConstants.SecondsPerDay;
             if (stations == null || stations.Count == 0 || altitudeM <= 0)
                 return new ContactStats(0, 0, durationS);
 
-            double radiusM = Constants.RadiusEarth + altitudeM;
-            double meanMotion = Math.Sqrt(Constants.MuEarth / (radiusM * radiusM * radiusM));
+            double radiusM = CoreConstants.RadiusEarth + altitudeM;
+            double meanMotion = Math.Sqrt(CoreConstants.MuEarth / (radiusM * radiusM * radiusM));
             double inclinationRad = inclinationDeg * Math.PI / 180;
 
             int steps = (int)(durationS / stepS);
@@ -47,7 +47,7 @@ namespace MissionCore.Budgets
             int passes = 0;
             double visibleS = 0, gapS = 0, longestGapS = 0;
 
-            KeplerOrbit orbit = J2Drift.ApplyTo(KeplerOrbit.Circular(altitudeM, inclinationRad, raanRad, Constants.RadiusEarth, Constants.MuEarth, epochS));
+            KeplerOrbit orbit = J2Drift.ApplyTo(KeplerOrbit.Circular(altitudeM, inclinationRad, raanRad, CoreConstants.RadiusEarth, CoreConstants.MuEarth, epochS));
 
             for (int k = 0; k < steps; k++)
             {
@@ -85,7 +85,7 @@ namespace MissionCore.Budgets
         {
             var position = StationPosition(latDeg, lonDeg, earthRotationRad);
             Vec3d lineOfSight = satellite - position;
-            double sinElevation = lineOfSight.Dot(position / Constants.RadiusEarth) / lineOfSight.Length;
+            double sinElevation = lineOfSight.Dot(position / CoreConstants.RadiusEarth) / lineOfSight.Length;
             return Math.Asin(Math.Clamp(sinElevation, -1, 1)) * 180 / Math.PI;
         }
 
@@ -95,7 +95,7 @@ namespace MissionCore.Budgets
             double lat = latDeg * Math.PI / 180;
             double lon = lonDeg * Math.PI / 180 + earthRotationRad;
             var up = new Vec3d(Math.Cos(lat) * Math.Cos(lon), Math.Cos(lat) * Math.Sin(lon), Math.Sin(lat));
-            return up * Constants.RadiusEarth;
+            return up * CoreConstants.RadiusEarth;
         }
     }
 }

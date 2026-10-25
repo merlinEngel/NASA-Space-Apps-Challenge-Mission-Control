@@ -6,15 +6,13 @@ using TMPro;
 using Unity.Theme.Binders;
 using UnityEngine;
 using MissionCore.Design;
+using MissionCore.Rules;
 
 namespace MissionGame.UI.Design
 {
     [RequireComponent(typeof(GraphicsColorBinder))]
     public class Budget : MonoBehaviour
     {
-        const string GREEN_COLOR_KEY = "Green";
-        const string RED_COLOR_KEY = "Red";
-
         [SerializeField] TMP_Text valueText;
         [SerializeField] TMP_Text metricText;
         [SerializeField] TMP_Text ofLimitText;
@@ -37,7 +35,7 @@ namespace MissionGame.UI.Design
             metricText.text = CatalogManager.Instance.Texts.Get(metricKey);
         }
 
-        public void UpdateValue(double budget, double value, double delta)
+        public void UpdateValue(double budget, double value, double delta, BudgetStatus status)
         {
             float totalHeight = bar.rect.height;
             float lineHeight = totalHeight * (float)(budgetLineHeightPercent / 100);
@@ -76,8 +74,7 @@ namespace MissionGame.UI.Design
             valueText.text = CatalogManager.Instance.Formatter.Value(metric, value);
             ofLimitText.text = CatalogManager.Instance.Texts.Get("ui.of_limit", CatalogManager.Instance.Formatter.Value(metric, budget));
 
-            if (value > budget) ColorBinder.SetColorByName(RED_COLOR_KEY);
-            else ColorBinder.SetColorByName(GREEN_COLOR_KEY);
+            ColorBinder.SetColorByName(Constants.StatusColorKeys[status]);
         }
 
         static float ToHeight(double v, double scaleMax, float lineHeight, float totalHeight)

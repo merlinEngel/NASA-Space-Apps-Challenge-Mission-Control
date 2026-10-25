@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09019608, g: 0.105882354, b: 0.09803922, a: 0.8}
+  m_Color: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.92941177, g: 0.9098039, b: 0.8627451, a: 1}
+  m_Color: {r: 0.8980392, g: 0.8980392, b: 0.8980392, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22745098, g: 0.25882354, b: 0.24313726, a: 1}
+  m_Color: {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09019608, g: 0.105882354, b: 0.09803922, a: 1}
+  m_Color: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1316,15 +1316,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3880055285333172358, guid: 143bebc04a67649ebb214e1d84cfb40f, type: 3}
       propertyPath: m_fontColor.b
-      value: 0.6156863
+      value: 0.7529412
       objectReference: {fileID: 0}
     - target: {fileID: 3880055285333172358, guid: 143bebc04a67649ebb214e1d84cfb40f, type: 3}
       propertyPath: m_fontColor.g
-      value: 0.6431373
+      value: 0.7529412
       objectReference: {fileID: 0}
     - target: {fileID: 3880055285333172358, guid: 143bebc04a67649ebb214e1d84cfb40f, type: 3}
       propertyPath: m_fontColor.r
-      value: 0.6117647
+      value: 0.7529412
       objectReference: {fileID: 0}
     - target: {fileID: 3880055285333172358, guid: 143bebc04a67649ebb214e1d84cfb40f, type: 3}
       propertyPath: m_fontSizeBase
